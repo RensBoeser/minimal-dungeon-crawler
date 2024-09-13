@@ -1,131 +1,139 @@
 <template>
-  <div class="flex gap-4 m-4">
-    <UCard class="w-80">
-      <template #header>
-        <h1 class="text-xl">Inventory</h1>
-      </template>
+  <UContainer>
+    <div class="my-2 flex justify-end">
+      <ColorSwitch />
+    </div>
 
-      <div class="flex flex-col gap-2">
-        <div>
-          <ul>
-            <li class="flex gap-1">
-              <span>Gold:</span>
-              <span class="font-bold">{{ user.gold }}</span>
-              <img width="18px" class="object-contain" src="~/public/gold.webp" alt="Gold" />
-            </li>
-            <li class="flex gap-1">
-              <span>Level:</span>
-              <span class="font-bold">{{ userLevel.level }} ({{ user.experience }} / {{ nextLevel?.requiredXp }})</span>
-            </li>
-            <li class="flex gap-1">
-              <span>Stamina:</span>
-              <span class="font-bold">{{ userLevel.stamina }}</span>
-            </li>
-            <li class="flex gap-1">
-              <span>Sword:</span>
-              <img v-if="user.weapon === 'woodenSword'" width="18px" class="object-contain" src="~/public/wooden-sword.webp" alt="Wooden Sword" />
-              <img v-else-if="user.weapon === 'stoneSword'" width="18px" class="object-contain" src="~/public/stone-sword.webp" alt="Iron Sword" />
-              <span class="font-bold">{{ user.weapon }}</span>
-            </li>
-          </ul>
-        </div>
+    <UDivider class="mb-4"></UDivider>
 
-        <div>
-          <h1 class="font-bold">Loot</h1>
+    <div class="flex gap-4">
+      <UCard class="w-80">
+        <template #header>
+          <h1 class="text-xl">Inventory</h1>
+        </template>
 
-          <ul>
-            <li class="flex gap-1">
-              <span class="font-bold">{{ inventory.bone }}</span>
-              <img width="18px" class="object-contain" src="~/public/bone.webp" alt="Bone" />
-              <span>Bones</span>
-            </li>
-
-            <li class="flex gap-1">
-              <span class="font-bold">{{ inventory.rottenMeat }}</span>
-              <img width="18px" class="object-contain" src="~/public/rotten-flesh.webp" alt="Rotten Flesh" />
-              <span>Rotten Flesh</span>
-            </li>
-
-            <li>
-              Sell value: <span class="font-bold">{{ inventoryValue }}</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <template #footer>
-        <UButton block @click="sellInventory" :disabled="hasEmptyInventory">Sell</UButton>
-      </template>
-    </UCard>
-
-    <UCard class="w-60">
-      <template #header>
-        <h1 class="text-xl">Dungeon</h1>
-      </template>
-
-      <ul>
-        <li>
-          <span>Type:</span>
-          <UIcon class="inline-block mx-1" size="18" name="i-game-icons:crypt-entrance"></UIcon>
-          <span class="font-bold">Crypt</span>
-        </li>
-      </ul>
-
-      <template #footer>
-        <UButton icon="i-ph:sword" class="mb-3" block @click="runDungeon" :loading="recovering">
-          <span v-if="recovering">Recovering...</span>
-          <span v-else>Run Dungeon</span>
-        </UButton>
-      </template>
-    </UCard>
-
-    <UCard>
-      <template #header>
-        <h1 class="text-xl">Shop</h1>
-      </template>
-
-      <h1>Weapons</h1>
-
-      <ul class="flex flex-col gap-1">
-        <li class="flex items-center justify-between" v-for="weapon of weaponShopItems" :key="weapon.id">
-          <div class="flex gap-1 mr-4">
-            <img width="18px" class="object-contain" :src="weapon.icon" :alt="weapon.name" />
-            <span class="font-bold">{{ weapon.name }}</span>
+        <div class="flex flex-col gap-2">
+          <div>
+            <ul>
+              <li class="flex gap-1">
+                <span>Gold:</span>
+                <span class="font-bold">{{ user.gold }}</span>
+                <img width="18px" class="object-contain" src="~/public/gold.webp" alt="Gold" />
+              </li>
+              <li class="flex gap-1">
+                <span>Level:</span>
+                <span class="font-bold">{{ userLevel.level }} ({{ user.experience }} / {{ nextLevel?.requiredXp }})</span>
+              </li>
+              <li class="flex gap-1">
+                <span>Stamina:</span>
+                <span class="font-bold">{{ userLevel.stamina }}</span>
+              </li>
+              <li class="flex gap-1">
+                <span>Sword:</span>
+                <img v-if="user.weapon === 'woodenSword'" width="18px" class="object-contain" src="~/public/wooden-sword.webp" alt="Wooden Sword" />
+                <img v-else-if="user.weapon === 'stoneSword'" width="18px" class="object-contain" src="~/public/stone-sword.webp" alt="Iron Sword" />
+                <span class="font-bold">{{ user.weapon }}</span>
+              </li>
+            </ul>
           </div>
 
-          <UButton
-            @click="() => buySword(weapon.id)"
-            :disabled="user.weapon === weapon.id || user.gold < weapon.cost"
-            :color="user.weapon === weapon.id ? 'amber' : 'primary'"
-          >
-            <span v-if="user.weapon === weapon.id">
-              Equipped
-            </span>
+          <div>
+            <h1 class="font-bold">Loot</h1>
 
-            <div v-else>
-              {{ weapon.cost }}
-              <img width="18px" class="object-contain inline-block" src="~/public/gold.webp" alt="Gold" />
-            </div>
-          </UButton>
-        </li>
-      </ul>
-    </UCard>
+            <ul>
+              <li class="flex gap-1">
+                <span class="font-bold">{{ inventory.bone }}</span>
+                <img width="18px" class="object-contain" src="~/public/bone.webp" alt="Bone" />
+                <span>Bones</span>
+              </li>
 
-    <UCard>
-      <template #header>
-        <h1 class="text-xl">Past Runs</h1>
-      </template>
+              <li class="flex gap-1">
+                <span class="font-bold">{{ inventory.rottenMeat }}</span>
+                <img width="18px" class="object-contain" src="~/public/rotten-flesh.webp" alt="Rotten Flesh" />
+                <span>Rotten Flesh</span>
+              </li>
 
-      <ul class="max-h-80 overflow-y-auto">
-        <template v-for="run of pastRuns.toReversed()">
-          <li>
-            <DungeonResultItem :run="run" />
-          </li>
-          <UDivider class="my-2"></UDivider>
+              <li>
+                Sell value: <span class="font-bold">{{ inventoryValue }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <template #footer>
+          <UButton block @click="sellInventory" :disabled="hasEmptyInventory">Sell</UButton>
         </template>
-      </ul>
-    </UCard>
-  </div>
+      </UCard>
+
+      <UCard class="w-60">
+        <template #header>
+          <h1 class="text-xl">Dungeon</h1>
+        </template>
+
+        <ul>
+          <li>
+            <span>Type:</span>
+            <UIcon class="inline-block mx-1" size="18" name="i-game-icons:crypt-entrance"></UIcon>
+            <span class="font-bold">Crypt</span>
+          </li>
+        </ul>
+
+        <template #footer>
+          <UButton icon="i-ph:sword" class="mb-3" block @click="runDungeon" :loading="recovering">
+            <span v-if="recovering">Recovering...</span>
+            <span v-else>Run Dungeon</span>
+          </UButton>
+        </template>
+      </UCard>
+
+      <UCard>
+        <template #header>
+          <h1 class="text-xl">Shop</h1>
+        </template>
+
+        <h1>Weapons</h1>
+
+        <ul class="flex flex-col gap-1">
+          <li class="flex items-center justify-between" v-for="weapon of weaponShopItems" :key="weapon.id">
+            <div class="flex gap-1 mr-4">
+              <img width="18px" class="object-contain" :src="weapon.icon" :alt="weapon.name" />
+              <span class="font-bold">{{ weapon.name }}</span>
+            </div>
+
+            <UButton
+              @click="() => buySword(weapon.id)"
+              :disabled="user.weapon === weapon.id || user.gold < weapon.cost"
+              :color="user.weapon === weapon.id ? 'amber' : 'primary'"
+            >
+              <span v-if="user.weapon === weapon.id">
+                Equipped
+              </span>
+
+              <div v-else>
+                {{ weapon.cost }}
+                <img width="18px" class="object-contain inline-block" src="~/public/gold.webp" alt="Gold" />
+              </div>
+            </UButton>
+          </li>
+        </ul>
+      </UCard>
+
+      <UCard>
+        <template #header>
+          <h1 class="text-xl">Past Runs</h1>
+        </template>
+
+        <ul class="max-h-80 overflow-y-auto">
+          <template v-for="run of pastRuns.toReversed()">
+            <li>
+              <DungeonResultItem :run="run" />
+            </li>
+            <UDivider class="my-2"></UDivider>
+          </template>
+        </ul>
+      </UCard>
+    </div>
+  </UContainer>
 </template>
 
 <script setup lang="ts">
