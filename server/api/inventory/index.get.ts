@@ -1,6 +1,6 @@
-import { WeaponId } from "~/utils/weapons"
+import type { WeaponId } from "~/utils/weapons"
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async () => {
   const userStorage = useStorage("db")
 
   const bone = await userStorage.getItem<number>("inventory:bone") ?? 0

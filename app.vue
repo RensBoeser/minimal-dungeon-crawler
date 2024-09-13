@@ -4,7 +4,7 @@
       <ColorSwitch />
     </div>
 
-    <UDivider class="mb-4"></UDivider>
+    <UDivider class="mb-4"/>
 
     <div class="flex gap-4">
       <UCard class="w-80">
@@ -18,7 +18,7 @@
               <li class="flex gap-1">
                 <span>Gold:</span>
                 <span class="font-bold">{{ user.gold }}</span>
-                <img width="18px" class="object-contain" src="~/public/gold.webp" alt="Gold" />
+                <img width="18px" class="object-contain" src="~/public/gold.webp" alt="Gold" >
               </li>
               <li class="flex gap-1">
                 <span>Level:</span>
@@ -30,8 +30,8 @@
               </li>
               <li class="flex gap-1">
                 <span>Weapon:</span>
-                <img v-if="user.weapon === 'woodenSword'" width="18px" class="object-contain" src="~/public/wooden-sword.webp" alt="Wooden Sword" />
-                <img v-else-if="user.weapon === 'stoneSword'" width="18px" class="object-contain" src="~/public/stone-sword.webp" alt="Iron Sword" />
+                <img v-if="user.weapon === 'woodenSword'" width="18px" class="object-contain" src="~/public/wooden-sword.webp" alt="Wooden Sword" >
+                <img v-else-if="user.weapon === 'stoneSword'" width="18px" class="object-contain" src="~/public/stone-sword.webp" alt="Iron Sword" >
                 <span class="font-bold">{{ user.weapon }}</span>
               </li>
             </ul>
@@ -43,13 +43,13 @@
             <ul>
               <li class="flex gap-1">
                 <span class="font-bold">{{ inventory.bone }}</span>
-                <img width="18px" class="object-contain" src="~/public/bone.webp" alt="Bone" />
+                <img width="18px" class="object-contain" src="~/public/bone.webp" alt="Bone" >
                 <span>Bones</span>
               </li>
 
               <li class="flex gap-1">
                 <span class="font-bold">{{ inventory.rottenMeat }}</span>
-                <img width="18px" class="object-contain" src="~/public/rotten-flesh.webp" alt="Rotten Flesh" />
+                <img width="18px" class="object-contain" src="~/public/rotten-flesh.webp" alt="Rotten Flesh" >
                 <span>Rotten Flesh</span>
               </li>
 
@@ -61,7 +61,7 @@
         </div>
 
         <template #footer>
-          <UButton block @click="sellInventory" :disabled="hasEmptyInventory">Sell</UButton>
+          <UButton block :disabled="hasEmptyInventory" @click="sellInventory">Sell</UButton>
         </template>
       </UCard>
 
@@ -73,13 +73,13 @@
         <ul>
           <li>
             <span>Type:</span>
-            <UIcon class="inline-block mx-1" size="18" name="i-game-icons:crypt-entrance"></UIcon>
+            <UIcon class="inline-block mx-1" size="18" name="i-game-icons:crypt-entrance"/>
             <span class="font-bold">Crypt</span>
           </li>
         </ul>
 
         <template #footer>
-          <UButton icon="i-ph:sword" class="mb-3" block @click="runDungeon" :loading="recovering">
+          <UButton icon="i-ph:sword" class="mb-3" block :loading="recovering" @click="runDungeon">
             <span v-if="recovering">Recovering...</span>
             <span v-else>Run Dungeon</span>
           </UButton>
@@ -94,16 +94,16 @@
         <h1>Weapons</h1>
 
         <ul class="flex flex-col gap-1">
-          <li class="flex items-center justify-between" v-for="weapon of weaponShopItems" :key="weapon.id">
+          <li v-for="weapon of weaponShopItems" :key="weapon.id" class="flex items-center justify-between">
             <div class="flex gap-1 mr-4">
-              <img width="18px" class="object-contain" :src="weapon.icon" :alt="weapon.name" />
+              <img width="18px" class="object-contain" :src="weapon.icon" :alt="weapon.name" >
               <span class="font-bold">{{ weapon.name }}</span>
             </div>
 
             <UButton
-              @click="() => buySword(weapon.id)"
               :disabled="user.weapon === weapon.id || user.gold < weapon.cost"
               :color="user.weapon === weapon.id ? 'amber' : 'primary'"
+              @click="() => buySword(weapon.id)"
             >
               <span v-if="user.weapon === weapon.id">
                 Equipped
@@ -111,7 +111,7 @@
 
               <div v-else>
                 {{ weapon.cost }}
-                <img width="18px" class="object-contain inline-block" src="~/public/gold.webp" alt="Gold" />
+                <img width="18px" class="object-contain inline-block" src="~/public/gold.webp" alt="Gold" >
               </div>
             </UButton>
           </li>
@@ -124,11 +124,11 @@
         </template>
 
         <ul class="max-h-80 overflow-y-auto">
-          <template v-for="run of pastRuns.toReversed()">
+          <template v-for="run of pastRuns.toReversed()" :key="run.dungeonId">
             <li>
               <DungeonResultItem :run="run" />
             </li>
-            <UDivider class="my-2"></UDivider>
+            <UDivider class="my-2"/>
           </template>
         </ul>
       </UCard>
@@ -211,28 +211,6 @@ const buySword = async (weaponToBuy: WeaponId) => {
 
   user.value.gold = gold
   user.value.weapon = weapon
-}
-
-const getEnemiesDefeated = (run: RunDungeonResult): Array<{ enemy: Enemy, count: number }> => {
-  const possibleEnemies = dungeons.find(dungeon => dungeon.id === run.dungeonId)!.enemies
-  const enemiesDefeated: Record<EnemyId, number> = {}
-
-  run.enemyDrops.forEach((drop) => {
-    if (drop in enemiesDefeated) {
-      enemiesDefeated[drop]++
-    } else {
-      enemiesDefeated[drop] = 1
-    }
-  })
-
-  return Object.entries(enemiesDefeated).map(([enemyId, count]) => {
-    const enemy = possibleEnemies.find((enemy) => enemy.id === enemyId)!
-
-    return {
-      enemy,
-      count
-    }
-  })
 }
 
 onMounted(getInventory)

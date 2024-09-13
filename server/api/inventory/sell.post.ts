@@ -1,6 +1,6 @@
 import { drops } from "~/utils/drops"
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async () => {
   const userStorage = useStorage("db")
 
   const userBones = await userStorage.getItem<number>("inventory:bone") ?? 0

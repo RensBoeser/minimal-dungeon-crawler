@@ -3,5 +3,9 @@
     "nuxt",
     "nuxtjs",
     "tailwindcss"
+  ],
+  "eslint.useFlatConfig": true,
+  "eslint.rules.customizations": [
+    { "rule": "*", "severity": "warn" }
   ]
 }

@@ -1,8 +1,10 @@
 import cloneDeep from "lodash/cloneDeep";
-import { EnemyDropId } from "~/utils/drops"
-import { dungeons, Enemy, EnemyId } from "~/utils/dungeons"
+import type { EnemyDropId } from "~/utils/drops"
+import type { Enemy, EnemyId } from "~/utils/dungeons";
+import { dungeons } from "~/utils/dungeons"
 import { getLevel } from "~/utils/levels";
-import { Weapon, weapons } from "~/utils/weapons"
+import type { Weapon} from "~/utils/weapons";
+import { weapons } from "~/utils/weapons"
 
 export const getDungeonEnemy = (enemies: Array<Enemy>): Enemy => {
   // Calculate the total encounter rate
@@ -77,7 +79,7 @@ export interface RunDungeonResult {
   xpGained: number
 }
 
-export default defineEventHandler(async (event): Promise<RunDungeonResult> => {
+export default defineEventHandler(async (): Promise<RunDungeonResult> => {
   const userStorage = useStorage("db")
 
   const userXp = await userStorage.getItem<number>("user:experience") ?? 0

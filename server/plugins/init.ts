@@ -1,6 +1,6 @@
-import { WeaponId } from "~/utils/weapons"
+import type { WeaponId } from "~/utils/weapons"
 
-export default defineNitroPlugin(async (nitroApp) => {
+export default defineNitroPlugin(async () => {
   const storage = useStorage("db")
   storage.dispose()
 

@@ -8,7 +8,7 @@
     <div class="flex gap-3 flex-wrap">
       <div v-for="enemyRecord of enemiesDefeated" :key="enemyRecord.enemy.id" class="flex gap-1">
         <code class="font-bold">{{ enemyRecord.count }}</code>
-        <img class="object-contain" width="18px" :src="enemyRecord.enemy.icon" :alt="enemyRecord.enemy.name" />
+        <img class="object-contain" width="18px" :src="enemyRecord.enemy.icon" :alt="enemyRecord.enemy.name" >
       </div>
     </div>
 
@@ -18,7 +18,7 @@
     <div class="flex gap-3 flex-wrap">
       <div v-for="dropRecord of enemyDrops" :key="dropRecord.drop.id" class="flex gap-1">
         <code class="font-bold">{{ dropRecord.count }}</code>
-        <img class="object-contain" width="18px" :src="dropRecord.drop.icon" :alt="dropRecord.drop.name" />
+        <img class="object-contain" width="18px" :src="dropRecord.drop.icon" :alt="dropRecord.drop.name" >
       </div>
     </div>
   </div>
