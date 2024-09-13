@@ -13,7 +13,6 @@ export default defineEventHandler(async (event) => {
   const userGold = await userStorage.getItem<number>("user:gold") ?? 0
 
   const weaponCost = weapons.find(({ id }) => id === weapon)!.cost
-  console.log(userGold, weaponCost)
 
   if (userGold < weaponCost) {
     throw createError({

@@ -89,7 +89,7 @@ export const cryptOfTheForgotten: Dungeon = {
         { item: "rottenMeat", probability: 0.2 },
       ]
     }
-  ]
+  ],
 }
 
 export const dungeons: Array<Dungeon> = [

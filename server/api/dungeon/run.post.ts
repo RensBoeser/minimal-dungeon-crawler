@@ -44,7 +44,7 @@ export const fightEnemy = (enemy: Enemy, weapon: Weapon, stamina: number): Fight
     // Calculate the damage dealt by the player
     const damageDealt = weapon.damage - damageNegation;
 
-    if (damageDealt < 0) {
+    if (damageDealt <= 0) {
       staminaLost = stamina
       break;
     }

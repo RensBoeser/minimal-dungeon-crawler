@@ -53,7 +53,7 @@ export const stoneSword: Weapon = {
   sortOrder: 2,
   icon: "stone-sword.webp",
   cost: 500,
-  damage: 3,
+  damage: 2.5,
   armorPenetration: 1,
   staminaCost: 1,
   levelRequirement: 5,
