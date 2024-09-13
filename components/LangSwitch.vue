@@ -1,13 +1,16 @@
 <template>
-  <div>
-    <div>
-      <button @click="() => setLocale('en')">en</button>
-      <button @click="() => setLocale('nl')">nl</button>
-      <p>{{ $t('welcome') }}</p>
-    </div>
-  </div>
+  <UDropdown :items="items" :popper="{ placement: 'bottom-start' }">
+    <UButton color="white" :label="locale === 'en' ? '🇬🇧 EN' : '🇳🇱 NL'" trailing-icon="i-heroicons-chevron-down-20-solid" />
+  </UDropdown>
 </template>
 
 <script setup lang="ts">
-const { locale, setLocale } = useI18n()
+const { localeCodes, locale, setLocale } = useI18n()
+
+const items = computed(() => {
+  return [localeCodes.value.map((localeCode) => ({
+    label: localeCode === 'en' ? '🇬🇧 English' : '🇳🇱 Nederlands',
+    click: () => setLocale(localeCode),
+  }))]
+})
 </script>
