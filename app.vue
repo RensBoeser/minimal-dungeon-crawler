@@ -22,7 +22,7 @@
               <span class="font-bold">{{ userLevel.stamina }}</span>
             </li>
             <li class="flex gap-1">
-              <span>Sword:</span>
+              <span>Weapon:</span>
               <img v-if="user.weapon === 'woodenSword'" width="18px" class="object-contain" src="~/public/wooden-sword.webp" alt="Wooden Sword" />
               <img v-else-if="user.weapon === 'stoneSword'" width="18px" class="object-contain" src="~/public/stone-sword.webp" alt="Iron Sword" />
               <span class="font-bold">{{ user.weapon }}</span>
