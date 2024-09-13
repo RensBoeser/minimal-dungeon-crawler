@@ -1,32 +1,32 @@
-import cloneDeep from "lodash/cloneDeep";
+import cloneDeep from "lodash/cloneDeep"
 import type { EnemyDropId } from "~/utils/drops"
-import type { Enemy, EnemyId } from "~/utils/dungeons";
+import type { Enemy, EnemyId } from "~/utils/dungeons"
 import { dungeons } from "~/utils/dungeons"
-import { getLevel } from "~/utils/levels";
-import type { Weapon} from "~/utils/weapons";
+import { getLevel } from "~/utils/levels"
+import type { Weapon } from "~/utils/weapons"
 import { weapons } from "~/utils/weapons"
 
 export const getDungeonEnemy = (enemies: Array<Enemy>): Enemy => {
   // Calculate the total encounter rate
-  const totalEncounterRate = enemies.reduce((sum, enemy) => sum + enemy.encounterRate, 0);
+  const totalEncounterRate = enemies.reduce((sum, enemy) => sum + enemy.encounterRate, 0)
 
   // Generate a random number between 0 and the total encounter rate
-  const rand = Math.random() * totalEncounterRate;
+  const rand = Math.random() * totalEncounterRate
 
-  let cumulativeProbability = 0;
+  let cumulativeProbability = 0
 
   // Loop through the enemies to select one based on their encounterRate
   for (const enemy of enemies) {
-    cumulativeProbability += enemy.encounterRate;
+    cumulativeProbability += enemy.encounterRate
 
     // If the random number is less than the cumulative probability, return this enemy
     if (rand <= cumulativeProbability) {
-      return enemy;
+      return enemy
     }
   }
 
   // Fallback in case no enemy is selected (shouldn't happen)
-  return enemies[enemies.length - 1];
+  return enemies[enemies.length - 1]
 }
 
 interface FightEnemyResult {
@@ -44,23 +44,23 @@ export const fightEnemy = (enemy: Enemy, weapon: Weapon, stamina: number): Fight
 
   while (enemyHealth > 0 && staminaLost < stamina) {
     // Calculate the damage dealt by the player
-    const damageDealt = weapon.damage - damageNegation;
+    const damageDealt = weapon.damage - damageNegation
 
     if (damageDealt <= 0) {
       staminaLost = stamina
-      break;
+      break
     }
 
     // Deal the damage to the enemy
-    enemyHealth -= damageDealt;
-    staminaLost += weapon.staminaCost;
+    enemyHealth -= damageDealt
+    staminaLost += weapon.staminaCost
   }
 
   // Calculate the drops
-  const drops: Array<EnemyDropId> = [];
+  const drops: Array<EnemyDropId> = []
   for (const drop of enemy.lootTable) {
     if (Math.random() < drop.probability) {
-      drops.push(drop.item);
+      drops.push(drop.item)
     }
   }
 
@@ -82,8 +82,8 @@ export interface RunDungeonResult {
 export default defineEventHandler(async (): Promise<RunDungeonResult> => {
   const userStorage = useStorage("db")
 
-  const userXp = await userStorage.getItem<number>("user:experience") ?? 0
-  const weaponId = await userStorage.getItem<string>("user:weapon") ?? 'fists'
+  const userXp = (await userStorage.getItem<number>("user:experience")) ?? 0
+  const weaponId = (await userStorage.getItem<string>("user:weapon")) ?? "fists"
 
   let { stamina: userStamina } = getLevel(userXp)
   const userWeapon = weapons.find(({ id }) => id === weaponId)!
@@ -98,7 +98,9 @@ export default defineEventHandler(async (): Promise<RunDungeonResult> => {
     const enemy = getDungeonEnemy(currentDungeon.enemies)
     const { wonFight, drops, staminaLost } = fightEnemy(enemy, userWeapon, userStamina)
 
-    if (!wonFight) { break; }
+    if (!wonFight) {
+      break
+    }
 
     userStamina -= staminaLost
     enemiesDefeated.push(enemy.id)
@@ -107,10 +109,10 @@ export default defineEventHandler(async (): Promise<RunDungeonResult> => {
   }
 
   // Update the database
-  const currentBone = await userStorage.getItem<number>("inventory:bone") ?? 0
-  const currentRottenMeat = await userStorage.getItem<number>("inventory:rottenMeat") ?? 0
-  await userStorage.setItem("inventory:bone", currentBone + enemyDrops.filter(drop => drop === "bone").length)
-  await userStorage.setItem("inventory:rottenMeat", currentRottenMeat + enemyDrops.filter(drop => drop === "rottenMeat").length)
+  const currentBone = (await userStorage.getItem<number>("inventory:bone")) ?? 0
+  const currentRottenMeat = (await userStorage.getItem<number>("inventory:rottenMeat")) ?? 0
+  await userStorage.setItem("inventory:bone", currentBone + enemyDrops.filter((drop) => drop === "bone").length)
+  await userStorage.setItem("inventory:rottenMeat", currentRottenMeat + enemyDrops.filter((drop) => drop === "rottenMeat").length)
   await userStorage.setItem("user:experience", userXp + xpGained)
 
   return {

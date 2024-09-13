@@ -10,14 +10,14 @@ export default defineEventHandler(async (event) => {
 
   const userStorage = useStorage("db")
 
-  const userGold = await userStorage.getItem<number>("user:gold") ?? 0
+  const userGold = (await userStorage.getItem<number>("user:gold")) ?? 0
 
   const weaponCost = weapons.find(({ id }) => id === weapon)!.cost
 
   if (userGold < weaponCost) {
     throw createError({
       status: 400,
-      statusMessage: "You don't have enough gold to buy this sword."
+      statusMessage: "You don't have enough gold to buy this sword.",
     })
   }
 

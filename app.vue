@@ -4,7 +4,7 @@
       <ColorSwitch />
     </div>
 
-    <UDivider class="mb-4"/>
+    <UDivider class="mb-4" />
 
     <div class="flex gap-4">
       <UCard class="w-80">
@@ -18,7 +18,7 @@
               <li class="flex gap-1">
                 <span>Gold:</span>
                 <span class="font-bold">{{ user.gold }}</span>
-                <img width="18px" class="object-contain" src="~/public/gold.webp" alt="Gold" >
+                <img width="18px" class="object-contain" src="~/public/gameplay/gold.webp" alt="Gold" />
               </li>
               <li class="flex gap-1">
                 <span>Level:</span>
@@ -30,8 +30,8 @@
               </li>
               <li class="flex gap-1">
                 <span>Weapon:</span>
-                <img v-if="user.weapon === 'woodenSword'" width="18px" class="object-contain" src="~/public/wooden-sword.webp" alt="Wooden Sword" >
-                <img v-else-if="user.weapon === 'stoneSword'" width="18px" class="object-contain" src="~/public/stone-sword.webp" alt="Iron Sword" >
+                <img v-if="user.weapon === 'woodenSword'" width="18px" class="object-contain" src="~/public/weapons/wooden-sword.webp" alt="Wooden Sword" />
+                <img v-else-if="user.weapon === 'stoneSword'" width="18px" class="object-contain" src="~/public/weapons/stone-sword.webp" alt="Iron Sword" />
                 <span class="font-bold">{{ user.weapon }}</span>
               </li>
             </ul>
@@ -43,13 +43,13 @@
             <ul>
               <li class="flex gap-1">
                 <span class="font-bold">{{ inventory.bone }}</span>
-                <img width="18px" class="object-contain" src="~/public/bone.webp" alt="Bone" >
+                <img width="18px" class="object-contain" src="~/public/loot/bone.webp" alt="Bone" />
                 <span>Bones</span>
               </li>
 
               <li class="flex gap-1">
                 <span class="font-bold">{{ inventory.rottenMeat }}</span>
-                <img width="18px" class="object-contain" src="~/public/rotten-flesh.webp" alt="Rotten Flesh" >
+                <img width="18px" class="object-contain" src="~/public/loot/rotten-flesh.webp" alt="Rotten Flesh" />
                 <span>Rotten Flesh</span>
               </li>
 
@@ -73,7 +73,7 @@
         <ul>
           <li>
             <span>Type:</span>
-            <UIcon class="inline-block mx-1" size="18" name="i-game-icons:crypt-entrance"/>
+            <UIcon class="inline-block mx-1" size="18" name="i-game-icons:crypt-entrance" />
             <span class="font-bold">Crypt</span>
           </li>
         </ul>
@@ -96,7 +96,7 @@
         <ul class="flex flex-col gap-1">
           <li v-for="weapon of weaponShopItems" :key="weapon.id" class="flex items-center justify-between">
             <div class="flex gap-1 mr-4">
-              <img width="18px" class="object-contain" :src="weapon.icon" :alt="weapon.name" >
+              <img width="18px" class="object-contain" :src="weapon.icon" :alt="weapon.name" />
               <span class="font-bold">{{ weapon.name }}</span>
             </div>
 
@@ -105,13 +105,11 @@
               :color="user.weapon === weapon.id ? 'amber' : 'primary'"
               @click="() => buySword(weapon.id)"
             >
-              <span v-if="user.weapon === weapon.id">
-                Equipped
-              </span>
+              <span v-if="user.weapon === weapon.id"> Equipped </span>
 
               <div v-else>
                 {{ weapon.cost }}
-                <img width="18px" class="object-contain inline-block" src="~/public/gold.webp" alt="Gold" >
+                <img width="18px" class="object-contain inline-block" src="~/public/gameplay/gold.webp" alt="Gold" />
               </div>
             </UButton>
           </li>
@@ -128,7 +126,7 @@
             <li>
               <DungeonResultItem :run="run" />
             </li>
-            <UDivider class="my-2"/>
+            <UDivider class="my-2" />
           </template>
         </ul>
       </UCard>
@@ -137,8 +135,7 @@
 </template>
 
 <script setup lang="ts">
-
-import type { RunDungeonResult } from "./server/api/dungeon/run.post";
+import type { RunDungeonResult } from "./server/api/dungeon/run.post"
 const user = ref<{
   gold: number
   weapon: WeaponId
@@ -146,7 +143,7 @@ const user = ref<{
 }>({
   gold: 0,
   weapon: "fists",
-  experience: 0
+  experience: 0,
 })
 
 const inventory = ref<Record<EnemyDropId, number>>({
@@ -184,7 +181,6 @@ const runDungeon = async () => {
   setTimeout(() => {
     recovering.value = false
   }, 1000)
-
 }
 
 const getInventory = async () => {

@@ -1,5 +1,5 @@
 export const weaponIds = ["fists", "woodenSword", "stoneSword"] as const
-export type WeaponId = typeof weaponIds[number]
+export type WeaponId = (typeof weaponIds)[number]
 
 export interface Weapon {
   id: WeaponId
@@ -39,7 +39,7 @@ export const woodenSword: Weapon = {
   name: "Wooden Sword",
   description: "A simple wooden sword",
   sortOrder: 1,
-  icon: "wooden-sword.webp",
+  icon: "weapons/wooden-sword.webp",
   cost: 100,
   damage: 2,
   armorPenetration: 0,
@@ -51,7 +51,7 @@ export const stoneSword: Weapon = {
   name: "Stone Sword",
   description: "A sword made of stone",
   sortOrder: 2,
-  icon: "stone-sword.webp",
+  icon: "weapons/stone-sword.webp",
   cost: 500,
   damage: 2.5,
   armorPenetration: 1,
@@ -59,8 +59,4 @@ export const stoneSword: Weapon = {
   levelRequirement: 5,
 }
 
-export const weapons: Array<Weapon> = [
-  fists,
-  woodenSword,
-  stoneSword
-];
+export const weapons: Array<Weapon> = [fists, woodenSword, stoneSword]

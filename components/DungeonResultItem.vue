@@ -8,7 +8,7 @@
     <div class="flex gap-3 flex-wrap">
       <div v-for="enemyRecord of enemiesDefeated" :key="enemyRecord.enemy.id" class="flex gap-1">
         <code class="font-bold">{{ enemyRecord.count }}</code>
-        <img class="object-contain" width="18px" :src="enemyRecord.enemy.icon" :alt="enemyRecord.enemy.name" >
+        <img class="object-contain" width="18px" :src="enemyRecord.enemy.icon" :alt="enemyRecord.enemy.name" />
       </div>
     </div>
 
@@ -18,14 +18,14 @@
     <div class="flex gap-3 flex-wrap">
       <div v-for="dropRecord of enemyDrops" :key="dropRecord.drop.id" class="flex gap-1">
         <code class="font-bold">{{ dropRecord.count }}</code>
-        <img class="object-contain" width="18px" :src="dropRecord.drop.icon" :alt="dropRecord.drop.name" >
+        <img class="object-contain" width="18px" :src="dropRecord.drop.icon" :alt="dropRecord.drop.name" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { RunDungeonResult } from "~/server/api/dungeon/run.post";
+import type { RunDungeonResult } from "~/server/api/dungeon/run.post"
 
 const props = defineProps<{
   run: RunDungeonResult
@@ -33,7 +33,7 @@ const props = defineProps<{
 const { run } = toRefs(props)
 
 const enemiesDefeated = computed(() => {
-  const possibleEnemies = dungeons.find(dungeon => dungeon.id === run.value.dungeonId)!.enemies
+  const possibleEnemies = dungeons.find((dungeon) => dungeon.id === run.value.dungeonId)!.enemies
   const enemiesDefeated: Record<EnemyId, number> = {}
 
   run.value.enemiesDefeated.forEach((enemyId) => {
@@ -44,14 +44,16 @@ const enemiesDefeated = computed(() => {
     }
   })
 
-  return Object.entries(enemiesDefeated).map(([enemyId, count]) => {
-    const enemy = possibleEnemies.find((enemy) => enemy.id === enemyId)!
+  return Object.entries(enemiesDefeated)
+    .map(([enemyId, count]) => {
+      const enemy = possibleEnemies.find((enemy) => enemy.id === enemyId)!
 
-    return {
-      enemy,
-      count
-    }
-  }).toSorted((a, b) => a.enemy.sortOrder - b.enemy.sortOrder)
+      return {
+        enemy,
+        count,
+      }
+    })
+    .toSorted((a, b) => a.enemy.sortOrder - b.enemy.sortOrder)
 })
 
 const enemyDrops = computed(() => {
@@ -65,13 +67,15 @@ const enemyDrops = computed(() => {
     }
   })
 
-  return Object.entries(enemyDrops).map(([dropId, count]) => {
-    const drop = drops.find((drop) => drop.id === dropId)!
+  return Object.entries(enemyDrops)
+    .map(([dropId, count]) => {
+      const drop = drops.find((drop) => drop.id === dropId)!
 
-    return {
-      drop,
-      count
-    }
-  }).toSorted((a, b) => a.drop.sortOrder - b.drop.sortOrder)
+      return {
+        drop,
+        count,
+      }
+    })
+    .toSorted((a, b) => a.drop.sortOrder - b.drop.sortOrder)
 })
 </script>

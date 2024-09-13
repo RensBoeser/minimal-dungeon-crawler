@@ -1,7 +1,7 @@
 import type { EnemyDropId } from "./drops"
 
 export const enemyIds = ["skeleton:straggler", "zombie:walker", "skeleton:warrior"]
-export type EnemyId = typeof enemyIds[number]
+export type EnemyId = (typeof enemyIds)[number]
 
 export interface LootTableEntry {
   /** Name of the item */
@@ -35,7 +35,7 @@ export interface Dungeon {
   name: string
   /** Description of the dungeon */
   description: string
-  sortOrder: number,
+  sortOrder: number
   /** Enemies that can be found in the dungeon */
   enemies: Array<Enemy>
 }
@@ -51,35 +51,31 @@ export const cryptOfTheForgotten: Dungeon = {
       name: "Skeleton straggler",
       description: "A lone skeleton wandering the crypt.",
       sortOrder: 0,
-      icon: "skeleton-straggler.png",
+      icon: "characters/skeleton-straggler.png",
       health: 10,
       armor: 0,
       xp: 1,
       encounterRate: 0.5,
-      lootTable: [
-        { item: "bone", probability: 0.5 },
-      ]
+      lootTable: [{ item: "bone", probability: 0.5 }],
     },
     {
       id: "zombie:walker",
       name: "Zombie walker",
       description: "A slow-moving zombie.",
       sortOrder: 1,
-      icon: "zombie-walker.png",
+      icon: "characters/zombie-walker.png",
       health: 15,
       armor: 0,
       xp: 3,
       encounterRate: 0.3,
-      lootTable: [
-        { item: "rottenMeat", probability: 0.5 },
-      ]
+      lootTable: [{ item: "rottenMeat", probability: 0.5 }],
     },
     {
       id: "skeleton:warrior",
       name: "Skeleton warrior",
       description: "A well-armed skeleton.",
       sortOrder: 2,
-      icon: "skeleton-warrior.png",
+      icon: "characters/skeleton-warrior.png",
       health: 30,
       armor: 1,
       xp: 8,
@@ -87,11 +83,9 @@ export const cryptOfTheForgotten: Dungeon = {
       lootTable: [
         { item: "bone", probability: 1 },
         { item: "rottenMeat", probability: 0.2 },
-      ]
-    }
+      ],
+    },
   ],
 }
 
-export const dungeons: Array<Dungeon> = [
-  cryptOfTheForgotten,
-]
+export const dungeons: Array<Dungeon> = [cryptOfTheForgotten]

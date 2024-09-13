@@ -23,10 +23,7 @@ export const levels: Array<UserLevel> = [
 ]
 
 export const getLevel = (xp: number) => {
-  const highestLevel = levels.reduce(
-    (accLevel, currentLevel) => (currentLevel.requiredXp <= xp ? currentLevel : accLevel),
-    levels[0]
-  )
+  const highestLevel = levels.reduce((accLevel, currentLevel) => (currentLevel.requiredXp <= xp ? currentLevel : accLevel), levels[0])
 
   return cloneDeep(highestLevel)
 }
