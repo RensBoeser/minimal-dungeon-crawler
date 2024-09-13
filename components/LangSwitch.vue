@@ -8,9 +8,11 @@
 const { localeCodes, locale, setLocale } = useI18n()
 
 const items = computed(() => {
-  return [localeCodes.value.map((localeCode) => ({
-    label: localeCode === 'en' ? '🇬🇧 English' : '🇳🇱 Nederlands',
-    click: () => setLocale(localeCode),
-  }))]
+  return [
+    localeCodes.value.map((localeCode) => ({
+      label: localeCode === "en" ? "🇬🇧 English" : "🇳🇱 Nederlands",
+      click: () => setLocale(localeCode),
+    })),
+  ]
 })
 </script>

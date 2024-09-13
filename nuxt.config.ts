@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     locales: ["en", "nl"],
     defaultLocale: "en",
     strategy: "no_prefix",
-    vueI18n: './i18n.config.ts'
+    vueI18n: "./i18n.config.ts",
   },
   nitro: {
     storage: {
