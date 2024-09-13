@@ -118,7 +118,7 @@
         </ul>
       </UCard>
 
-      <UCard>
+      <UCard class="flex-1 w-80">
         <template #header>
           <h1 class="text-xl">Past Runs</h1>
         </template>
