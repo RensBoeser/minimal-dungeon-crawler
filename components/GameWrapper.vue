@@ -20,6 +20,7 @@ const experience = ref(0)
 const inventory = ref<Record<EnemyDropId, number>>({
   bone: 0,
   rottenMeat: 0,
+  potteryShard: 0,
   oldCoin: 0,
 })
 
