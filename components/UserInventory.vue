@@ -22,9 +22,8 @@
           </li>
           <li class="flex gap-1">
             <span>{{ $t('ui.user.weapon') }}:</span>
-            <img v-if="weapon === 'woodenSword'" width="18px" class="object-contain" src="~/public/weapons/wooden-sword.webp" alt="Wooden Sword" />
-            <img v-else-if="weapon === 'stoneSword'" width="18px" class="object-contain" src="~/public/weapons/stone-sword.webp" alt="Iron Sword" />
-            <span class="font-bold">{{ $t(`weapons.${weapon}.name`) }}</span>
+            <img v-if="currentWeapon.icon" width="18px" class="object-contain" :src="currentWeapon.icon" :alt="$t(`weapons.${currentWeaponId}.name`)" />
+            <span class="font-bold">{{ $t(`weapons.${currentWeaponId}.name`) }}</span>
           </li>
         </ul>
       </div>
@@ -60,7 +59,7 @@
 
 <script setup lang="ts">
 const experience = defineModel<number>("experience", { required: true })
-const weapon = defineModel<WeaponId>("weapon", { required: true })
+const currentWeaponId = defineModel<WeaponId>("weapon", { required: true })
 const gold = defineModel<number>("gold", { required: true })
 const inventory = defineModel<Record<EnemyDropId, number>>("inventory", { required: true })
 
@@ -74,6 +73,8 @@ const inventoryValue = computed(() => {
 
 const userLevel = computed(() => getLevel(experience.value))
 const nextLevel = computed(() => getNextLevel(experience.value))
+
+const currentWeapon = computed(() => weapons.find((weapon) => weapon.id === currentWeaponId.value))
 
 const sellInventory = async () => {
   const { gold: newGold } = await $fetch("/api/inventory/sell", { method: "POST" })

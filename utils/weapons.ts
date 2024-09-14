@@ -24,6 +24,7 @@ export interface Weapon {
 export const fists: Weapon = {
   id: "fists",
   sortOrder: 0,
+  icon: "weapons/fists.webp",
   cost: 0,
   damage: 1,
   armorPenetration: 0,
