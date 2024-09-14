@@ -52,8 +52,10 @@ const runDungeon = async () => {
   recovering.value = true
   const runDungeonResult = await $fetch("/api/dungeon/run", { method: "POST" })
 
-  inventory.value.bone += runDungeonResult.enemyDrops.filter((drop) => drop === "bone").length
-  inventory.value.rottenMeat += runDungeonResult.enemyDrops.filter((drop) => drop === "rottenMeat").length
+  for (const drop of runDungeonResult.enemyDrops) {
+    inventory.value[drop]++
+  }
+
   experience.value += runDungeonResult.xpGained
 
   pastRuns.value.push(runDungeonResult)

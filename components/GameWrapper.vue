@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-wrap gap-4">
-    <UserInventory class="w-80" :experience="user.experience" :weapon="user.weapon" :gold="user.gold" :inventory="inventory" />
+    <UserInventory v-model:experience="experience" v-model:weapon="weapon" v-model:gold="gold" v-model:inventory="inventory" class="w-80" />
 
-    <DungeonPicker class="w-80" :experience="user.experience" :inventory="inventory" :past-runs="pastRuns" />
+    <DungeonPicker v-model:experience="experience" v-model:inventory="inventory" v-model:past-runs="pastRuns" class="w-80" />
 
-    <WeaponShop class="w-80" :weapon="user.weapon" :gold="user.gold" />
+    <WeaponShop v-model:weapon="weapon" v-model:gold="gold" class="w-80" />
 
     <RunHistory class="w-80" :past-runs="pastRuns" />
   </div>
@@ -13,19 +13,14 @@
 <script setup lang="ts">
 import type { RunDungeonResult } from "~/server/api/dungeon/run.post"
 
-const user = ref<{
-  gold: number
-  weapon: WeaponId
-  experience: number
-}>({
-  gold: 0,
-  weapon: "fists",
-  experience: 0,
-})
+const gold = ref(0)
+const weapon = ref<WeaponId>("fists")
+const experience = ref(0)
 
 const inventory = ref<Record<EnemyDropId, number>>({
   bone: 0,
   rottenMeat: 0,
+  oldCoin: 0,
 })
 
 const pastRuns = ref<Array<RunDungeonResult>>([])
@@ -33,11 +28,10 @@ const pastRuns = ref<Array<RunDungeonResult>>([])
 const getInventory = async () => {
   const currentUser = await $fetch("/api/inventory")
 
-  inventory.value.bone = currentUser.bone
-  inventory.value.rottenMeat = currentUser.rottenMeat
-  user.value.gold = currentUser.gold
-  user.value.experience = currentUser.experience
-  user.value.weapon = currentUser.weapon
+  inventory.value = currentUser.inventory
+  gold.value = currentUser.gold
+  experience.value = currentUser.experience
+  weapon.value = currentUser.weapon
 }
 
 onMounted(getInventory)

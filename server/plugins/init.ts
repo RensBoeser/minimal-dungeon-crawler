@@ -1,3 +1,4 @@
+import { drops } from "~/utils/drops"
 import type { WeaponId } from "~/utils/weapons"
 
 export default defineNitroPlugin(async () => {
@@ -6,8 +7,7 @@ export default defineNitroPlugin(async () => {
 
   Promise.all([
     // Inventory
-    storage.setItem<number>("inventory:bone", 0),
-    storage.setItem<number>("inventory:rottenMeat", 0),
+    ...drops.map(drop => storage.setItem<number>(`inventory:loot:${drop.id}`, 0)),
 
     // User stats
     storage.setItem<number>("user:experience", 0),

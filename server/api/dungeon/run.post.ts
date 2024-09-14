@@ -123,10 +123,11 @@ export default defineEventHandler(async (): Promise<RunDungeonResult> => {
   }
 
   // Update the database
-  const currentBone = (await userStorage.getItem<number>("inventory:bone")) ?? 0
-  const currentRottenMeat = (await userStorage.getItem<number>("inventory:rottenMeat")) ?? 0
-  await userStorage.setItem("inventory:bone", currentBone + enemyDrops.filter((drop) => drop === "bone").length)
-  await userStorage.setItem("inventory:rottenMeat", currentRottenMeat + enemyDrops.filter((drop) => drop === "rottenMeat").length)
+  for (const drop of enemyDrops) {
+    const currentAmount = (await userStorage.getItem<number>(`inventory:loot:${drop}`)) ?? 0
+    await userStorage.setItem(`inventory:loot:${drop}`, currentAmount + 1)
+  }
+
   await userStorage.setItem("user:experience", userXp + xpGained)
 
   return {

@@ -32,16 +32,14 @@
         <h1 class="font-bold">{{ $t('ui.inventory.sellableLoot') }}</h1>
 
         <ul>
-          <li class="flex gap-1">
-            <span class="font-bold">{{ inventory.bone }}</span>
-            <img width="18px" class="object-contain" src="~/public/loot/bone.webp" :alt="$t('drops.bone.name')" />
-            <span>{{ $t("drops.bone.name", inventory.bone) }}</span>
-          </li>
-
-          <li class="flex gap-1">
-            <span class="font-bold">{{ inventory.rottenMeat }}</span>
-            <img width="18px" class="object-contain" src="~/public/loot/rotten-flesh.webp" :alt="$t('drops.rottenMeat.name')" />
-            <span>{{ $t("drops.rottenMeat.name", inventory.rottenMeat) }}</span>
+          <li
+            v-for="[enemyDropId, amount] of (Object.entries(inventory) as [EnemyDropId, number][])"
+            :key="enemyDropId"
+            class="flex gap-1"
+          >
+            <span class="font-bold">{{ amount }}</span>
+            <img width="18px" class="object-contain" :src="enemyDropIcon(enemyDropId)" :alt="$t(`drops.${enemyDropId}.name`)" />
+            <span>{{ $t(`drops.${enemyDropId}.name`, amount) }}</span>
           </li>
 
           <li>
@@ -74,7 +72,9 @@ const inventoryValue = computed(() => {
 const userLevel = computed(() => getLevel(experience.value))
 const nextLevel = computed(() => getNextLevel(experience.value))
 
-const currentWeapon = computed(() => weapons.find((weapon) => weapon.id === currentWeaponId.value))
+const currentWeapon = computed(() => weapons.find((weapon) => weapon.id === currentWeaponId.value)!)
+
+const enemyDropIcon = (enemyDropId: EnemyDropId) => drops.find((drop) => drop.id === enemyDropId)!.icon
 
 const sellInventory = async () => {
   const { gold: newGold } = await $fetch("/api/inventory/sell", { method: "POST" })

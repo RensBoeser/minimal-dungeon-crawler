@@ -28,6 +28,10 @@ export default defineI18nConfig(() => ({
           name: "Rotten Meat",
           description: "A piece of rotten meat.",
         },
+        oldCoin: {
+          name: "Old coin",
+          description: "An old coin from a long-lost civilization. Still looks shiny.",
+        }
       },
       enemies: {
         "skeleton:straggler": {
@@ -85,6 +89,7 @@ export default defineI18nConfig(() => ({
         buy: "Buy",
         runDungeon: "Run Dungeon",
         recovering: "Recovering",
+        equipped: "Equipped",
       }
     },
     nl: {
@@ -169,6 +174,7 @@ export default defineI18nConfig(() => ({
         buy: "Koop",
         runDungeon: "Dungeon Rennen",
         recovering: "Bijkomen",
+        equipped: "Uitgerust",
       }
     },
   },

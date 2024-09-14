@@ -14,8 +14,6 @@ export interface LootTableEntry {
 
 export interface Enemy {
   id: EnemyId
-  name: string
-  description: string
   sortOrder: number
   icon: string
   health: number
@@ -50,8 +48,6 @@ export const cryptOfTheForgotten: Dungeon = {
   enemies: [
     {
       id: "skeleton:straggler",
-      name: "Skeleton straggler",
-      description: "A lone skeleton wandering the crypt.",
       sortOrder: 0,
       icon: "characters/skeleton-straggler.png",
       health: 10,
@@ -62,8 +58,6 @@ export const cryptOfTheForgotten: Dungeon = {
     },
     {
       id: "zombie:walker",
-      name: "Zombie walker",
-      description: "A slow-moving zombie.",
       sortOrder: 1,
       icon: "characters/zombie-walker.png",
       health: 15,
@@ -74,8 +68,6 @@ export const cryptOfTheForgotten: Dungeon = {
     },
     {
       id: "skeleton:warrior",
-      name: "Skeleton warrior",
-      description: "A well-armed skeleton.",
       sortOrder: 2,
       icon: "characters/skeleton-warrior.png",
       health: 30,
@@ -83,8 +75,8 @@ export const cryptOfTheForgotten: Dungeon = {
       xp: 8,
       encounterRate: 0.1,
       lootTable: [
-        { item: "bone", probability: 0.8, amount: 2 },
-        { item: "rottenMeat", probability: 0.3, amount: 1 },
+        { item: "bone", probability: 0.9, amount: 2 },
+        { item: "oldCoin", probability: 0.2, amount: 1 },
       ],
     },
   ],
