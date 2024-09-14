@@ -42,6 +42,7 @@ import type { RunDungeonResult } from "~/server/api/dungeon/run.post"
 import { handleXpGain } from "~/utils/levels";
 
 const experience = defineModel<number>("experience", { required: true })
+const gold = defineModel<number>("gold", { required: true })
 const inventory = defineModel<Record<EnemyDropId, number>>("inventory", { required: true })
 const pastRuns = defineModel<Array<RunDungeonResult>>("pastRuns", { required: true })
 
@@ -53,12 +54,19 @@ const runDungeon = async () => {
   recovering.value = true
   const runDungeonResult = await $fetch("/api/dungeon/run", { method: "POST" })
 
+  // add drops to inventory
   for (const drop of runDungeonResult.enemyDrops) {
     inventory.value[drop]++
   }
-
-  experience.value = await handleXpGain(experience.value, runDungeonResult.xpGained)
-
+ 
+  // calculate xp gain and rewards for this run
+  const xpGainRewards = await handleXpGain(experience.value, runDungeonResult.xpGained)
+  experience.value = xpGainRewards.newXpValue
+  if (xpGainRewards.goldReward) {
+    gold.value = gold.value + xpGainRewards.goldReward
+  }
+  
+  // add run to history
   pastRuns.value.push(runDungeonResult)
 
   setTimeout(() => {

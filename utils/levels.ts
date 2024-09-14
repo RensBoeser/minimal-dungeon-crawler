@@ -13,6 +13,11 @@ export interface LevelUpResult {
   gold: number
 }
 
+export interface ExperienceGainedResult {
+  newXpValue: number
+  goldReward?: number
+}
+
 export const levels: Array<UserLevel> = [
   { level: 1, requiredXp: 0, baseStamina: 50 },
   { level: 2, requiredXp: 100, baseStamina: 50 },
@@ -40,21 +45,26 @@ export const getNextLevel = (xp: number) => {
 }
 
 /** Calculates XP gain, returns new XP value */
-export const handleXpGain = async (currentXp: number, xpGain: number): Promise<number> => {
+export const handleXpGain = async (currentXp: number, xpGain: number): Promise<ExperienceGainedResult> => {
 
   // XP gain from a user's boosts can be modified here.
 
   const newXpValue = currentXp + xpGain
   if (getLevel(currentXp).level < getLevel(newXpValue).level) {
-    await levelUp()
+    const levelUpReward = await levelUp()
+    return {
+      newXpValue,
+      goldReward: levelUpReward.gold
+    }
   }
 
-  return newXpValue
+  return {
+    newXpValue
+  }
 }
 
-export const levelUp = async () => {
-  // add gold to user
-  await $fetch("/api/user/levelUp", { method: "POST" })
-
+/** Level up the user, returns gold amount added to user */
+export const levelUp = async (): Promise<LevelUpResult> => {
+  return await $fetch("/api/user/levelUp", { method: "POST" })
   // additionally, you could add a notification trigger here
 }
