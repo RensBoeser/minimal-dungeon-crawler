@@ -124,6 +124,14 @@ export default defineI18nConfig(() => ({
           name: "Rottend Vlees",
           description: "Een stuk rottend vlees.",
         },
+        oldCoin: {
+          name: "Oude munt | Oude munten",
+          description: "Een oude munt van een lang-verloren beschaving. Schitterd nogsteeds in het licht.",
+        },
+        potteryShard: {
+          name: "Potten Scherf | Potten Scherven",
+          description: "Een stuk aardewerk van een lang-verloren beschaving.",
+        },
       },
       enemies: {
         "skeleton:straggler": {
@@ -174,6 +182,9 @@ export default defineI18nConfig(() => ({
           noEnemiesDefeated: "Geen vijanden verslagen",
           enemyDrops: "Geloot",
           noEnemyDrops: "Niks geloot",
+        },
+        drops: {
+          sellValue: "Waarde",
         },
       },
       actions: {
