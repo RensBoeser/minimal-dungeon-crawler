@@ -4,7 +4,7 @@
       <h1 class="text-xl">{{ $t('ui.inventory.title')}}</h1>
     </template>
 
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2 h-52">
       <div>
         <ul>
           <li class="flex gap-1">

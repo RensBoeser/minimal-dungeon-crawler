@@ -4,7 +4,7 @@
       <h1 class="text-xl">{{ $t('ui.dungeonPicker.title') }}</h1>
     </template>
 
-    <ul>
+    <ul class="h-52">
       <li>
         <span>{{ $t("ui.dungeonPicker.name" )}}:</span>
         <UIcon class="inline-block mx-1" size="18" name="i-game-icons:crypt-entrance" />
@@ -29,7 +29,7 @@
     </ul>
 
     <template #footer>
-      <UButton icon="i-ph:sword" class="mb-3" block :loading="recovering" @click="runDungeon">
+      <UButton icon="i-ph:sword" block :loading="recovering" @click="runDungeon">
         <span v-if="recovering">{{ $t('actions.recovering') }}...</span>
         <span v-else>{{ $t('actions.runDungeon')}}</span>
       </UButton>
