@@ -50,6 +50,8 @@ export const stoneSword: Weapon = {
   armorPenetration: 1,
   staminaCost: 1,
   levelRequirement: 5,
+  criticalChance: 0.1,
+  criticalMultiplier: 1.2,
 }
 
 export const weapons: Array<Weapon> = [fists, woodenSword, stoneSword]
