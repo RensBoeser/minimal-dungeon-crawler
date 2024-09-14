@@ -1,3 +1,4 @@
+import { get } from "lodash"
 import cloneDeep from "lodash/cloneDeep"
 
 export interface UserLevel {
@@ -44,7 +45,7 @@ export const handleXpGain = async (currentXp: number, xpGain: number): Promise<n
   // XP gain from a user's boosts can be modified here.
 
   const newXpValue = currentXp + xpGain
-  if (getLevel(currentXp) < getLevel(newXpValue)) {
+  if (getLevel(currentXp).level < getLevel(newXpValue).level) {
     await levelUp()
   }
 
