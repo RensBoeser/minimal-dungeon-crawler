@@ -71,7 +71,14 @@ export default defineI18nConfig(() => ({
           title: "Dungeon",
           enemies: "Enemies",
           name: "Name",
-        }
+        },
+        logs: {
+          title: "Logs",
+          enemiesDefeated: "Enemies Defeated",
+          noEnemiesDefeated: "No enemies defeated",
+          enemyDrops: "Looted",
+          noEnemyDrops: "Nothing looted",
+        },
       },
       actions: {
         sell: "Sell",
@@ -149,6 +156,13 @@ export default defineI18nConfig(() => ({
           enemies: "Vijanden",
           name: "Naam",
         },
+        logs: {
+          title: "Historie",
+          enemiesDefeated: "Vijanden Verslagen",
+          noEnemiesDefeated: "Geen vijanden verslagen",
+          enemyDrops: "Geloot",
+          noEnemyDrops: "Niks geloot",
+        },
       },
       actions: {
         sell: "Verkoop",
@@ -158,4 +172,30 @@ export default defineI18nConfig(() => ({
       }
     },
   },
+  datetimeFormats: {
+    en: {
+      short: {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      },
+      time: {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      }
+    },
+    nl: {
+      short: {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      },
+      time: {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      }
+    },
+  }
 }))

@@ -1,7 +1,7 @@
 <template>
   <UCard>
     <template #header>
-      <h1 class="text-xl">Past Runs</h1>
+      <h1 class="text-xl">{{ $t('ui.logs.title')}}</h1>
     </template>
 
     <ul class="max-h-80 overflow-y-auto">
