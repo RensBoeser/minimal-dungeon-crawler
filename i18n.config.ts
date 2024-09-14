@@ -140,7 +140,7 @@ export default defineI18nConfig(() => ({
           experience: "Ervaring",
           xp: "XP",
           gold: "Goud",
-          stamina: "Uithoudingsvermogen",
+          stamina: "Stamina",
         },
         inventory: {
           title: "Inventaris",
