@@ -5,21 +5,21 @@ export interface UserLevel {
   level: number
   /** The XP required */
   requiredXp: number
-  stamina: number
+  baseStamina: number
 }
 
 export const levels: Array<UserLevel> = [
-  { level: 1, requiredXp: 0, stamina: 50 },
-  { level: 2, requiredXp: 100, stamina: 50 },
-  { level: 3, requiredXp: 200, stamina: 55 },
-  { level: 4, requiredXp: 400, stamina: 55 },
-  { level: 5, requiredXp: 650, stamina: 65 },
-  { level: 6, requiredXp: 1000, stamina: 65 },
-  { level: 7, requiredXp: 1400, stamina: 65 },
-  { level: 8, requiredXp: 1800, stamina: 70 },
-  { level: 9, requiredXp: 2300, stamina: 70 },
-  { level: 10, requiredXp: 3000, stamina: 80 },
-  { level: 11, requiredXp: Infinity, stamina: 80 },
+  { level: 1, requiredXp: 0, baseStamina: 50 },
+  { level: 2, requiredXp: 100, baseStamina: 50 },
+  { level: 3, requiredXp: 200, baseStamina: 55 },
+  { level: 4, requiredXp: 400, baseStamina: 55 },
+  { level: 5, requiredXp: 650, baseStamina: 65 },
+  { level: 6, requiredXp: 1000, baseStamina: 65 },
+  { level: 7, requiredXp: 1400, baseStamina: 65 },
+  { level: 8, requiredXp: 1800, baseStamina: 70 },
+  { level: 9, requiredXp: 2300, baseStamina: 70 },
+  { level: 10, requiredXp: 3000, baseStamina: 80 },
+  { level: 11, requiredXp: Infinity, baseStamina: 80 },
 ]
 
 export const getLevel = (xp: number) => {

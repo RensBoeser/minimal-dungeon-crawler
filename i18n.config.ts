@@ -43,6 +43,10 @@ export default defineI18nConfig(() => ({
           sellableLoot: "Sellable Loot",
           inventoryValue: "Inventory Value",
         },
+        shop: {
+          title: "Shop",
+          weapons: "Weapons",
+        }
       },
       actions: {
         sell: "Sell",
@@ -87,6 +91,10 @@ export default defineI18nConfig(() => ({
           title: "Inventaris",
           sellableLoot: "Verkoopbare Buit",
           inventoryValue: "Inventaris Waarde",
+        },
+        shop: {
+          title: "Winkel",
+          weapons: "Wapens",
         },
       },
       actions: {

@@ -1,16 +1,12 @@
 export const drops = [
   {
     id: "bone",
-    name: "Bone",
-    description: "A bone from a skeleton.",
     sortOrder: 0,
     icon: "loot/bone.webp",
     goldValue: 1,
   },
   {
     id: "rottenMeat",
-    name: "Rotten Meat",
-    description: "A piece of rotten meat.",
     sortOrder: 1,
     icon: "loot/rotten-flesh.webp",
     goldValue: 2,

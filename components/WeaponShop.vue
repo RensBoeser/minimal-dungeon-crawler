@@ -1,16 +1,16 @@
 <template>
   <UCard>
     <template #header>
-      <h1 class="text-xl">Shop</h1>
+      <h1 class="text-xl">{{ $t('ui.shop.title') }}</h1>
     </template>
 
-    <h1>Weapons</h1>
+    <h1>{{ $t('ui.shop.weapons') }}</h1>
 
     <ul class="flex flex-col gap-1">
       <li v-for="weaponShopItem of weaponShopItems" :key="weaponShopItem.id" class="flex items-center justify-between">
         <div class="flex gap-1 mr-4">
-          <img width="18px" class="object-contain" :src="weaponShopItem.icon" :alt="weaponShopItem.name" />
-          <span class="font-bold">{{ weaponShopItem.name }}</span>
+          <img width="18px" class="object-contain" :src="weaponShopItem.icon" :alt="$t(`weapons.${weaponShopItem.id}.name`)" />
+          <span class="font-bold">{{ $t(`weapons.${weaponShopItem.id}.name`) }}</span>
         </div>
 
         <UButton
@@ -18,11 +18,11 @@
           :color="currentWeapon === weaponShopItem.id ? 'amber' : 'primary'"
           @click="() => buySword(weaponShopItem.id)"
         >
-          <span v-if="currentWeapon === weaponShopItem.id"> Equipped </span>
+          <span v-if="currentWeapon === weaponShopItem.id"> {{ $t('actions.equipped') }} </span>
 
           <div v-else>
             {{ weaponShopItem.cost }}
-            <img width="18px" class="object-contain inline-block" src="~/public/gameplay/gold.webp" alt="Gold" />
+            <img width="18px" class="object-contain inline-block" src="~/public/gameplay/gold.webp" :alt="$t('ui.user.gold')" />
           </div>
         </UButton>
       </li>

@@ -18,7 +18,7 @@
           </li>
           <li class="flex gap-1">
             <span>{{ $t('ui.user.stamina') }}:</span>
-            <span class="font-bold">{{ userLevel.stamina }}</span>
+            <span class="font-bold">{{ userLevel.baseStamina }}</span>
           </li>
           <li class="flex gap-1">
             <span>{{ $t('ui.user.weapon') }}:</span>

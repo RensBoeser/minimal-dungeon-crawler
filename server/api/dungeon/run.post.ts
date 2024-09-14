@@ -85,7 +85,7 @@ export default defineEventHandler(async (): Promise<RunDungeonResult> => {
   const userXp = (await userStorage.getItem<number>("user:experience")) ?? 0
   const weaponId = (await userStorage.getItem<string>("user:weapon")) ?? "fists"
 
-  let { stamina: userStamina } = getLevel(userXp)
+  let { baseStamina: userStamina } = getLevel(userXp)
   const userWeapon = weapons.find(({ id }) => id === weaponId)!
 
   const currentDungeon = dungeons[0]

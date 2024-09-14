@@ -3,8 +3,6 @@ export type WeaponId = (typeof weaponIds)[number]
 
 export interface Weapon {
   id: WeaponId
-  name: string
-  description: string
   sortOrder: number
   icon?: string
   /** Cost of the sword in the shop */
@@ -25,8 +23,6 @@ export interface Weapon {
 
 export const fists: Weapon = {
   id: "fists",
-  name: "Fists",
-  description: "Your bare hands",
   sortOrder: 0,
   cost: 0,
   damage: 1,
@@ -36,8 +32,6 @@ export const fists: Weapon = {
 
 export const woodenSword: Weapon = {
   id: "woodenSword",
-  name: "Wooden Sword",
-  description: "A simple wooden sword",
   sortOrder: 1,
   icon: "weapons/wooden-sword.webp",
   cost: 100,
@@ -48,8 +42,6 @@ export const woodenSword: Weapon = {
 
 export const stoneSword: Weapon = {
   id: "stoneSword",
-  name: "Stone Sword",
-  description: "A sword made of stone",
   sortOrder: 2,
   icon: "weapons/stone-sword.webp",
   cost: 500,
