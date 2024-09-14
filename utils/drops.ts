@@ -12,11 +12,17 @@ export const drops = [
     goldValue: 2,
   },
   {
-    id: "oldCoin",
+    id: "potteryShard",
     sortOrder: 2,
+    icon: "loot/pottery-shard.webp",
+    goldValue: 5,
+  },
+  {
+    id: "oldCoin",
+    sortOrder: 3,
     icon: "loot/old-coin.webp",
     goldValue: 10,
-  }
+  },
 ] as const
 
 export type EnemyDropId = (typeof drops)[number]["id"]

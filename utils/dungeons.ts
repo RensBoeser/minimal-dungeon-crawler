@@ -64,7 +64,10 @@ export const cryptOfTheForgotten: Dungeon = {
       armor: 0,
       xp: 3,
       encounterRate: 0.3,
-      lootTable: [{ item: "rottenMeat", probability: 0.3, amount: 2 }],
+      lootTable: [
+        { item: "rottenMeat", probability: 0.3, amount: 2 },
+        { item: "potteryShard", probability: 0.05, amount: 1 },
+      ],
     },
     {
       id: "skeleton:warrior",
@@ -76,7 +79,8 @@ export const cryptOfTheForgotten: Dungeon = {
       encounterRate: 0.1,
       lootTable: [
         { item: "bone", probability: 0.9, amount: 2 },
-        { item: "oldCoin", probability: 0.2, amount: 1 },
+        { item: "potteryShard", probability: 0.3, amount: 1 },
+        { item: "oldCoin", probability: 0.05, amount: 1 },
       ],
     },
   ],

@@ -4,7 +4,7 @@
       <h1 class="text-xl">{{ $t('ui.dungeonPicker.title') }}</h1>
     </template>
 
-    <ul class="h-52">
+    <ul class="h-64">
       <li>
         <span>{{ $t("ui.dungeonPicker.name" )}}:</span>
         <UIcon class="inline-block mx-1" size="18" name="i-game-icons:crypt-entrance" />

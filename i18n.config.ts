@@ -31,7 +31,11 @@ export default defineI18nConfig(() => ({
         oldCoin: {
           name: "Old coin",
           description: "An old coin from a long-lost civilization. Still looks shiny.",
-        }
+        },
+        potteryShard: {
+          name: "Pottery Shard",
+          description: "A piece of pottery from a long-lost civilization.",
+        },
       },
       enemies: {
         "skeleton:straggler": {
