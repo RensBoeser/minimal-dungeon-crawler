@@ -14,7 +14,7 @@
           </li>
           <li class="flex gap-1">
             <span>{{ $t('ui.user.level') }}:</span>
-            <span class="font-bold">{{ userLevel.level }}</span> <span>({{ $n(experience) }} / {{ $n(nextLevel?.requiredXp ?? 0) }} {{ $t('ui.user.xp') }})</span>
+            <span class="font-bold">{{ userLevel.level }}</span> <span v-if="nextLevel?.requiredXp && nextLevel.requiredXp !== Infinity">({{ $n(experience) }} / {{ $n(nextLevel?.requiredXp ?? 0) }} {{ $t('ui.user.xp') }})</span>
           </li>
           <li class="flex gap-1">
             <span>{{ $t('ui.user.stamina') }}:</span>
