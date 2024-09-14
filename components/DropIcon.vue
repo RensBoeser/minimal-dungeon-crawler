@@ -13,7 +13,7 @@
         <ul>
           <li>
             <span>{{ $t('ui.drops.sellValue') }}: <span class="font-bold">{{ enemyDrop.goldValue }}</span></span>
-            <img width="18px" class="object-contain inline ml-1" src="~/public/gameplay/gold.webp" alt="Gold" />
+            <img width="20px" class="object-contain inline ml-1" src="~/public/gameplay/gold.webp" alt="Gold" />
           </li>
         </ul>
       </div>
