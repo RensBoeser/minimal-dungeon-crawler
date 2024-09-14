@@ -8,6 +8,10 @@ export interface UserLevel {
   baseStamina: number
 }
 
+export interface LevelUpResult {
+  gold: number
+}
+
 export const levels: Array<UserLevel> = [
   { level: 1, requiredXp: 0, baseStamina: 50 },
   { level: 2, requiredXp: 100, baseStamina: 50 },
@@ -32,4 +36,24 @@ export const getNextLevel = (xp: number) => {
   const nextLevel = levels.find((level) => level.requiredXp > xp)
 
   return cloneDeep(nextLevel)
+}
+
+/** Calculates XP gain, returns new XP value */
+export const handleXpGain = (currentXp: number, xpGain: number): number => {
+
+  // XP gain from a user's boosts can be modified here.
+
+  const newXpValue = currentXp + xpGain
+  if (getLevel(currentXp) < getLevel(newXpValue)) {
+    levelUp()
+  }
+
+  return newXpValue
+}
+
+export const levelUp = async () => {
+  // add gold to user
+  await $fetch("/api/user/levelUp", { method: "POST" })
+
+  // additionally, you could add a notification trigger here
 }

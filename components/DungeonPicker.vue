@@ -39,6 +39,7 @@
 
 <script setup lang="ts">
 import type { RunDungeonResult } from "~/server/api/dungeon/run.post"
+import { handleXpGain } from "~/utils/levels";
 
 const experience = defineModel<number>("experience", { required: true })
 const inventory = defineModel<Record<EnemyDropId, number>>("inventory", { required: true })
@@ -56,7 +57,7 @@ const runDungeon = async () => {
     inventory.value[drop]++
   }
 
-  experience.value += runDungeonResult.xpGained
+  experience.value = handleXpGain(experience.value, runDungeonResult.xpGained)
 
   pastRuns.value.push(runDungeonResult)
 
