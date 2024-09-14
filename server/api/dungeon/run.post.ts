@@ -38,16 +38,6 @@ interface FightEnemyResult {
 export const fightEnemy = (enemy: Enemy, weapon: Weapon, stamina: number): FightEnemyResult => {
   let { health: enemyHealth } = cloneDeep(enemy)
   let staminaLost = 0
-
-  let compositeWeaponDamage = weapon.damage
-  // Check if the player lands a critical hit
-  if (weapon.criticalChance) {
-    const hitCritically = Math.random() <= weapon.criticalChance
-    if (hitCritically) {
-      // Multiply the weapon's damage by the critical multiplier, if none is set, default to 1
-      compositeWeaponDamage = weapon.damage * (weapon.criticalMultiplier ?? 1)
-    }
-  }
   
   // Calculate the damage negation based on the enemy's armor and the weapon's armor penetration
   const damageNegation = enemy.armor - weapon.armorPenetration
