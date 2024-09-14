@@ -38,7 +38,7 @@ interface FightEnemyResult {
 export const fightEnemy = (enemy: Enemy, weapon: Weapon, stamina: number): FightEnemyResult => {
   let { health: enemyHealth } = cloneDeep(enemy)
   let staminaLost = 0
-  
+
   // Calculate the damage negation based on the enemy's armor and the weapon's armor penetration
   const damageNegation = enemy.armor - weapon.armorPenetration
 
@@ -70,8 +70,11 @@ export const fightEnemy = (enemy: Enemy, weapon: Weapon, stamina: number): Fight
   // Calculate the drops
   const drops: Array<EnemyDropId> = []
   for (const drop of enemy.lootTable) {
-    if (Math.random() < drop.probability) {
-      drops.push(drop.item)
+    // Loop through the amount of drops and add them to the drops array based on the probability
+    for (let i = 0; i < drop.amount; i++) {
+      if (Math.random() < drop.probability) {
+        drops.push(drop.item)
+      }
     }
   }
 

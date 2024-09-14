@@ -6,8 +6,10 @@ export type EnemyId = (typeof enemyIds)[number]
 export interface LootTableEntry {
   /** Name of the item */
   item: EnemyDropId
-  /** Probability of the item dropping */
+  /** Probability of an item dropping */
   probability: number
+  /** Amount of the item that can drop */
+  amount: number
 }
 
 export interface Enemy {
@@ -56,7 +58,7 @@ export const cryptOfTheForgotten: Dungeon = {
       armor: 0,
       xp: 1,
       encounterRate: 0.5,
-      lootTable: [{ item: "bone", probability: 0.5 }],
+      lootTable: [{ item: "bone", probability: 0.4, amount: 2 }],
     },
     {
       id: "zombie:walker",
@@ -68,7 +70,7 @@ export const cryptOfTheForgotten: Dungeon = {
       armor: 0,
       xp: 3,
       encounterRate: 0.3,
-      lootTable: [{ item: "rottenMeat", probability: 0.5 }],
+      lootTable: [{ item: "rottenMeat", probability: 0.3, amount: 2 }],
     },
     {
       id: "skeleton:warrior",
@@ -81,8 +83,8 @@ export const cryptOfTheForgotten: Dungeon = {
       xp: 8,
       encounterRate: 0.1,
       lootTable: [
-        { item: "bone", probability: 1 },
-        { item: "rottenMeat", probability: 0.2 },
+        { item: "bone", probability: 0.8, amount: 2 },
+        { item: "rottenMeat", probability: 0.3, amount: 1 },
       ],
     },
   ],
