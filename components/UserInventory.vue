@@ -38,7 +38,7 @@
             class="flex gap-1"
           >
             <span class="font-bold">{{ amount }}</span>
-            <img width="18px" class="object-contain" :src="enemyDropIcon(enemyDropId)" :alt="$t(`drops.${enemyDropId}.name`)" />
+            <drop-icon :enemy-drop-id="enemyDropId" />
             <span>{{ $t(`drops.${enemyDropId}.name`, amount) }}</span>
           </li>
 
@@ -73,8 +73,6 @@ const userLevel = computed(() => getLevel(experience.value))
 const nextLevel = computed(() => getNextLevel(experience.value))
 
 const currentWeapon = computed(() => weapons.find((weapon) => weapon.id === currentWeaponId.value)!)
-
-const enemyDropIcon = (enemyDropId: EnemyDropId) => drops.find((drop) => drop.id === enemyDropId)!.icon
 
 const sellInventory = async () => {
   const { gold: newGold } = await $fetch("/api/inventory/sell", { method: "POST" })

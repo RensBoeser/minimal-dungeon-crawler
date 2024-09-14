@@ -83,6 +83,9 @@ export default defineI18nConfig(() => ({
           enemyDrops: "Looted",
           noEnemyDrops: "Nothing looted",
         },
+        drops: {
+          sellValue: "Worth",
+        }
       },
       actions: {
         sell: "Sell",

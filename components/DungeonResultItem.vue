@@ -18,7 +18,7 @@
     <div class="flex gap-3 flex-wrap">
       <div v-for="dropRecord of enemyDrops" :key="dropRecord.drop.id" class="flex gap-1">
         <code class="font-bold">{{ dropRecord.count }}</code>
-        <img class="object-contain" width="20px" :src="dropRecord.drop.icon" :alt="$t(`drops.${dropRecord.drop.id}.name`)" />
+        <DropIcon :enemy-drop-id="dropRecord.drop.id" />
       </div>
     </div>
   </div>
