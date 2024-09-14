@@ -1,20 +1,20 @@
 <template>
   <UCard>
     <template #header>
-      <h1 class="text-xl">Dungeon</h1>
+      <h1 class="text-xl">{{ $t('ui.dungeonPicker.title') }}</h1>
     </template>
 
     <ul>
       <li>
-        <span>Name:</span>
+        <span>{{ $t("ui.dungeonPicker.name" )}}:</span>
         <UIcon class="inline-block mx-1" size="18" name="i-game-icons:crypt-entrance" />
-        <span class="font-bold">{{ dungeon.name }}</span>
+        <span class="font-bold">{{ $t(`dungeons.${dungeon.id}.name`) }}</span>
       </li>
 
-      <li class="text-sm text-gray-400 mb-2">{{ dungeon.description }}</li>
+      <li class="text-sm text-gray-400 mb-2">{{ $t(`dungeons.${dungeon.id}.description`) }}</li>
 
       <li>
-        <span>Enemies:</span>
+        <span>{{ $t('ui.dungeonPicker.enemies') }}:</span>
         <div class="flex flex-wrap gap-1">
           <img
             v-for="enemy of dungeon.enemies"
@@ -22,7 +22,7 @@
             class="object-contain"
             width="20px"
             :src="enemy.icon"
-            :alt="enemy.name"
+            :alt="$t(`enemies.${enemy.id}.name`)"
           />
         </div>
       </li>
@@ -30,8 +30,8 @@
 
     <template #footer>
       <UButton icon="i-ph:sword" class="mb-3" block :loading="recovering" @click="runDungeon">
-        <span v-if="recovering">Recovering...</span>
-        <span v-else>Run Dungeon</span>
+        <span v-if="recovering">{{ $t('actions.recovering') }}...</span>
+        <span v-else>{{ $t('actions.runDungeon')}}</span>
       </UButton>
     </template>
   </UCard>

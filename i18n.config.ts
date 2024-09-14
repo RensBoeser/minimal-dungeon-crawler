@@ -29,6 +29,26 @@ export default defineI18nConfig(() => ({
           description: "A piece of rotten meat.",
         },
       },
+      enemies: {
+        "skeleton:straggler": {
+          name: "Skeleton Straggler",
+          description: "A lone skeleton wandering the crypt.",
+        },
+        "skeleton:warrior": {
+          name: "Skeleton Warrior",
+          description: "A skeleton with light armor.",
+        },
+        "zombie:walker": {
+          name: "Zombie Walker",
+          description: "A slow-moving zombie.",
+        },
+      },
+      dungeons: {
+        cryptOfTheForgotten: {
+          name: "Crypt of the Forgotten",
+          description: "A dark and damp crypt filled with the undead.",
+        },
+      },
       ui: {
         user: {
           weapon: "Weapon",
@@ -46,10 +66,18 @@ export default defineI18nConfig(() => ({
         shop: {
           title: "Shop",
           weapons: "Weapons",
+        },
+        dungeonPicker: {
+          title: "Dungeon",
+          enemies: "Enemies",
+          name: "Name",
         }
       },
       actions: {
         sell: "Sell",
+        buy: "Buy",
+        runDungeon: "Run Dungeon",
+        recovering: "Recovering",
       }
     },
     nl: {
@@ -78,6 +106,26 @@ export default defineI18nConfig(() => ({
           description: "Een stuk rottend vlees.",
         },
       },
+      enemies: {
+        "skeleton:straggler": {
+          name: "Dwalende Skelet",
+          description: "Een eenzaam skelet dat door de crypte dwaalt.",
+        },
+        "skeleton:warrior": {
+          name: "Skelet Krijger",
+          description: "Een skelet met een lichte bepantsering.",
+        },
+        "zombie:walker": {
+          name: "Lopende Zombie",
+          description: "Een langzaam bewegende zombie.",
+        },
+      },
+      dungeons: {
+        cryptOfTheForgotten: {
+          name: "Crypte van de Vergetenen",
+          description: "Een donkere en vochtige crypte gevuld met de ondoden.",
+        },
+      },
       ui: {
         user: {
           weapon: "Wapen",
@@ -96,9 +144,17 @@ export default defineI18nConfig(() => ({
           title: "Winkel",
           weapons: "Wapens",
         },
+        dungeonPicker: {
+          title: "Dungeon",
+          enemies: "Vijanden",
+          name: "Naam",
+        },
       },
       actions: {
         sell: "Verkoop",
+        buy: "Koop",
+        runDungeon: "Dungeon Rennen",
+        recovering: "Bijkomen",
       }
     },
   },
