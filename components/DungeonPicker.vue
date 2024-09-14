@@ -57,7 +57,7 @@ const runDungeon = async () => {
     inventory.value[drop]++
   }
 
-  experience.value = handleXpGain(experience.value, runDungeonResult.xpGained)
+  experience.value = await handleXpGain(experience.value, runDungeonResult.xpGained)
 
   pastRuns.value.push(runDungeonResult)
 

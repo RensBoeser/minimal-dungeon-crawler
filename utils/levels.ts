@@ -39,13 +39,13 @@ export const getNextLevel = (xp: number) => {
 }
 
 /** Calculates XP gain, returns new XP value */
-export const handleXpGain = (currentXp: number, xpGain: number): number => {
+export const handleXpGain = async (currentXp: number, xpGain: number): Promise<number> => {
 
   // XP gain from a user's boosts can be modified here.
 
   const newXpValue = currentXp + xpGain
   if (getLevel(currentXp) < getLevel(newXpValue)) {
-    levelUp()
+    await levelUp()
   }
 
   return newXpValue
