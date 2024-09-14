@@ -6,9 +6,25 @@
 
     <ul>
       <li>
-        <span>Type:</span>
+        <span>Name:</span>
         <UIcon class="inline-block mx-1" size="18" name="i-game-icons:crypt-entrance" />
-        <span class="font-bold">Crypt</span>
+        <span class="font-bold">{{ dungeon.name }}</span>
+      </li>
+
+      <li class="text-sm text-gray-400 mb-2">{{ dungeon.description }}</li>
+
+      <li>
+        <span>Enemies:</span>
+        <div class="flex flex-wrap gap-1">
+          <img
+            v-for="enemy of dungeon.enemies"
+            :key="enemy.id"
+            class="object-contain"
+            width="20px"
+            :src="enemy.icon"
+            :alt="enemy.name"
+          />
+        </div>
       </li>
     </ul>
 
@@ -29,6 +45,8 @@ const inventory = defineModel<Record<EnemyDropId, number>>("inventory", { requir
 const pastRuns = defineModel<Array<RunDungeonResult>>("pastRuns", { required: true })
 
 const recovering = ref(false)
+
+const dungeon = dungeons[0]
 
 const runDungeon = async () => {
   recovering.value = true

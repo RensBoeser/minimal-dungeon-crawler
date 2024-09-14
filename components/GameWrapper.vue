@@ -1,12 +1,12 @@
 <template>
-  <div class="flex gap-4">
+  <div class="flex flex-wrap gap-4">
     <UserInventory class="w-80" :experience="user.experience" :weapon="user.weapon" :gold="user.gold" :inventory="inventory" />
 
-    <DungeonPicker class="w-60" :experience="user.experience" :inventory="inventory" :past-runs="pastRuns" />
+    <DungeonPicker class="w-80" :experience="user.experience" :inventory="inventory" :past-runs="pastRuns" />
 
-    <WeaponShop :weapon="user.weapon" :gold="user.gold" />
+    <WeaponShop class="w-80" :weapon="user.weapon" :gold="user.gold" />
 
-    <RunHistory class="flex-1 w-80" :past-runs="pastRuns" />
+    <RunHistory class="w-80" :past-runs="pastRuns" />
   </div>
 </template>
 
