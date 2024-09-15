@@ -92,15 +92,21 @@ export default defineI18nConfig(() => ({
           levelUp: "Level up!",
           rewards: "Rewards",
         },
-        drops: {
+        drop: {
           sellValue: "Worth",
         },
-        weapons: {
+        weapon: {
           damage: "Damage",
           staminaCost: "Stamina cost",
           criticalChance: "Crit chance",
           criticalMultiplier: "Crit multiplier",
-        }
+        },
+        enemy: {
+          health: "Health",
+          armor: "Armor",
+          xp: "XP reward",
+          drops: "Drops",
+        },
       },
       actions: {
         sell: "Sell",
@@ -199,14 +205,20 @@ export default defineI18nConfig(() => ({
           levelUp: "Level up!",
           rewards: "Beloningen",
         },
-        drops: {
+        drop: {
           sellValue: "Waarde",
         },
-        weapons: {
+        weapon: {
           damage: "Schade",
           staminaCost: "Stamina kosten",
           criticalChance: "Kans op kritiek",
           criticalMultiplier: "Kritieke vermenigvuldiger",
+        },
+        enemy: {
+          health: "Levens",
+          armor: "Pantser",
+          xp: "XP beloning",
+          drops: "Loot",
         },
       },
       actions: {

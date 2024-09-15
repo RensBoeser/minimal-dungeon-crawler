@@ -15,7 +15,7 @@
     <div class="flex gap-3 flex-wrap">
       <div v-for="enemyRecord of enemiesDefeated" :key="enemyRecord.enemy.id" class="flex gap-1">
         <span class="font-bold">{{ enemyRecord.count }}</span>
-        <img class="object-contain" width="20px" :src="enemyRecord.enemy.icon" :alt="$t(`enemies.${enemyRecord.enemy.id}.name`)" />
+        <EnemyIcon :dungeon-id="run.dungeonId" :enemy-id="enemyRecord.enemy.id" />
       </div>
     </div>
 

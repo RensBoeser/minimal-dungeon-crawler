@@ -16,13 +16,11 @@
       <li>
         <span>{{ $t('ui.dungeonPicker.enemies') }}:</span>
         <div class="flex flex-wrap gap-1">
-          <img
+          <enemy-icon
             v-for="enemy of dungeon.enemies"
             :key="enemy.id"
-            class="object-contain"
-            width="20px"
-            :src="enemy.icon"
-            :alt="$t(`enemies.${enemy.id}.name`)"
+            :dungeon-id="dungeon.id"
+            :enemy-id="enemy.id"
           />
         </div>
       </li>

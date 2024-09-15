@@ -1,6 +1,6 @@
 import cloneDeep from "lodash/cloneDeep"
 import type { EnemyDropId } from "~/utils/drops"
-import type { Enemy, EnemyId } from "~/utils/dungeons"
+import type { DungeonId, Enemy, EnemyId } from "~/utils/dungeons"
 import { dungeons } from "~/utils/dungeons"
 import type { UserLevel } from "~/utils/levels"
 import { getLevel } from "~/utils/levels"
@@ -88,7 +88,7 @@ export const fightEnemy = (enemy: Enemy, weapon: Weapon, stamina: number): Fight
 
 export interface RunDungeonResult {
   dateTime: string
-  dungeonId: string
+  dungeonId: DungeonId
   enemiesDefeated: Array<EnemyId>
   enemyDrops: Array<EnemyDropId>
   xpGained: number
