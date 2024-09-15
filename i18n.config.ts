@@ -11,11 +11,11 @@ export default defineI18nConfig(() => ({
           description: "Your bare hands",
         },
         woodenSword: {
-          name: "Wooden Sword",
+          name: "Wooden sword",
           description: "A simple wooden sword",
         },
         stoneSword: {
-          name: "Stone Sword",
+          name: "Stone sword",
           description: "A sword made of stone",
         },
       },
@@ -25,39 +25,42 @@ export default defineI18nConfig(() => ({
           description: "A bone from a skeleton.",
         },
         rottenMeat: {
-          name: "Rotten Meat",
+          name: "Rotten meat | Rotten meat",
           description: "A piece of rotten meat.",
         },
         oldCoin: {
-          name: "Old coin",
+          name: "Old coin | Old coins",
           description: "An old coin from a long-lost civilization. Still looks shiny.",
         },
         potteryShard: {
-          name: "Pottery Shard",
+          name: "Pottery shard | Pottery shards",
           description: "A piece of pottery from a long-lost civilization.",
         },
       },
       enemies: {
         "skeleton:straggler": {
-          name: "Skeleton Straggler",
+          name: "Skeleton straggler",
           description: "A lone skeleton wandering the crypt.",
         },
         "skeleton:warrior": {
-          name: "Skeleton Warrior",
+          name: "Skeleton warrior",
           description: "A skeleton with light armor.",
         },
         "zombie:walker": {
-          name: "Zombie Walker",
+          name: "Zombie walker",
           description: "A slow-moving zombie.",
         },
       },
       dungeons: {
         cryptOfTheForgotten: {
-          name: "Crypt of the Forgotten",
+          name: "Crypt",
           description: "A dark and damp crypt filled with the undead.",
         },
       },
       ui: {
+        general: {
+          stats: "Stats",
+        },
         user: {
           weapon: "Weapon",
           level: "Level",
@@ -68,8 +71,8 @@ export default defineI18nConfig(() => ({
         },
         inventory: {
           title: "Inventory",
-          sellableLoot: "Sellable Loot",
-          inventoryValue: "Inventory Value",
+          sellableLoot: "Sellable loot",
+          inventoryValue: "Inventory value",
         },
         shop: {
           title: "Shop",
@@ -81,7 +84,7 @@ export default defineI18nConfig(() => ({
           name: "Name",
         },
         logs: {
-          title: "Logs",
+          title: "Runs",
           enemiesDefeated: "Enemies defeated",
           noEnemiesDefeated: "No enemies defeated",
           enemyDrops: "Looted",
@@ -91,12 +94,18 @@ export default defineI18nConfig(() => ({
         },
         drops: {
           sellValue: "Worth",
+        },
+        weapons: {
+          damage: "Damage",
+          staminaCost: "Stamina cost",
+          criticalChance: "Crit chance",
+          criticalMultiplier: "Crit multiplier",
         }
       },
       actions: {
         sell: "Sell",
         buy: "Buy",
-        runDungeon: "Run Dungeon",
+        runDungeon: "Run dungeon",
         recovering: "Recovering",
         equipped: "Equipped",
       }
@@ -109,11 +118,11 @@ export default defineI18nConfig(() => ({
           description: "Je blote handen",
         },
         woodenSword: {
-          name: "Houten Zwaard",
+          name: "Houten zwaard",
           description: "Een simpel houten zwaard",
         },
         stoneSword: {
-          name: "Stenen Zwaard",
+          name: "Stenen zwaard",
           description: "Een zwaard gemaakt van steen",
         },
       },
@@ -123,7 +132,7 @@ export default defineI18nConfig(() => ({
           description: "Een bot van een skelet.",
         },
         rottenMeat: {
-          name: "Rottend Vlees",
+          name: "Rottend vlees",
           description: "Een stuk rottend vlees.",
         },
         oldCoin: {
@@ -131,31 +140,34 @@ export default defineI18nConfig(() => ({
           description: "Een oude munt van een lang-verloren beschaving. Schitterd nogsteeds in het licht.",
         },
         potteryShard: {
-          name: "Potten Scherf | Potten Scherven",
+          name: "Potten scherf | Potten scherven",
           description: "Een stuk aardewerk van een lang-verloren beschaving.",
         },
       },
       enemies: {
         "skeleton:straggler": {
-          name: "Dwalende Skelet",
+          name: "Dwalende skelet",
           description: "Een eenzaam skelet dat door de crypte dwaalt.",
         },
         "skeleton:warrior": {
-          name: "Skelet Krijger",
+          name: "Skelet krijger",
           description: "Een skelet met een lichte bepantsering.",
         },
         "zombie:walker": {
-          name: "Lopende Zombie",
+          name: "Lopende zombie",
           description: "Een langzaam bewegende zombie.",
         },
       },
       dungeons: {
         cryptOfTheForgotten: {
-          name: "Crypte van de Vergetenen",
+          name: "Crypte",
           description: "Een donkere en vochtige crypte gevuld met de ondoden.",
         },
       },
       ui: {
+        general: {
+          stats: "Stats",
+        },
         user: {
           weapon: "Wapen",
           level: "Level",
@@ -166,8 +178,8 @@ export default defineI18nConfig(() => ({
         },
         inventory: {
           title: "Inventaris",
-          sellableLoot: "Verkoopbare Buit",
-          inventoryValue: "Inventaris Waarde",
+          sellableLoot: "Verkoopbare buit",
+          inventoryValue: "Inventaris waarde",
         },
         shop: {
           title: "Winkel",
@@ -179,7 +191,7 @@ export default defineI18nConfig(() => ({
           name: "Naam",
         },
         logs: {
-          title: "Historie",
+          title: "Runs",
           enemiesDefeated: "Vijanden verslagen",
           noEnemiesDefeated: "Geen vijanden verslagen",
           enemyDrops: "Geloot",
@@ -190,11 +202,17 @@ export default defineI18nConfig(() => ({
         drops: {
           sellValue: "Waarde",
         },
+        weapons: {
+          damage: "Schade",
+          staminaCost: "Stamina kosten",
+          criticalChance: "Kans op kritiek",
+          criticalMultiplier: "Kritieke vermenigvuldiger",
+        },
       },
       actions: {
         sell: "Verkoop",
         buy: "Koop",
-        runDungeon: "Dungeon Rennen",
+        runDungeon: "Dungeon rennen",
         recovering: "Bijkomen",
         equipped: "Uitgerust",
       }

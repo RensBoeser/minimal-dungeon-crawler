@@ -22,7 +22,7 @@
           </li>
           <li class="flex gap-1">
             <span>{{ $t('ui.user.weapon') }}:</span>
-            <img v-if="currentWeapon.icon" width="20px" class="object-contain" :src="currentWeapon.icon" :alt="$t(`weapons.${currentWeaponId}.name`)" />
+            <weapon-icon :weapon-id="currentWeaponId" />
             <span class="font-bold">{{ $t(`weapons.${currentWeaponId}.name`) }}</span>
           </li>
         </ul>
@@ -76,8 +76,6 @@ const inventoryValue = computed(() => {
 
 const userLevel = computed(() => getLevel(experience.value))
 const nextLevel = computed(() => getNextLevel(experience.value))
-
-const currentWeapon = computed(() => weapons.find((weapon) => weapon.id === currentWeaponId.value)!)
 
 const sellInventory = async () => {
   const { gold: newGold } = await $fetch("/api/inventory/sell", { method: "POST" })

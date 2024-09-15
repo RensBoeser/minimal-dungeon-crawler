@@ -4,9 +4,9 @@
 
     <DungeonPicker v-model:experience="experience" v-model:inventory="inventory" v-model:past-runs="pastRuns" v-model:gold="gold" class="w-80" />
 
-    <WeaponShop v-model:weapon="weapon" v-model:gold="gold" class="w-80" />
-
     <RunHistory class="w-80" :past-runs="pastRuns" />
+
+    <WeaponShop v-model:weapon="weapon" v-model:gold="gold" class="w-80" />
   </div>
 </template>
 

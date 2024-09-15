@@ -4,7 +4,7 @@
       <h1 class="text-xl">{{ $t('ui.logs.title')}}</h1>
     </template>
 
-    <ul class="max-h-80 overflow-y-auto">
+    <ul class="max-h-72 overflow-y-auto">
       <li v-for="run of pastRuns.toReversed()" :key="run.dungeonId">
         <DungeonResultItem :run="run" />
       </li>

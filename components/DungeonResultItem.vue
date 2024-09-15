@@ -1,7 +1,10 @@
 <template>
-  <div class="mb-2">
+  <section class="mb-2">
     <UDivider>
-      <h2 class="text-sm text-gray-400">{{ $d(new Date(run.dateTime), "time") }}</h2>
+      <UIcon class="inline-block mr-2" size="18" name="i-game-icons:crypt-entrance" />
+      <h1 class="text-sm text-gray-400">
+        {{ $d(new Date(run.dateTime), "time") }}
+      </h1>
     </UDivider>
 
     <p>+{{ run.xpGained }} {{ $t('ui.user.xp') }}</p>
@@ -37,7 +40,7 @@
         </li>
       </ul>
     </template>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">

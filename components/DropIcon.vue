@@ -3,19 +3,24 @@
     <img width="20px" class="object-contain" :src="enemyDrop.icon" :alt="$t(`drops.${enemyDropId}.name`)" />
 
     <template #panel>
-      <div class="p-2 max-w-xs text-sm">
+      <div class="p-2 max-w-56 text-sm">
         <img width="20px" class="object-contain" :src="enemyDrop.icon" :alt="$t(`drops.${enemyDropId}.name`)" />
-        <h1 class="my-1">{{ $t(`drops.${enemyDropId}.name`) }}</h1>
+        <h1>{{ $t(`drops.${enemyDropId}.name`) }}</h1>
         <p class="text-xs">{{ $t(`drops.${enemyDropId}.description`) }}</p>
 
-        <UDivider class="my-2"/>
+        <UDivider class="mt-2">{{ $t('ui.general.stats')}}</UDivider>
 
-        <ul>
-          <li>
-            <span>{{ $t('ui.drops.sellValue') }}: <span class="font-bold">{{ enemyDrop.goldValue }}</span></span>
-            <img width="20px" class="object-contain inline ml-1" src="~/public/gameplay/gold.webp" alt="Gold" />
-          </li>
-        </ul>
+        <table class="w-full">
+          <tbody>
+            <tr>
+              <td>{{ $t('ui.drops.sellValue') }}:</td>
+              <td class="text-right font-mono">
+                <span>{{ enemyDrop.goldValue }}</span>
+                <img width="20px" class="object-contain inline pl-1" src="~/public/gameplay/gold.webp" alt="Gold" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </template>
   </UPopover>

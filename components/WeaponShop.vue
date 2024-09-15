@@ -9,7 +9,7 @@
     <ul class="flex flex-col gap-1">
       <li v-for="weaponShopItem of weaponShopItems" :key="weaponShopItem.id" class="flex items-center justify-between">
         <div class="flex gap-1 mr-4">
-          <img width="20px" class="object-contain" :src="weaponShopItem.icon" :alt="$t(`weapons.${weaponShopItem.id}.name`)" />
+          <weapon-icon :weapon-id="weaponShopItem.id" />
           <span class="font-bold">{{ $t(`weapons.${weaponShopItem.id}.name`) }}</span>
         </div>
 
