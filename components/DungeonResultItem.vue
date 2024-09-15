@@ -29,9 +29,9 @@
     </div>
 
     <template v-if="run.levelledUpTo">
-      <h2 class="text-primary mt-3">{{ $t('ui.user.levelledUp') }}! ({{ $t('ui.user.level') }} {{ run.levelledUpTo.level }})</h2>
+      <h2 class="text-primary mt-3">{{ $t('ui.logs.levelUp') }}! ({{ $t('ui.user.level') }} {{ run.levelledUpTo.level }})</h2>
 
-      <span>{{ $t('ui.user.levelledUpRewards') }}</span>
+      <span>{{ $t('ui.logs.rewards') }}</span>
       <ul>
         <li v-if="run.levelledUpTo.reward?.gold" class="flex gap-1">
           <span>+{{ run.levelledUpTo.reward?.gold }}</span>
