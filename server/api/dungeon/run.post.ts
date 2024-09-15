@@ -1,4 +1,5 @@
 import cloneDeep from "lodash/cloneDeep"
+import { getUser, setUser, TEMP_USER_ID } from "~/server/utils/user"
 import type { EnemyDropId } from "~/utils/drops"
 import type { DungeonId, Enemy, EnemyId } from "~/utils/dungeons"
 import { dungeons } from "~/utils/dungeons"
@@ -97,16 +98,17 @@ export interface RunDungeonResult {
 }
 
 export default defineEventHandler(async (): Promise<RunDungeonResult> => {
-  const userStorage = useStorage("db")
+  const user = await getUser(TEMP_USER_ID)
 
-  const userXp = (await userStorage.getItem<number>("user:experience")) ?? 0
-  const weaponId = (await userStorage.getItem<string>("user:weapon")) ?? "fists"
+  if (!user) {
+    throw createError("User not found")
+  }
 
-  const currentLevel = getLevel(userXp)
+  const currentLevel = getLevel(user.experience)
 
   let userStamina = currentLevel.baseStamina
 
-  const userWeapon = weapons.find(({ id }) => id === weaponId)!
+  const userWeapon = weapons.find(({ id }) => id === user.weapon)!
 
   const currentDungeon = dungeons[0]
 
@@ -128,21 +130,20 @@ export default defineEventHandler(async (): Promise<RunDungeonResult> => {
     xpGained += enemy.xp
   }
 
-  // Update the database
   for (const drop of enemyDrops) {
-    const currentAmount = (await userStorage.getItem<number>(`inventory:loot:${drop}`)) ?? 0
-    await userStorage.setItem(`inventory:loot:${drop}`, currentAmount + 1)
+    user.inventory[drop] = (user.inventory[drop] ?? 0) + 1
   }
 
-  await userStorage.setItem("user:experience", userXp + xpGained)
+  user.experience += xpGained
 
   // Check for level up and process rewards if applicable
-  const newLevel = getLevel(userXp + xpGained)
+  const newLevel = getLevel(user.experience + xpGained)
   const levelledUp = newLevel.level > currentLevel.level
   if (levelledUp) {
-    const userGold = (await userStorage.getItem<number>("user:gold")) ?? 0
-    await userStorage.setItem("user:gold", userGold + (newLevel.reward?.gold ?? 0))
+    user.gold += newLevel.reward?.gold ?? 0
   }
+
+  await setUser(TEMP_USER_ID, user)
 
   return {
     dateTime: new Date().toISOString(),

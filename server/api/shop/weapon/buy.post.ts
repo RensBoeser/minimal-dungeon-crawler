@@ -1,4 +1,5 @@
 import { z } from "zod"
+import { getUser, setUser, TEMP_USER_ID } from "~/server/utils/user"
 import { weaponIds, weapons } from "~/utils/weapons"
 
 const buyWeaponSchema = z.object({
@@ -8,24 +9,28 @@ const buyWeaponSchema = z.object({
 export default defineEventHandler(async (event) => {
   const { weapon } = await readValidatedBody(event, (body) => buyWeaponSchema.parse(body))
 
-  const userStorage = useStorage("db")
+  const user = await getUser(TEMP_USER_ID)
 
-  const userGold = (await userStorage.getItem<number>("user:gold")) ?? 0
+  if (!user) {
+    throw createError("User not found")
+  }
 
   const weaponCost = weapons.find(({ id }) => id === weapon)!.cost
 
-  if (userGold < weaponCost) {
+  if (user.gold < weaponCost) {
     throw createError({
       status: 400,
       statusMessage: "You don't have enough gold to buy this sword.",
     })
   }
 
-  await userStorage.setItem("user:gold", userGold - weaponCost)
-  await userStorage.setItem("user:weapon", weapon)
+  user.gold -= weaponCost
+  user.weapon = weapon
+
+  await setUser(TEMP_USER_ID, user)
 
   return {
     weapon,
-    gold: userGold - weaponCost,
+    gold: user.gold,
   }
 })
