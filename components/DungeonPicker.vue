@@ -59,8 +59,8 @@ const runDungeon = async () => {
   }
 
   // add gold and experience
-  experience.value = experience.value + runDungeonResult.xpGained
-  gold.value = gold.value + (runDungeonResult.levelledUpTo?.reward?.gold ?? 0)
+  experience.value += runDungeonResult.xpGained
+  gold.value += runDungeonResult.levelledUpTo?.reward?.gold ?? 0
 
   // add run to history
   pastRuns.value.push(runDungeonResult)
