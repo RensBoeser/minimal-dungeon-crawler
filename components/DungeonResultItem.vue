@@ -4,6 +4,7 @@
 
     <p>+{{ run.xpGained }} {{ $t('ui.user.xp') }}</p>
 
+    <!-- TODO: Show level up reward and new level better -->
     <div v-if="run.levelledUpTo">
       <p>{{ $t('ui.user.levelUp') }}</p>
       <p v-if="run.levelledUpTo.reward?.gold">{{ $t('ui.user.goldReward') }} +{{ run.levelledUpTo.reward?.gold }}</p>
