@@ -65,6 +65,8 @@ export default defineI18nConfig(() => ({
           xp: "XP",
           gold: "Gold",
           stamina: "Stamina",
+          levelledUp: "Level Up!",
+          levelledUpRewards: "Level Up Rewards",
         },
         inventory: {
           title: "Inventory",
@@ -161,6 +163,8 @@ export default defineI18nConfig(() => ({
           xp: "XP",
           gold: "Goud",
           stamina: "Stamina",
+          levelledUp: "Level Up!",
+          levelledUpRewards: "Level Up Beloning",
         },
         inventory: {
           title: "Inventaris",

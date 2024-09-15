@@ -1,15 +1,12 @@
 <template>
-  <div>
-    <h2 class="text-sm text-gray-400 mb-1">{{ $d(new Date(run.dateTime), "time") }}</h2>
+  <div class="mb-2">
+    <UDivider>
+      <div class="flex flex-col">
+        <h2 class="text-sm text-gray-400">{{ $d(new Date(run.dateTime), "time") }}</h2>
+      </div>
+    </UDivider>
 
     <p>+{{ run.xpGained }} {{ $t('ui.user.xp') }}</p>
-
-    <!-- TODO: Show level up reward and new level better -->
-    <div v-if="run.levelledUpTo">
-      <p>{{ $t('ui.user.levelUp') }}</p>
-      <p v-if="run.levelledUpTo.reward?.gold">{{ $t('ui.user.goldReward') }} +{{ run.levelledUpTo.reward?.gold }}</p>
-    </div>
-
 
     <span v-if="enemiesDefeated.length">{{ $t('ui.logs.enemiesDefeated')}}</span>
     <span v-else class="italic">{{ $t('ui.logs.noEnemiesDefeated')}}</span>
@@ -30,6 +27,18 @@
         <DropIcon :enemy-drop-id="dropRecord.drop.id" />
       </div>
     </div>
+
+    <template v-if="run.levelledUpTo">
+      <h2 class="text-primary mt-3">{{ $t('ui.user.levelledUp') }}! ({{ $t('ui.user.level') }} {{ run.levelledUpTo.level }})</h2>
+
+      <span>{{ $t('ui.user.levelledUpRewards') }}</span>
+      <ul>
+        <li v-if="run.levelledUpTo.reward?.gold" class="flex gap-1">
+          <span>+{{ run.levelledUpTo.reward?.gold }}</span>
+          <img width="20px" class="object-contain" src="~/public/gameplay/gold.webp" alt="Gold" />
+        </li>
+      </ul>
+    </template>
   </div>
 </template>
 

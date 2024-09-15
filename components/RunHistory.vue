@@ -5,12 +5,9 @@
     </template>
 
     <ul class="max-h-80 overflow-y-auto">
-      <template v-for="run of pastRuns.toReversed()" :key="run.dungeonId">
-        <li>
-          <DungeonResultItem :run="run" />
-        </li>
-        <UDivider class="my-2" />
-      </template>
+      <li v-for="run of pastRuns.toReversed()" :key="run.dungeonId">
+        <DungeonResultItem :run="run" />
+      </li>
     </ul>
   </UCard>
 </template>
