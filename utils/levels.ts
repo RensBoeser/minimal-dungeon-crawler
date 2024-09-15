@@ -1,5 +1,9 @@
-import { get } from "lodash"
 import cloneDeep from "lodash/cloneDeep"
+
+export interface LevelUpReward {
+  // TODO: Add more types of rewards
+  gold?: number
+}
 
 export interface UserLevel {
   /** The level */
@@ -7,28 +11,21 @@ export interface UserLevel {
   /** The XP required */
   requiredXp: number
   baseStamina: number
-}
-
-export interface LevelUpResult {
-  gold: number
-}
-
-export interface ExperienceGainedResult {
-  newXpValue: number
-  goldReward?: number
+  /** Reward for leveling up */
+  reward?: LevelUpReward
 }
 
 export const levels: Array<UserLevel> = [
   { level: 1, requiredXp: 0, baseStamina: 50 },
-  { level: 2, requiredXp: 100, baseStamina: 50 },
-  { level: 3, requiredXp: 200, baseStamina: 55 },
-  { level: 4, requiredXp: 400, baseStamina: 55 },
-  { level: 5, requiredXp: 650, baseStamina: 65 },
-  { level: 6, requiredXp: 1000, baseStamina: 65 },
-  { level: 7, requiredXp: 1400, baseStamina: 65 },
-  { level: 8, requiredXp: 1800, baseStamina: 70 },
-  { level: 9, requiredXp: 2300, baseStamina: 70 },
-  { level: 10, requiredXp: 3000, baseStamina: 80 },
+  { level: 2, requiredXp: 100, baseStamina: 50, reward: { gold: 50 } },
+  { level: 3, requiredXp: 200, baseStamina: 55, reward: { gold: 50 } },
+  { level: 4, requiredXp: 400, baseStamina: 55, reward: { gold: 50 } },
+  { level: 5, requiredXp: 650, baseStamina: 65, reward: { gold: 100 } },
+  { level: 6, requiredXp: 1000, baseStamina: 65, reward: { gold: 100 } },
+  { level: 7, requiredXp: 1400, baseStamina: 65, reward: { gold: 100 } },
+  { level: 8, requiredXp: 1800, baseStamina: 70, reward: { gold: 100 } },
+  { level: 9, requiredXp: 2300, baseStamina: 70, reward: { gold: 100 } },
+  { level: 10, requiredXp: 3000, baseStamina: 80, reward: { gold: 200 } },
   { level: 11, requiredXp: Infinity, baseStamina: 80 },
 ]
 
@@ -44,27 +41,3 @@ export const getNextLevel = (xp: number) => {
   return cloneDeep(nextLevel)
 }
 
-/** Calculates XP gain, returns new XP value */
-export const handleXpGain = async (currentXp: number, xpGain: number): Promise<ExperienceGainedResult> => {
-
-  // XP gain from a user's boosts can be modified here.
-
-  const newXpValue = currentXp + xpGain
-  if (getLevel(currentXp).level < getLevel(newXpValue).level) {
-    const levelUpReward = await levelUp()
-    return {
-      newXpValue,
-      goldReward: levelUpReward.gold
-    }
-  }
-
-  return {
-    newXpValue
-  }
-}
-
-/** Level up the user, returns gold amount added to user */
-export const levelUp = async (): Promise<LevelUpResult> => {
-  return await $fetch("/api/user/levelUp", { method: "POST" })
-  // additionally, you could add a notification trigger here
-}

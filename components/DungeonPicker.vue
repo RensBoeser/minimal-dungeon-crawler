@@ -39,7 +39,6 @@
 
 <script setup lang="ts">
 import type { RunDungeonResult } from "~/server/api/dungeon/run.post"
-import { handleXpGain } from "~/utils/levels";
 
 const experience = defineModel<number>("experience", { required: true })
 const gold = defineModel<number>("gold", { required: true })
@@ -58,14 +57,11 @@ const runDungeon = async () => {
   for (const drop of runDungeonResult.enemyDrops) {
     inventory.value[drop]++
   }
- 
-  // calculate xp gain and rewards for this run
-  const xpGainRewards = await handleXpGain(experience.value, runDungeonResult.xpGained)
-  experience.value = xpGainRewards.newXpValue
-  if (xpGainRewards.goldReward) {
-    gold.value = gold.value + xpGainRewards.goldReward
-  }
-  
+
+  // add gold and experience
+  experience.value = experience.value + runDungeonResult.xpGained
+  gold.value = gold.value + (runDungeonResult.levelledUpTo?.reward?.gold ?? 0)
+
   // add run to history
   pastRuns.value.push(runDungeonResult)
 

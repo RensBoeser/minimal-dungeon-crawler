@@ -2,6 +2,14 @@
   <div>
     <h2 class="text-sm text-gray-400 mb-1">{{ $d(new Date(run.dateTime), "time") }}</h2>
 
+    <p>+{{ run.xpGained }} {{ $t('ui.user.xp') }}</p>
+
+    <div v-if="run.levelledUpTo">
+      <p>{{ $t('ui.user.levelUp') }}</p>
+      <p v-if="run.levelledUpTo.reward?.gold">{{ $t('ui.user.goldReward') }} +{{ run.levelledUpTo.reward?.gold }}</p>
+    </div>
+
+
     <span v-if="enemiesDefeated.length">{{ $t('ui.logs.enemiesDefeated')}}</span>
     <span v-else class="italic">{{ $t('ui.logs.noEnemiesDefeated')}}</span>
 
