@@ -40,6 +40,17 @@ export interface Dungeon {
   enemies: Array<Enemy>
 }
 
+export interface RunDungeonResult {
+  index?: number
+  dateTime: string
+  dungeonId: DungeonId
+  enemiesDefeated: Array<EnemyId>
+  enemyDrops: Array<EnemyDropId>
+  xpGained: number
+  currentLevel: UserLevel
+  levelledUpTo?: UserLevel
+}
+
 export const cryptOfTheForgotten: Dungeon = {
   id: "cryptOfTheForgotten",
   name: "Crypt of the Forgotten",

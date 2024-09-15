@@ -13,8 +13,6 @@
 </template>
 
 <script setup lang="ts">
-import type { RunDungeonResult } from "~/server/api/dungeon/run.post"
-
 const props = defineProps<{ pastRuns: Array<RunDungeonResult> }>()
 const { pastRuns } = toRefs(props)
 </script>

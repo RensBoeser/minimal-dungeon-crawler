@@ -1,7 +1,8 @@
-import { getUser, TEMP_USER_ID } from "~/server/utils/user"
+import { TEMP_USER_ID, useUserService } from "~/server/utils/user"
 
 export default defineEventHandler(async () => {
-  const user = await getUser(TEMP_USER_ID)
+  const { getUser } = useUserService(TEMP_USER_ID)
+  const user = await getUser()
 
   if (!user) {
     throw createError("User not found")

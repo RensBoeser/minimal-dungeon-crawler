@@ -1,9 +1,12 @@
 <template>
   <section class="mb-2">
     <UDivider>
-      <UIcon class="inline-block mr-2" size="18" name="i-game-icons:crypt-entrance" />
       <h1 class="text-sm text-gray-400">
-        {{ $d(new Date(run.dateTime), "time") }}
+      <span>#{{ run.index }}</span>
+
+      <UIcon class="inline-block mx-2" size="18" name="i-game-icons:crypt-entrance" />
+
+      <span>{{ $d(new Date(run.dateTime), "time") }}</span>
       </h1>
     </UDivider>
 
@@ -44,8 +47,6 @@
 </template>
 
 <script setup lang="ts">
-import type { RunDungeonResult } from "~/server/api/dungeon/run.post"
-
 const props = defineProps<{
   run: RunDungeonResult
 }>()

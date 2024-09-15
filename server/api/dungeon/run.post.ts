@@ -1,9 +1,8 @@
 import cloneDeep from "lodash/cloneDeep"
-import { getUser, setUser, TEMP_USER_ID } from "~/server/utils/user"
+import { TEMP_USER_ID, useUserService } from "~/server/utils/user"
 import type { EnemyDropId } from "~/utils/drops"
-import type { DungeonId, Enemy, EnemyId } from "~/utils/dungeons"
+import type { Enemy, EnemyId, RunDungeonResult } from "~/utils/dungeons"
 import { dungeons } from "~/utils/dungeons"
-import type { UserLevel } from "~/utils/levels"
 import { getLevel } from "~/utils/levels"
 import type { Weapon } from "~/utils/weapons"
 import { weapons } from "~/utils/weapons"
@@ -87,18 +86,9 @@ export const fightEnemy = (enemy: Enemy, weapon: Weapon, stamina: number): Fight
   }
 }
 
-export interface RunDungeonResult {
-  dateTime: string
-  dungeonId: DungeonId
-  enemiesDefeated: Array<EnemyId>
-  enemyDrops: Array<EnemyDropId>
-  xpGained: number
-  currentLevel: UserLevel
-  levelledUpTo?: UserLevel
-}
-
 export default defineEventHandler(async (): Promise<RunDungeonResult> => {
-  const user = await getUser(TEMP_USER_ID)
+  const { getUser, setUser, addRun } = useUserService(TEMP_USER_ID)
+  const user = await getUser()
 
   if (!user) {
     throw createError("User not found")
@@ -143,9 +133,9 @@ export default defineEventHandler(async (): Promise<RunDungeonResult> => {
     user.gold += newLevel.reward?.gold ?? 0
   }
 
-  await setUser(TEMP_USER_ID, user)
+  await setUser(user)
 
-  return {
+  const run: RunDungeonResult = {
     dateTime: new Date().toISOString(),
     dungeonId: currentDungeon.id,
     enemiesDefeated,
@@ -154,4 +144,6 @@ export default defineEventHandler(async (): Promise<RunDungeonResult> => {
     currentLevel,
     levelledUpTo: levelledUp ? newLevel : undefined,
   }
+
+  return await addRun(run)
 })

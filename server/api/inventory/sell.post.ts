@@ -1,8 +1,9 @@
-import { getUser, setUser, TEMP_USER_ID } from "~/server/utils/user"
+import { TEMP_USER_ID, useUserService } from "~/server/utils/user"
 import { drops } from "~/utils/drops"
 
 export default defineEventHandler(async () => {
-  const user = await getUser(TEMP_USER_ID)
+  const { getUser, setUser } = useUserService(TEMP_USER_ID)
+  const user = await getUser()
 
   if (!user) {
     throw createError("User not found")
@@ -15,7 +16,7 @@ export default defineEventHandler(async () => {
   }
 
   user.gold += soldGold
-  await setUser(TEMP_USER_ID, user)
+  await setUser(user)
 
   return {
     soldGold,

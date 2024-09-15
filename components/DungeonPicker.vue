@@ -36,8 +36,6 @@
 </template>
 
 <script setup lang="ts">
-import type { RunDungeonResult } from "~/server/api/dungeon/run.post"
-
 const experience = defineModel<number>("experience", { required: true })
 const gold = defineModel<number>("gold", { required: true })
 const inventory = defineModel<Record<EnemyDropId, number>>("inventory", { required: true })

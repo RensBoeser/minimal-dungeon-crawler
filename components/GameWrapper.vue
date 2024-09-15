@@ -11,8 +11,6 @@
 </template>
 
 <script setup lang="ts">
-import type { RunDungeonResult } from "~/server/api/dungeon/run.post"
-
 const gold = ref(0)
 const weapon = ref<WeaponId>("fists")
 const experience = ref(0)
@@ -33,6 +31,9 @@ const getInventory = async () => {
   gold.value = currentUser.gold
   experience.value = currentUser.experience
   weapon.value = currentUser.weapon
+
+  const runs = await $fetch("/api/dungeon/runs")
+  pastRuns.value = runs
 }
 
 onMounted(getInventory)

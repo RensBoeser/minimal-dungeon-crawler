@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { getUser, setUser, TEMP_USER_ID } from "~/server/utils/user"
+import { TEMP_USER_ID, useUserService } from "~/server/utils/user"
 import { weaponIds, weapons } from "~/utils/weapons"
 
 const buyWeaponSchema = z.object({
@@ -9,7 +9,9 @@ const buyWeaponSchema = z.object({
 export default defineEventHandler(async (event) => {
   const { weapon } = await readValidatedBody(event, (body) => buyWeaponSchema.parse(body))
 
-  const user = await getUser(TEMP_USER_ID)
+  const { getUser, setUser } = useUserService(TEMP_USER_ID)
+
+  const user = await getUser()
 
   if (!user) {
     throw createError("User not found")
@@ -27,7 +29,7 @@ export default defineEventHandler(async (event) => {
   user.gold -= weaponCost
   user.weapon = weapon
 
-  await setUser(TEMP_USER_ID, user)
+  await setUser(user)
 
   return {
     weapon,
