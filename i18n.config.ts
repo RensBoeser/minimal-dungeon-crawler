@@ -82,10 +82,12 @@ export default defineI18nConfig(() => ({
         },
         logs: {
           title: "Logs",
-          enemiesDefeated: "Enemies Defeated",
+          enemiesDefeated: "Enemies defeated",
           noEnemiesDefeated: "No enemies defeated",
           enemyDrops: "Looted",
           noEnemyDrops: "Nothing looted",
+          levelUp: "Level up!",
+          rewards: "Rewards",
         },
         drops: {
           sellValue: "Worth",
@@ -178,10 +180,12 @@ export default defineI18nConfig(() => ({
         },
         logs: {
           title: "Historie",
-          enemiesDefeated: "Vijanden Verslagen",
+          enemiesDefeated: "Vijanden verslagen",
           noEnemiesDefeated: "Geen vijanden verslagen",
           enemyDrops: "Geloot",
           noEnemyDrops: "Niks geloot",
+          levelUp: "Level up!",
+          rewards: "Beloningen",
         },
         drops: {
           sellValue: "Waarde",

@@ -2,6 +2,7 @@ import cloneDeep from "lodash/cloneDeep"
 import type { EnemyDropId } from "~/utils/drops"
 import type { Enemy, EnemyId } from "~/utils/dungeons"
 import { dungeons } from "~/utils/dungeons"
+import type { UserLevel } from "~/utils/levels"
 import { getLevel } from "~/utils/levels"
 import type { Weapon } from "~/utils/weapons"
 import { weapons } from "~/utils/weapons"
@@ -91,6 +92,8 @@ export interface RunDungeonResult {
   enemiesDefeated: Array<EnemyId>
   enemyDrops: Array<EnemyDropId>
   xpGained: number
+  currentLevel: UserLevel
+  levelledUpTo?: UserLevel
 }
 
 export default defineEventHandler(async (): Promise<RunDungeonResult> => {
@@ -99,7 +102,10 @@ export default defineEventHandler(async (): Promise<RunDungeonResult> => {
   const userXp = (await userStorage.getItem<number>("user:experience")) ?? 0
   const weaponId = (await userStorage.getItem<string>("user:weapon")) ?? "fists"
 
-  let { baseStamina: userStamina } = getLevel(userXp)
+  const currentLevel = getLevel(userXp)
+
+  let userStamina = currentLevel.baseStamina
+
   const userWeapon = weapons.find(({ id }) => id === weaponId)!
 
   const currentDungeon = dungeons[0]
@@ -130,11 +136,21 @@ export default defineEventHandler(async (): Promise<RunDungeonResult> => {
 
   await userStorage.setItem("user:experience", userXp + xpGained)
 
+  // Check for level up and process rewards if applicable
+  const newLevel = getLevel(userXp + xpGained)
+  const levelledUp = newLevel.level > currentLevel.level
+  if (levelledUp) {
+    const userGold = (await userStorage.getItem<number>("user:gold")) ?? 0
+    await userStorage.setItem("user:gold", userGold + (newLevel.reward?.gold ?? 0))
+  }
+
   return {
     dateTime: new Date().toISOString(),
     dungeonId: currentDungeon.id,
     enemiesDefeated,
     enemyDrops,
     xpGained,
+    currentLevel,
+    levelledUpTo: levelledUp ? newLevel : undefined,
   }
 })
