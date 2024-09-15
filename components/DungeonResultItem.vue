@@ -1,29 +1,27 @@
 <template>
   <div class="mb-2">
     <UDivider>
-      <div class="flex flex-col">
-        <h2 class="text-sm text-gray-400">{{ $d(new Date(run.dateTime), "time") }}</h2>
-      </div>
+      <h2 class="text-sm text-gray-400">{{ $d(new Date(run.dateTime), "time") }}</h2>
     </UDivider>
 
     <p>+{{ run.xpGained }} {{ $t('ui.user.xp') }}</p>
 
-    <span v-if="enemiesDefeated.length">{{ $t('ui.logs.enemiesDefeated')}}</span>
-    <span v-else class="italic">{{ $t('ui.logs.noEnemiesDefeated')}}</span>
+    <h3 v-if="enemiesDefeated.length">{{ $t('ui.logs.enemiesDefeated')}}</h3>
+    <h3 v-else class="italic">{{ $t('ui.logs.noEnemiesDefeated')}}</h3>
 
     <div class="flex gap-3 flex-wrap">
       <div v-for="enemyRecord of enemiesDefeated" :key="enemyRecord.enemy.id" class="flex gap-1">
-        <code class="font-bold">{{ enemyRecord.count }}</code>
+        <span class="font-bold">{{ enemyRecord.count }}</span>
         <img class="object-contain" width="20px" :src="enemyRecord.enemy.icon" :alt="$t(`enemies.${enemyRecord.enemy.id}.name`)" />
       </div>
     </div>
 
-    <span v-if="enemyDrops.length">{{ $t('ui.logs.enemyDrops')}}</span>
-    <span v-else class="italic">{{ $t('ui.logs.noEnemyDrops')}}</span>
+    <h3 v-if="enemyDrops.length">{{ $t('ui.logs.enemyDrops')}}</h3>
+    <h3 v-else class="italic">{{ $t('ui.logs.noEnemyDrops')}}</h3>
 
     <div class="flex gap-3 flex-wrap">
       <div v-for="dropRecord of enemyDrops" :key="dropRecord.drop.id" class="flex gap-1">
-        <code class="font-bold">{{ dropRecord.count }}</code>
+        <span class="font-bold">{{ dropRecord.count }}</span>
         <DropIcon :enemy-drop-id="dropRecord.drop.id" />
       </div>
     </div>
