@@ -18,14 +18,13 @@
     "@nuxthub/core": "^0.7.18",
     "@nuxtjs/i18n": "^8.5.3",
     "@nuxtjs/tailwindcss": "^6.12.1",
-    "@types/lodash": "^4.17.7",
-    "lodash": "^4.17.21",
     "nuxt": "^3.13.2",
     "vue": "latest",
     "vue-router": "latest",
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "nuxt-lodash": "^2.5.3",
     "prettier": "3.3.3",
     "wrangler": "^3.78.3"
   }

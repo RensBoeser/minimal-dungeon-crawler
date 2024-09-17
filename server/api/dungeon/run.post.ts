@@ -1,4 +1,3 @@
-import cloneDeep from "lodash/cloneDeep"
 import { TEMP_USER_ID, useUserService } from "~/server/utils/user"
 import type { EnemyDropId } from "~/utils/drops"
 import type { Enemy, EnemyId, RunDungeonResult } from "~/utils/dungeons"
@@ -37,7 +36,7 @@ interface FightEnemyResult {
 }
 
 export const fightEnemy = (enemy: Enemy, weapon: Weapon, stamina: number): FightEnemyResult => {
-  let { health: enemyHealth } = cloneDeep(enemy)
+  let { health: enemyHealth } = enemy
   let staminaLost = 0
 
   // Calculate the damage negation based on the enemy's armor and the weapon's armor penetration
