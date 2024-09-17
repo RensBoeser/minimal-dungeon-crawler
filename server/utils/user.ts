@@ -13,7 +13,7 @@ export interface DatabaseUser {
 export const TEMP_USER_ID = "TEMP"
 
 export const useUserService = (userId: string) => {
-  const storage = useStorage("db")
+  const storage = useStorage("data")
 
   const getUser = async (): Promise<DatabaseUser | null> => {
     const user = await storage.getItem<DatabaseUser>(`users:${userId}:user`)

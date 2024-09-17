@@ -17,6 +17,7 @@
     "@nuxt/ui": "^2.18.4",
     "@nuxtjs/i18n": "^8.5.3",
     "@nuxtjs/tailwindcss": "^6.12.1",
+    "@vercel/kv": "^2.0.0",
     "lodash-es": "^4.17.21",
     "nuxt": "^3.13.2",
     "vue": "latest",

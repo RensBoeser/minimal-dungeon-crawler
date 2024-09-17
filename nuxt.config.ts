@@ -15,7 +15,12 @@ export default defineNuxtConfig({
       openAPI: true,
     },
     storage: {
-      db: {
+      data: {
+        driver: "vercelKV",
+      },
+    },
+    devStorage: {
+      data: {
         driver: "fs",
         base: "./.data/db",
       },
