@@ -15,6 +15,7 @@
     "@nuxt/eslint": "^0.5.7",
     "@nuxt/icon": "^1.5.1",
     "@nuxt/ui": "^2.18.4",
+    "@nuxthub/core": "^0.7.18",
     "@nuxtjs/i18n": "^8.5.3",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@types/lodash": "^4.17.7",
@@ -25,6 +26,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "prettier": "3.3.3"
+    "prettier": "3.3.3",
+    "wrangler": "^3.78.3"
   }
 }
