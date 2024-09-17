@@ -19,7 +19,7 @@
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@types/lodash": "^4.17.7",
     "lodash": "^4.17.21",
-    "nuxt": "^3.13.0",
+    "nuxt": "^3.13.2",
     "vue": "latest",
     "vue-router": "latest",
     "zod": "^3.23.8"

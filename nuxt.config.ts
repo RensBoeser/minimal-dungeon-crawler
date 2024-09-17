@@ -10,6 +10,9 @@ export default defineNuxtConfig({
     vueI18n: "./i18n.config.ts",
   },
   nitro: {
+    experimental: {
+      openAPI: true,
+    },
     storage: {
       db: {
         driver: "fs",
