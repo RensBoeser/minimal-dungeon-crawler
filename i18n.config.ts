@@ -83,14 +83,15 @@ export default defineI18nConfig(() => ({
           enemies: "Enemies",
           name: "Name",
         },
-        logs: {
-          title: "Runs",
+        run: {
+          title: "Run",
           enemiesDefeated: "Enemies defeated",
-          noEnemiesDefeated: "No enemies defeated",
-          enemyDrops: "Looted",
-          noEnemyDrops: "Nothing looted",
+          noEnemiesDefeated: "No enemies",
+          enemyDrops: "Loot",
+          noEnemyDrops: "No loot",
           levelUp: "Level up!",
           rewards: "Rewards",
+          noRuns: "Start a run to see it here",
         },
         drop: {
           sellValue: "Worth",
@@ -114,7 +115,7 @@ export default defineI18nConfig(() => ({
         runDungeon: "Run dungeon",
         recovering: "Recovering",
         equipped: "Equipped",
-      }
+      },
     },
     nl: {
       title: "Virtuele Dungeon Crawler",
@@ -196,14 +197,15 @@ export default defineI18nConfig(() => ({
           enemies: "Vijanden",
           name: "Naam",
         },
-        logs: {
-          title: "Runs",
+        run: {
+          title: "Run",
           enemiesDefeated: "Vijanden verslagen",
-          noEnemiesDefeated: "Geen vijanden verslagen",
+          noEnemiesDefeated: "Geen vijanden",
           enemyDrops: "Geloot",
-          noEnemyDrops: "Niks geloot",
+          noEnemyDrops: "Geen loot",
           levelUp: "Level up!",
           rewards: "Beloningen",
+          noRuns: "Start een run om het hier te zien",
         },
         drop: {
           sellValue: "Waarde",
@@ -227,7 +229,7 @@ export default defineI18nConfig(() => ({
         runDungeon: "Dungeon rennen",
         recovering: "Bijkomen",
         equipped: "Uitgerust",
-      }
+      },
     },
   },
   datetimeFormats: {
@@ -241,7 +243,7 @@ export default defineI18nConfig(() => ({
         hour: "2-digit",
         minute: "2-digit",
         second: "2-digit",
-      }
+      },
     },
     nl: {
       short: {
@@ -253,7 +255,7 @@ export default defineI18nConfig(() => ({
         hour: "2-digit",
         minute: "2-digit",
         second: "2-digit",
-      }
+      },
     },
-  }
+  },
 }))

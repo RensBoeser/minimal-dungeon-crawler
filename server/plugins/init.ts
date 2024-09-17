@@ -8,8 +8,10 @@ export default defineNitroPlugin(async () => {
 
   const { setUser } = useUserService(TEMP_USER_ID)
 
+  console.log("Setting up user")
+
   await setUser({
-    id: "1",
+    id: TEMP_USER_ID,
     experience: 0,
     gold: 0,
     weapon: "fists",

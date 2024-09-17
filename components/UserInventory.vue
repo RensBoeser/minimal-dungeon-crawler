@@ -15,10 +15,10 @@
           <li class="flex gap-1">
             <span>{{ $t("ui.user.level") }}:</span>
             <span class="font-bold">{{ userLevel.level }}</span>
-            <span v-if="nextLevel?.requiredXp && nextLevel.requiredXp !== Infinity">
-              ({{ $n(experience) }} / {{ $n(nextLevel?.requiredXp ?? 0) }} {{ $t("ui.user.xp") }})
+            <span v-if="nextLevel?.requiredXp && nextLevel.requiredXp !== Infinity" class="font-mono">
+              ({{ $n(experience) }}/{{ $n(nextLevel?.requiredXp ?? 0) }} {{ $t("ui.user.xp") }})
             </span>
-            <span v-else>({{ $n(experience) }} {{ $t("ui.user.xp") }})</span>
+            <span v-else class="font-mono">({{ $n(experience) }} {{ $t("ui.user.xp") }})</span>
           </li>
 
           <li class="flex gap-1">
@@ -34,7 +34,7 @@
       </div>
 
       <div>
-        <h1 class="font-bold">{{ $t("ui.inventory.sellableLoot") }}</h1>
+        <h1>{{ $t("ui.inventory.sellableLoot") }}</h1>
 
         <ul>
           <li v-for="[enemyDropId, amount] of Object.entries(inventory) as [EnemyDropId, number][]" :key="enemyDropId" class="flex gap-1">

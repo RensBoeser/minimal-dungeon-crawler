@@ -1,48 +1,59 @@
 <template>
-  <section class="mb-2">
-    <UDivider>
-      <h1 class="text-sm text-gray-400">
-      <span>#{{ run.index }}</span>
+  <section>
+    <h1 class="text-center">
+      <UIcon class="mr-1" size="18" name="i-game-icons:crypt-entrance" />
+      <span>{{ $t(`dungeons.${run.dungeonId}.name`) }}</span>
+    </h1>
 
-      <UIcon class="inline-block mx-2" size="18" name="i-game-icons:crypt-entrance" />
+    <p class="text-center text-gray-400 text-xs mb-3">
+      {{ $d(new Date(run.dateTime), "time") }}
+    </p>
 
-      <span>{{ $d(new Date(run.dateTime), "time") }}</span>
-      </h1>
-    </UDivider>
+    <div class="flex gap-4">
+      <section class="flex-1">
+        <UDivider class="mb-3">
+          <h2 class="text-sm">{{ $t("ui.run.enemiesDefeated") }}</h2>
+        </UDivider>
 
-    <p>+{{ run.xpGained }} {{ $t('ui.user.xp') }}</p>
+        <ul>
+          <li v-for="enemyRecord of enemiesDefeated" :key="enemyRecord.enemy.id" class="flex gap-2 justify-center">
+            <EnemyIcon :dungeon-id="run.dungeonId" :enemy-id="enemyRecord.enemy.id" />
+            <span>{{ enemyRecord.count }}x</span>
+          </li>
 
-    <h3 v-if="enemiesDefeated.length">{{ $t('ui.logs.enemiesDefeated')}}</h3>
-    <h3 v-else class="italic">{{ $t('ui.logs.noEnemiesDefeated')}}</h3>
+          <li v-if="enemiesDefeated.length" class="text-center font-mono mt-1">+{{ run.xpGained }} {{ $t("ui.user.xp") }}</li>
+          <li v-else class="text-center italic text-gray-400 mt-1">{{ $t("ui.run.noEnemiesDefeated") }}</li>
+        </ul>
+      </section>
 
-    <div class="flex gap-3 flex-wrap">
-      <div v-for="enemyRecord of enemiesDefeated" :key="enemyRecord.enemy.id" class="flex gap-1">
-        <span class="font-bold">{{ enemyRecord.count }}</span>
-        <EnemyIcon :dungeon-id="run.dungeonId" :enemy-id="enemyRecord.enemy.id" />
-      </div>
+      <section class="flex-1">
+        <UDivider class="mb-3">
+          <h2 class="text-sm">{{ $t("ui.run.enemyDrops") }}</h2>
+        </UDivider>
+
+        <ul>
+          <li v-for="dropRecord of enemyDrops" :key="dropRecord.drop.id" class="flex gap-2 justify-center">
+            <DropIcon :enemy-drop-id="dropRecord.drop.id" />
+            <span>{{ dropRecord.count }}x</span>
+          </li>
+
+          <li v-if="!enemyDrops.length" class="text-center italic text-gray-400 mt-1">{{ $t("ui.run.noEnemyDrops") }}</li>
+        </ul>
+      </section>
     </div>
 
-    <h3 v-if="enemyDrops.length">{{ $t('ui.logs.enemyDrops')}}</h3>
-    <h3 v-else class="italic">{{ $t('ui.logs.noEnemyDrops')}}</h3>
+    <div v-if="run.levelledUpTo" class="text-center">
+      <UDivider class="my-3">
+        <h2 class="text-primary">{{ $t("ui.run.levelUp") }}! ({{ $t("ui.user.level") }} {{ run.levelledUpTo?.level }})</h2>
+      </UDivider>
 
-    <div class="flex gap-3 flex-wrap">
-      <div v-for="dropRecord of enemyDrops" :key="dropRecord.drop.id" class="flex gap-1">
-        <span class="font-bold">{{ dropRecord.count }}</span>
-        <DropIcon :enemy-drop-id="dropRecord.drop.id" />
-      </div>
-    </div>
-
-    <template v-if="run.levelledUpTo">
-      <h2 class="text-primary mt-3">{{ $t('ui.logs.levelUp') }}! ({{ $t('ui.user.level') }} {{ run.levelledUpTo.level }})</h2>
-
-      <span>{{ $t('ui.logs.rewards') }}</span>
       <ul>
-        <li v-if="run.levelledUpTo.reward?.gold" class="flex gap-1">
-          <span>+{{ run.levelledUpTo.reward?.gold }}</span>
+        <li v-if="run.levelledUpTo?.reward?.gold" class="flex gap-1 justify-center">
+          <span>+{{ run.levelledUpTo?.reward?.gold }}</span>
           <img width="20px" class="object-contain" src="~/public/gameplay/gold.webp" alt="Gold" />
         </li>
       </ul>
-    </template>
+    </div>
   </section>
 </template>
 
