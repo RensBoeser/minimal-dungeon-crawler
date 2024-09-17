@@ -126,7 +126,7 @@ export default defineEventHandler(async (): Promise<RunDungeonResult> => {
   user.experience += xpGained
 
   // Check for level up and process rewards if applicable
-  const newLevel = getLevel(user.experience + xpGained)
+  const newLevel = getLevel(user.experience)
   const levelledUp = newLevel.level > currentLevel.level
   if (levelledUp) {
     user.gold += newLevel.reward?.gold ?? 0

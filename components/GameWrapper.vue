@@ -1,12 +1,13 @@
 <template>
   <div class="flex flex-wrap gap-4">
-    <UserInventory v-model:experience="experience" v-model:weapon="weapon" v-model:gold="gold" v-model:inventory="inventory" class="w-80" />
+    <UserInventory v-model:experience="experience" v-model:weapon="weapon" v-model:gold="gold" v-model:inventory="inventory" class="min-w-96" />
 
-    <DungeonPicker v-model:experience="experience" v-model:inventory="inventory" v-model:past-runs="pastRuns" v-model:gold="gold" class="w-80" />
+    <DungeonRunner v-model:experience="experience" v-model:inventory="inventory" v-model:past-runs="pastRuns" v-model:gold="gold" class="min-w-96" />
 
-    <RunHistory class="w-80" :past-runs="pastRuns" />
-
-    <WeaponShop v-model:weapon="weapon" v-model:gold="gold" class="w-80" />
+    <div class="flex flex-col gap-4">
+      <DungeonViewer class="min-w-96" :past-runs="pastRuns" />
+      <WeaponShop v-model:weapon="weapon" v-model:gold="gold" class="min-w-96 flex-1" />
+    </div>
   </div>
 </template>
 

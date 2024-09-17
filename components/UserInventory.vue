@@ -1,27 +1,32 @@
 <template>
   <UCard>
     <template #header>
-      <h1 class="text-xl">{{ $t('ui.inventory.title')}}</h1>
+      <h1 class="text-xl">{{ $t("ui.inventory.title") }}</h1>
     </template>
 
-    <div class="flex flex-col gap-2 h-56">
+    <div class="flex flex-col gap-2 h-72">
       <div>
         <ul>
           <li class="flex gap-1">
-            <span>{{ $t('ui.user.gold') }}:</span>
+            <span>{{ $t("ui.user.gold") }}:</span>
             <span class="font-bold">{{ gold }}</span>
             <img width="20px" class="object-contain" src="~/public/gameplay/gold.webp" alt="Gold" />
           </li>
           <li class="flex gap-1">
-            <span>{{ $t('ui.user.level') }}:</span>
-            <span class="font-bold">{{ userLevel.level }}</span> <span v-if="nextLevel?.requiredXp && nextLevel.requiredXp !== Infinity">({{ $n(experience) }} / {{ $n(nextLevel?.requiredXp ?? 0) }} {{ $t('ui.user.xp') }})</span>
+            <span>{{ $t("ui.user.level") }}:</span>
+            <span class="font-bold">{{ userLevel.level }}</span>
+            <span v-if="nextLevel?.requiredXp && nextLevel.requiredXp !== Infinity">
+              ({{ $n(experience) }} / {{ $n(nextLevel?.requiredXp ?? 0) }} {{ $t("ui.user.xp") }})
+            </span>
+            <span v-else>({{ $n(experience) }} {{ $t("ui.user.xp") }})</span>
           </li>
+
           <li class="flex gap-1">
-            <span>{{ $t('ui.user.stamina') }}:</span>
+            <span>{{ $t("ui.user.stamina") }}:</span>
             <span class="font-bold">{{ userLevel.baseStamina }}</span>
           </li>
           <li class="flex gap-1">
-            <span>{{ $t('ui.user.weapon') }}:</span>
+            <span>{{ $t("ui.user.weapon") }}:</span>
             <weapon-icon :weapon-id="currentWeaponId" />
             <span class="font-bold">{{ $t(`weapons.${currentWeaponId}.name`) }}</span>
           </li>
@@ -29,14 +34,10 @@
       </div>
 
       <div>
-        <h1 class="font-bold">{{ $t('ui.inventory.sellableLoot') }}</h1>
+        <h1 class="font-bold">{{ $t("ui.inventory.sellableLoot") }}</h1>
 
         <ul>
-          <li
-            v-for="[enemyDropId, amount] of (Object.entries(inventory) as [EnemyDropId, number][])"
-            :key="enemyDropId"
-            class="flex gap-1"
-          >
+          <li v-for="[enemyDropId, amount] of Object.entries(inventory) as [EnemyDropId, number][]" :key="enemyDropId" class="flex gap-1">
             <span class="font-bold">{{ amount }}</span>
             <drop-icon :enemy-drop-id="enemyDropId" />
             <span>{{ $t(`drops.${enemyDropId}.name`, amount) }}</span>
@@ -47,7 +48,7 @@
 
     <template #footer>
       <UButton block :disabled="hasEmptyInventory" @click="sellInventory">
-        <span>{{ $t('actions.sell') }}</span>
+        <span>{{ $t("actions.sell") }}</span>
         <div>
           <span>{{ inventoryValue }}</span>
           <img width="20px" class="object-contain inline" src="~/public/gameplay/gold.webp" alt="Gold" />
@@ -80,7 +81,7 @@ const nextLevel = computed(() => getNextLevel(experience.value))
 const sellInventory = async () => {
   const { gold: newGold } = await $fetch("/api/inventory/sell", { method: "POST" })
 
-  for (const key of (Object.keys(inventory.value) as EnemyDropId[])) {
+  for (const key of Object.keys(inventory.value) as EnemyDropId[]) {
     inventory.value[key] = 0
   }
 

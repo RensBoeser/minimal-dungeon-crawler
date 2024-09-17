@@ -1,9 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  ssr: false,
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
-  modules: ["@nuxt/ui", "@nuxtjs/tailwindcss", "@nuxt/icon", "@nuxt/eslint", "@nuxtjs/i18n", "@nuxthub/core", "nuxt-lodash"],
+  modules: ["@nuxt/ui", "@nuxtjs/tailwindcss", "@nuxt/icon", "@nuxt/eslint", "@nuxtjs/i18n", "@nuxthub/core", "@vueuse/nuxt"],
   i18n: {
     locales: ["en", "nl"],
     defaultLocale: "en",
@@ -18,7 +17,7 @@ export default defineNuxtConfig({
     storage: {
       db: {
         driver: "fs",
-        base: "./data/db",
+        base: "./.data/db",
       },
     },
   },

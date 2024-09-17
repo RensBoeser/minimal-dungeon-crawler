@@ -24,4 +24,4 @@ logs
 !.env.example
 
 # Temporary files
-data/db
+.wrangler

@@ -1,10 +1,10 @@
-import type { EnemyDropId } from "~/utils/drops";
+import type { EnemyDropId } from "~/utils/drops"
 import { drops } from "~/utils/drops"
 import { TEMP_USER_ID, useUserService } from "../utils/user"
 
 export default defineNitroPlugin(async () => {
   const storage = useStorage("db")
-  storage.dispose()
+  storage.clear()
 
   const { setUser } = useUserService(TEMP_USER_ID)
 

@@ -4,7 +4,8 @@
 
     <UDivider class="mb-4" />
 
-    <GameWrapper />
+    <NuxtLoadingIndicator />
+    <NuxtPage />
   </UContainer>
 </template>
 
