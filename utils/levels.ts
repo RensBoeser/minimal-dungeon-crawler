@@ -1,5 +1,3 @@
-import cloneDeep from "lodash-es/cloneDeep"
-
 export interface LevelUpReward {
   // TODO: Add more types of rewards
   gold?: number
@@ -32,11 +30,11 @@ export const levels: Array<UserLevel> = [
 export const getLevel = (xp: number) => {
   const highestLevel = levels.reduce((accLevel, currentLevel) => (currentLevel.requiredXp <= xp ? currentLevel : accLevel), levels[0])
 
-  return cloneDeep(highestLevel)
+  return JSON.parse(JSON.stringify(highestLevel))
 }
 
 export const getNextLevel = (xp: number) => {
   const nextLevel = levels.find((level) => level.requiredXp > xp)
 
-  return cloneDeep(nextLevel)
+  return JSON.parse(JSON.stringify(nextLevel))
 }
