@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "prettier": "3.3.3",
+    "unenv": "^1.10.0",
     "wrangler": "^3.78.3"
   }
 }
