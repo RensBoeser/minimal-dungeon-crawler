@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
-  modules: ["@nuxt/ui", "@nuxtjs/tailwindcss", "@nuxt/icon", "@nuxt/eslint", "@nuxtjs/i18n", "@nuxthub/core", "@vueuse/nuxt"],
+  modules: ["@nuxt/ui", "@nuxtjs/tailwindcss", "@nuxt/icon", "@nuxt/eslint", "@nuxtjs/i18n", "@vueuse/nuxt"],
   i18n: {
     locales: ["en", "nl"],
     defaultLocale: "en",
@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     vueI18n: "./i18n.config.ts",
   },
   nitro: {
-    preset: "cloudflare-pages",
+    preset: "vercel",
     experimental: {
       openAPI: true,
     },
@@ -20,9 +20,5 @@ export default defineNuxtConfig({
         base: "./.data/db",
       },
     },
-  },
-  hub: {
-    kv: true,
-    cache: true,
   },
 })
