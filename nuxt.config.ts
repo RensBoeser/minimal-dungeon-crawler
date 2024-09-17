@@ -24,4 +24,8 @@ export default defineNuxtConfig({
     kv: true,
     cache: true,
   },
+  // Fix for cloudflare
+  alias: {
+    string_decoder: "string_decoder/",
+  },
 })
