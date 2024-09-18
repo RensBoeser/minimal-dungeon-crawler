@@ -18,7 +18,7 @@
 
           <div class="flex flex-col justify-center items-center">
             <WeaponIcon :weapon-id="weaponId" />
-            <span>Fighting...</span>
+            <span>{{ $t("actions.fighting") }}...</span>
           </div>
         </div>
 

@@ -116,6 +116,7 @@ export default defineI18nConfig(() => ({
         runningDungeon: "Running dungeon",
         recovering: "Recovering",
         equipped: "Equipped",
+        fighting: "Fighting",
       },
     },
     nl: {
@@ -230,6 +231,7 @@ export default defineI18nConfig(() => ({
         runDungeon: "Dungeon rennen",
         runningDungeon: "Dungeon rennen",
         recovering: "Bijkomen",
+        fighting: "Vechten",
         equipped: "Uitgerust",
       },
     },
