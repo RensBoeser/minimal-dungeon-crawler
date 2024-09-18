@@ -12,20 +12,22 @@
     </template>
 
     <template #footer>
-      <Transition name="slide-y-fade" mode="out-in">
-        <div v-if="isRunning || loading" key="progress" class="flex flex-col justify-center items-center gap-4">
-          <UProgress :value="runProgress" color="amber" indicator />
+      <div class="min-h-52">
+        <Transition name="slide-y-fade" mode="out-in">
+          <div v-if="isRunning || loading" key="progress" class="flex flex-col justify-center items-center gap-4">
+            <UProgress :value="runProgress" color="amber" indicator />
 
-          <div class="flex flex-col justify-center items-center">
-            <WeaponIcon :weapon-id="weaponId" />
-            <span>{{ $t("actions.fighting") }}...</span>
+            <div class="flex flex-col justify-center items-center">
+              <WeaponIcon :weapon-id="weaponId" />
+              <span>{{ $t("actions.fighting") }}...</span>
+            </div>
           </div>
-        </div>
 
-        <DungeonResultItem v-else-if="lastRun" :key="lastRun.dateTime" :run="lastRun" />
+          <DungeonResultItem v-else-if="lastRun" :key="lastRun.dateTime" :run="lastRun" />
 
-        <div v-else key="no-runs" class="text-gray-400 text-center">{{ $t("ui.run.noRuns") }}</div>
-      </Transition>
+          <div v-else key="no-runs" class="text-gray-400 text-center">{{ $t("ui.run.noRuns") }}</div>
+        </Transition>
+      </div>
     </template>
   </UCard>
 </template>

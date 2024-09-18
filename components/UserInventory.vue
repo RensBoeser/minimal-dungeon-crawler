@@ -1,7 +1,13 @@
 <template>
   <UCard>
     <template #header>
-      <h1 class="text-xl">{{ $t("ui.inventory.title") }}</h1>
+      <div class="flex gap-2">
+        <h1 class="text-xl">{{ $t("ui.inventory.title") }}</h1>
+
+        <span class="flex-1" />
+        <UButton icon="i-material-symbols:delete" color="red" variant="ghost" @click="resetProgress" />
+        <UButton icon="i-material-symbols:refresh" color="gray" variant="ghost" @click="getInventory" />
+      </div>
     </template>
 
     <div class="flex flex-col gap-2 h-72">
@@ -77,6 +83,21 @@ const inventoryValue = computed(() => {
 
 const userLevel = computed(() => getLevel(experience.value))
 const nextLevel = computed(() => getNextLevel(experience.value))
+
+const getInventory = async () => {
+  const currentUser = await $fetch("/api/inventory")
+
+  inventory.value = currentUser.inventory
+  gold.value = currentUser.gold
+  experience.value = currentUser.experience
+  currentWeaponId.value = currentUser.weapon
+}
+
+const resetProgress = async () => {
+  await $fetch("/api/game/reset", { method: "POST" })
+
+  getInventory()
+}
 
 const sellInventory = async () => {
   const { gold: newGold } = await $fetch("/api/inventory/sell", { method: "POST" })

@@ -1,4 +1,4 @@
-import type { EnemyDropId } from "~/utils/drops"
+import { drops, type EnemyDropId } from "~/utils/drops"
 import type { WeaponId } from "~/utils/weapons"
 
 export interface DatabaseUser {
@@ -10,6 +10,14 @@ export interface DatabaseUser {
 }
 
 export const TEMP_USER_ID = "TEMP"
+
+export const starterUser: DatabaseUser = {
+  id: TEMP_USER_ID,
+  experience: 0,
+  gold: 0,
+  weapon: "fists",
+  inventory: drops.reduce((acc, drop) => ({ ...acc, [drop.id]: 0 }), {}) as Record<EnemyDropId, number>,
+}
 
 export const useUserService = (userId: string) => {
   const storage = useStorage("data")
