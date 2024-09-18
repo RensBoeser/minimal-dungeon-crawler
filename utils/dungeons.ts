@@ -41,7 +41,6 @@ export interface Dungeon {
 }
 
 export interface RunDungeonResult {
-  index?: number
   dateTime: string
   dungeonId: DungeonId
   enemiesDefeated: Array<EnemyId>

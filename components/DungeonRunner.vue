@@ -13,7 +13,7 @@
 
     <template #footer>
       <Transition name="fade" mode="out-in">
-        <DungeonResultItem v-if="lastRun" :key="lastRun.index" :run="lastRun" />
+        <DungeonResultItem v-if="lastRun" :key="lastRun.dateTime" :run="lastRun" />
         <div v-else class="text-gray-400 text-center">{{ $t("ui.run.noRuns") }}</div>
       </Transition>
     </template>

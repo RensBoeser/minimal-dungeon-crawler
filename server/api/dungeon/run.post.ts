@@ -86,7 +86,7 @@ export const fightEnemy = (enemy: Enemy, weapon: Weapon, stamina: number): Fight
 }
 
 export default defineEventHandler(async (): Promise<RunDungeonResult> => {
-  const { getUser, setUser, addRun } = useUserService(TEMP_USER_ID)
+  const { getUser, setUser } = useUserService(TEMP_USER_ID)
   const user = await getUser()
 
   if (!user) {
@@ -134,7 +134,7 @@ export default defineEventHandler(async (): Promise<RunDungeonResult> => {
 
   await setUser(user)
 
-  const run: RunDungeonResult = {
+  return {
     dateTime: new Date().toISOString(),
     dungeonId: currentDungeon.id,
     enemiesDefeated,
@@ -143,6 +143,4 @@ export default defineEventHandler(async (): Promise<RunDungeonResult> => {
     currentLevel,
     levelledUpTo: levelledUp ? newLevel : undefined,
   }
-
-  return await addRun(run)
 })

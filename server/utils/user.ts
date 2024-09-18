@@ -1,5 +1,4 @@
 import type { EnemyDropId } from "~/utils/drops"
-import type { RunDungeonResult } from "~/utils/dungeons"
 import type { WeaponId } from "~/utils/weapons"
 
 export interface DatabaseUser {
@@ -24,23 +23,8 @@ export const useUserService = (userId: string) => {
     return storage.setItem(`users:${userId}:user`, user)
   }
 
-  const getRuns = async (limit = 10): Promise<Array<RunDungeonResult>> => {
-    const runs = (await storage.getItem<Array<RunDungeonResult>>(`users:${userId}:runs`)) ?? []
-    return runs.slice(0, limit).toReversed()
-  }
-
-  const addRun = async (run: RunDungeonResult): Promise<RunDungeonResult> => {
-    const runs = (await storage.getItem<Array<RunDungeonResult>>(`users:${userId}:runs`)) ?? []
-    runs.unshift({ ...run, index: runs.length })
-    await storage.setItem(`users:${userId}:runs`, runs)
-
-    return { ...run, index: runs.length - 1 }
-  }
-
   return {
     getUser,
     setUser,
-    getRuns,
-    addRun,
   }
 }
