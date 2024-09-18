@@ -24,28 +24,9 @@
 const experience = defineModel<number>("experience", { required: true })
 const gold = defineModel<number>("gold", { required: true })
 const inventory = defineModel<Record<EnemyDropId, number>>("inventory", { required: true })
-const pastRuns = defineModel<Array<RunDungeonResult>>("pastRuns", { required: true })
 
 const lastRun = ref<RunDungeonResult | null>(null)
-
 const recovering = ref(false)
-const scrollList = ref<HTMLElement | null>(null)
-
-const { y } = useScroll(scrollList, {
-  behavior: usePreferredReducedMotion().value === "reduce" ? "instant" : "smooth",
-})
-
-watchDebounced(
-  pastRuns,
-  () => {
-    if (scrollList.value) {
-      console.log("scrolling")
-      console.log(y.value, scrollList.value.scrollHeight)
-      y.value = scrollList.value.scrollHeight
-    }
-  },
-  { deep: true, immediate: true, debounce: 100 },
-)
 
 const runDungeon = async () => {
   recovering.value = true
@@ -60,9 +41,7 @@ const runDungeon = async () => {
   experience.value += runDungeonResult.xpGained
   gold.value += runDungeonResult.levelledUpTo?.reward?.gold ?? 0
 
-  // add run to history
-  pastRuns.value.push(runDungeonResult)
-
+  // update last run
   lastRun.value = runDungeonResult
 
   setTimeout(() => {
