@@ -47,7 +47,7 @@ export const fightEnemy = (enemy: Enemy, weapon: Weapon, stamina: number): Fight
     // Check if the player lands a hit on the enemy
     if (Math.random() <= enemy.blockChance) {
       staminaLost = weapon.staminaCost
-      break
+      continue
     }
 
     let compositeWeaponDamage = weapon.damage
