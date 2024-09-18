@@ -3,12 +3,14 @@ import { drops } from "~/utils/drops"
 import { TEMP_USER_ID, useUserService } from "../utils/user"
 
 export default defineNitroPlugin(async () => {
-  const storage = useStorage("db")
-  storage.clear()
+  const { getUser, setUser } = useUserService(TEMP_USER_ID)
 
-  const { setUser } = useUserService(TEMP_USER_ID)
+  const currentUser = await getUser()
+  if (currentUser) {
+    return
+  }
 
-  console.log("Setting up user")
+  console.log("Creating initial user")
 
   await setUser({
     id: TEMP_USER_ID,
