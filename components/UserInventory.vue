@@ -15,7 +15,7 @@
         <ul>
           <li class="flex gap-1">
             <span>{{ $t("ui.user.gold") }}:</span>
-            <span class="font-bold">{{ gold }}</span>
+            <span class="font-bold">{{ $n(gold) }}</span>
             <img width="20px" class="object-contain" src="~/public/gameplay/gold.webp" alt="Gold" />
           </li>
           <li class="flex gap-1">
@@ -29,7 +29,7 @@
 
           <li class="flex gap-1">
             <span>{{ $t("ui.user.stamina") }}:</span>
-            <span class="font-bold">{{ userLevel.baseStamina }}</span>
+            <span class="font-bold">{{ $n(userLevel.baseStamina) }}</span>
           </li>
           <li class="flex gap-1">
             <span>{{ $t("ui.user.weapon") }}:</span>
@@ -44,7 +44,7 @@
 
         <ul>
           <li v-for="[enemyDropId, amount] of Object.entries(inventory) as [EnemyDropId, number][]" :key="enemyDropId" class="flex gap-1">
-            <span class="font-bold">{{ amount }}</span>
+            <span class="font-bold">{{ $n(amount) }}</span>
             <drop-icon :enemy-drop-id="enemyDropId" />
             <span>{{ $t(`drops.${enemyDropId}.name`, amount) }}</span>
           </li>
@@ -56,7 +56,7 @@
       <UButton block :disabled="hasEmptyInventory" @click="sellInventory">
         <span>{{ $t("actions.sell") }}</span>
         <div>
-          <span>{{ inventoryValue }}</span>
+          <span>{{ $n(inventoryValue) }}</span>
           <img width="20px" class="object-contain inline" src="~/public/gameplay/gold.webp" alt="Gold" />
         </div>
       </UButton>
