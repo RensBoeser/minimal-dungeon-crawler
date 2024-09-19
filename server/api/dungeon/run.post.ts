@@ -44,6 +44,12 @@ export const fightEnemy = (enemy: Enemy, weapon: Weapon, stamina: number): Fight
 
   // every iteration of the loop is a swing of the weapon
   while (enemyHealth > 0 && staminaLost < stamina) {
+    // Check if the player lands a hit on the enemy
+    if (Math.random() <= enemy.blockChance) {
+      staminaLost = weapon.staminaCost
+      continue
+    }
+
     let compositeWeaponDamage = weapon.damage
     // Check if the player lands a critical hit
     if (weapon.criticalChance) {

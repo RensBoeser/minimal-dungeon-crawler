@@ -23,6 +23,8 @@ export interface Enemy {
   xp: number
   /** Chance of encountering the enemy */
   encounterRate: number
+  /** Block chance of enemy*/
+  blockChance: number
   /** Loot table of the enemy */
   lootTable: Array<LootTableEntry>
 }
@@ -64,6 +66,7 @@ export const cryptOfTheForgotten: Dungeon = {
       armor: 0,
       xp: 1,
       encounterRate: 0.5,
+      blockChance: 0,
       lootTable: [{ item: "bone", probability: 0.4, amount: 2 }],
     },
     {
@@ -74,6 +77,7 @@ export const cryptOfTheForgotten: Dungeon = {
       armor: 0,
       xp: 3,
       encounterRate: 0.3,
+      blockChance: 0,
       lootTable: [
         { item: "rottenMeat", probability: 0.3, amount: 2 },
         { item: "potteryShard", probability: 0.05, amount: 1 },
@@ -87,6 +91,7 @@ export const cryptOfTheForgotten: Dungeon = {
       armor: 1,
       xp: 8,
       encounterRate: 0.1,
+      blockChance: 0.1,
       lootTable: [
         { item: "bone", probability: 0.9, amount: 2 },
         { item: "potteryShard", probability: 0.3, amount: 1 },
