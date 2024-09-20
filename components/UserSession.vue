@@ -10,6 +10,6 @@ const { loggedIn, user, session, clear } = useUserSession()
   </div>
   <div v-else>
     <h1>Not logged in</h1>
-    <UButton href="/auth/github">Login with GitHub</UButton>
+    <UButton to="/auth/github">Login with GitHub</UButton>
   </div>
 </template>
