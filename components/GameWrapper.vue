@@ -1,4 +1,6 @@
 <template>
+  <UserSession class="mb-3" />
+
   <div class="flex flex-wrap gap-4 mb-12">
     <UserInventory v-model:experience="experience" v-model:weapon="weapon" v-model:gold="gold" v-model:inventory="inventory" class="w-96" />
 
