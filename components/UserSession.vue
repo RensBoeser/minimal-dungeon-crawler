@@ -1,11 +1,10 @@
 <script setup>
-const { loggedIn, user, session, clear } = useUserSession()
+const { loggedIn, user, clear } = useUserSession()
 </script>
 
 <template>
   <div v-if="loggedIn">
-    {{ user }}
-    {{ session }}
+    {{ user.login }} ({{ user.id }})
     <UButton @click="clear">Logout</UButton>
   </div>
   <div v-else>
