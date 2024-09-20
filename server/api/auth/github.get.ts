@@ -1,6 +1,6 @@
 export default oauthGitHubEventHandler({
   config: {
-    scope: ["read:user", "user:email"],
+    scope: [],
   },
   async onSuccess(event, { user }) {
     await setUserSession(event, { user })
