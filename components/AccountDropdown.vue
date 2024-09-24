@@ -42,7 +42,7 @@ const items = computed((): InstanceType<typeof UDropdown>["items"] => [
     ? [
         {
           label: "Sign out",
-          icon: "i-mdi:logout",
+          icon: "i-heroicons-arrow-left-on-rectangle",
           click: clear,
         },
       ]
