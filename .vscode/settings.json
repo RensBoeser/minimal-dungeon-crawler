@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["gameplay", "nuxt", "nuxtjs", "tailwindcss"],
+  "cSpell.words": ["gameplay", "iconify", "nuxt", "nuxtjs", "tailwindcss", "unenv", "vueuse"],
   "eslint.useFlatConfig": true,
   "eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }]
 }

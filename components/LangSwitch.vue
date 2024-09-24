@@ -1,11 +1,6 @@
 <template>
   <UDropdown :items="items" :popper="{ placement: 'bottom-start' }">
-    <UButton
-      color="gray"
-      variant="ghost"
-      :label="locale === 'en' ? '🇬🇧 EN' : '🇳🇱 NL'"
-      trailing-icon="i-heroicons-chevron-down-20-solid"
-    />
+    <UButton color="gray" variant="ghost" :label="locale.toUpperCase()" />
   </UDropdown>
 </template>
 
