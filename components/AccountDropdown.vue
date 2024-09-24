@@ -1,6 +1,6 @@
 <template>
   <UDropdown :items="items">
-    <UAvatar :chip-color="loggedIn ? undefined : 'orange'" icon="i-material-symbols:person" />
+    <UAvatar :chip-color="loggedIn ? undefined : 'orange'" icon="i-material-symbols:person" :src="user?.avatar_url" />
 
     <template #account="{ item }">
       <div class="text-left">
@@ -15,12 +15,12 @@
 <script setup lang="ts">
 import type { UDropdown } from "#build/components"
 
-const { loggedIn, session, clear } = useUserSession()
+const { loggedIn, user, clear } = useUserSession()
 
 const items = computed((): InstanceType<typeof UDropdown>["items"] => [
   [
     {
-      label: session.value.user?.login ?? "Not signed in",
+      label: user.value?.login ?? "Not signed in",
       slot: "account",
       disabled: true,
     },
