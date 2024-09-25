@@ -40,6 +40,18 @@ const items = computed((): InstanceType<typeof UDropdown>["items"] => [
       external: true,
     },
   ],
+  [
+    {
+      label: "Reset progress",
+      icon: "i-heroicons-trash",
+      labelClass: "text-red-500",
+      iconClass: "dark:text-red-500 text-red-500",
+      click: async () => {
+        await resetProgress()
+        $router.go(0)
+      },
+    },
+  ],
   loggedIn.value
     ? [
         {
@@ -61,4 +73,8 @@ const items = computed((): InstanceType<typeof UDropdown>["items"] => [
         },
       ],
 ])
+
+const resetProgress = async () => {
+  await $fetch("/api/game/reset", { method: "POST" })
+}
 </script>

@@ -5,7 +5,6 @@
         <h1 class="text-xl">{{ $t("ui.inventory.title") }}</h1>
 
         <span class="flex-1" />
-        <UButton icon="i-material-symbols:delete" color="red" variant="ghost" @click="resetProgress" />
         <UButton icon="i-material-symbols:refresh" color="gray" variant="ghost" @click="getInventory" />
       </div>
     </template>
@@ -91,12 +90,6 @@ const getInventory = async () => {
   gold.value = currentUser.gold
   experience.value = currentUser.experience
   currentWeaponId.value = currentUser.weapon
-}
-
-const resetProgress = async () => {
-  await $fetch("/api/game/reset", { method: "POST" })
-
-  getInventory()
 }
 
 const sellInventory = async () => {
