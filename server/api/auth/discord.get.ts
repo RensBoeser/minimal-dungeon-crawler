@@ -1,4 +1,4 @@
-export default oauthGitHubEventHandler({
+export default oauthDiscordEventHandler({
   config: {
     scope: [],
   },
@@ -6,16 +6,16 @@ export default oauthGitHubEventHandler({
     await setUserSession(event, {
       user: {
         generic: {
-          provider: "github",
+          provider: "discord",
           id: user.id,
-          avatarUrl: user.avatar_url,
-          username: user.login,
-          name: user.name,
+          avatarUrl: `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`,
+          username: user.username,
+          name: user.global_name,
         },
       },
     })
 
-    const { setUser: setUser, checkUserExistence } = useUserService(`github:${user?.id}`)
+    const { setUser: setUser, checkUserExistence } = useUserService(`discord:${user?.id}`)
 
     // If the user is new, migrate the local user to the GitHub user and delete the local user
     const userExists = await checkUserExistence()
@@ -24,7 +24,7 @@ export default oauthGitHubEventHandler({
       if (localSession) {
         const { getUser: getLocalUser, setUser: setLocalUser } = useUserService(`local:${localSession}`)
 
-        console.log("Migrating local user to new GitHub user", `local:${localSession}`, `github:${user?.id}`)
+        console.log("Migrating local user to new Discord user", `local:${localSession}`, `discord:${user?.id}`)
         const localUser = await getLocalUser()
         await setUser(localUser)
         await setLocalUser(starterUser)

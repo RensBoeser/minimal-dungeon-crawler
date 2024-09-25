@@ -1,16 +1,17 @@
 <template>
   <UDropdown :items="items">
-    <UAvatar :chip-color="loggedIn ? undefined : 'orange'" icon="i-material-symbols:person" :src="user?.avatar_url" />
+    <UAvatar :chip-color="loggedIn ? undefined : 'orange'" icon="i-material-symbols:person" :src="user?.generic.avatarUrl" />
 
     <template v-if="loggedIn" #account>
-      <UAvatar v-if="user?.avatar_url" icon="i-material-symbols:person" :src="user.avatar_url" />
+      <UAvatar v-if="user?.generic.avatarUrl" icon="i-material-symbols:person" :src="user.generic.avatarUrl" />
 
       <div class="text-left">
-        <p class="truncate max-w-28">{{ user?.login }}</p>
-        <p class="truncate text-gray-400 max-w-28">{{ user?.name }}</p>
+        <p class="truncate max-w-28">{{ user?.generic.username }}</p>
+        <p class="truncate text-gray-400 max-w-28">{{ user?.generic.name }}</p>
       </div>
 
-      <UIcon class="ml-auto text-gray-600" name="i-simple-icons-github" />
+      <UIcon v-if="user?.generic.provider === 'github'" class="ml-auto" name="i-simple-icons:github" />
+      <UIcon v-else-if="user?.generic.provider === 'discord'" class="ml-auto dark:text-indigo-400 text-indigo-400" name="i-simple-icons:discord" />
     </template>
 
     <template v-else #account="{ item }">
@@ -32,7 +33,7 @@ const $router = useRouter()
 const items = computed((): InstanceType<typeof UDropdown>["items"] => [
   [
     {
-      label: user.value?.login ?? "Not signed in",
+      label: user.value?.generic.username ?? "Not signed in",
       slot: "account",
       disabled: true,
       class: "opacity-100 cursor-default",
@@ -51,10 +52,19 @@ const items = computed((): InstanceType<typeof UDropdown>["items"] => [
       ]
     : [
         {
-          label: "Sign in with github",
-          icon: "i-simple-icons-github",
+          label: "Sign in with Github",
+          icon: "i-simple-icons:github",
+          iconClass: "dark:text-white text-black",
           slot: "login",
           to: "/api/auth/github",
+          external: true,
+        },
+        {
+          label: "Sign in with Discord",
+          icon: "i-simple-icons:discord",
+          iconClass: "dark:text-indigo-400 text-indigo-400",
+          slot: "login",
+          to: "/api/auth/discord",
           external: true,
         },
       ],

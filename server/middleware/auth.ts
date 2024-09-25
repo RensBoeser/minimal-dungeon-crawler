@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  const { user, provider } = await getUserSession(event)
+  const { user } = await getUserSession(event)
 
   if (!user) {
     let localSession = getCookie(event, "localSession")
@@ -17,9 +17,8 @@ export default defineEventHandler(async (event) => {
     }
 
     event.context.userId = `local:${localSession}`
+    return
   }
 
-  if (provider === "github") {
-    event.context.userId = `${provider}:${user.id}`
-  }
+  event.context.userId = `${user.generic.provider}:${user.generic.id}`
 })

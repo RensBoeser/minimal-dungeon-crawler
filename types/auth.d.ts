@@ -1,21 +1,42 @@
-import type { UserSessionComposable as _UserSessionComposable } from "#auth-utils"
+// type Test =
+//   | {
+//       provider: "github"
+//       id: number
+//       login: string
+//       avatar_url: string
+//       name: string
+//     }
+//   | {
+//       provider: "discord"
+//       id: string
+//       username: string
+//       avatar: string
+//     }
 
 declare module "#auth-utils" {
-  type UserSession =
-    | {
-        user: User
-        provider: "github"
-      }
-    | {
-        user: undefined
-        provider: undefined
-      }
-
   interface User {
-    id: number
-    login: string
-    avatar_url: string
-    name: string
+    // sso:
+    //   | {
+    //       provider: "github"
+    //       id: number
+    //       login: string
+    //       avatar_url: string
+    //       name: string
+    //     }
+    //   | {
+    //       provider: "discord"
+    //       id: string
+    //       username: string
+    //       avatar: string
+    //       global_name: string
+    //     }
+    generic: {
+      provider: "discord" | "github"
+      id: string | number
+      username: string
+      name: string
+      avatarUrl: string
+    }
   }
 }
 export {}
