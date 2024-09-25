@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center">
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-4 max-w-lg">
       <UButton to="/" label="Back" variant="outline" icon="i-heroicons-chevron-left-20-solid" class="self-start" />
 
       <h1 class="text-3xl">Technologies</h1>

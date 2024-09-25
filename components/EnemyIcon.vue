@@ -3,8 +3,8 @@
     <img v-bind="$attrs" width="20px" class="object-contain" :src="enemy.icon" :alt="$t(`enemies.${enemy.id}.name`)" />
 
     <template #panel>
-      <div class="p-2 max-w-56 text-sm">
-        <img width="20px" class="object-contain" :src="enemy.icon" :alt="$t(`enemies.${enemy.id}.name`)" />
+      <div class="p-3 w-56 text-sm">
+        <img width="32px" class="mb-2 object-contain" :src="enemy.icon" :alt="$t(`enemies.${enemy.id}.name`)" />
         <h1>{{ $t(`enemies.${enemy.id}.name`) }}</h1>
         <p class="text-xs">{{ $t(`enemies.${enemy.id}.description`) }}</p>
 
