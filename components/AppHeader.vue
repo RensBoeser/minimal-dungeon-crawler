@@ -4,8 +4,8 @@
 
     <div class="flex-1" />
 
-    <LangSwitch />
     <ColorSwitch />
+    <LangSwitch />
     <UButton to="https://github.com/RensBoeser/minimal-dungeon-crawler" icon="i-simple-icons-github" color="gray" variant="ghost" external />
 
     <AccountDropdown class="ml-1" />

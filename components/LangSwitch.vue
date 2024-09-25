@@ -1,18 +1,16 @@
 <template>
-  <ClientOnly>
-    <UDropdown :items="items" :popper="{ placement: 'bottom-start' }" v-bind="$attrs">
-      <UButton color="gray" variant="ghost" icon="i-material-symbols:translate" />
+  <UDropdown :items="items" :popper="{ placement: 'bottom-start' }" v-bind="$attrs">
+    <UButton color="gray" variant="ghost" icon="i-material-symbols:translate" />
 
-      <template v-for="code of localeCodes" :key="code" #[code]="{ item }">
-        <code class="uppercase" :class="{ 'text-primary-400': locale === item.slot }">
-          {{ item.slot }}
-        </code>
-        <span class="truncate" :class="{ 'text-primary-400': locale === item.slot }">
-          {{ item.label }}
-        </span>
-      </template>
-    </UDropdown>
-  </ClientOnly>
+    <template v-for="code of localeCodes" :key="code" #[code]="{ item }">
+      <code class="uppercase" :class="{ 'text-primary-400': locale === item.slot }">
+        {{ item.slot }}
+      </code>
+      <span class="truncate" :class="{ 'text-primary-400': locale === item.slot }">
+        {{ item.label }}
+      </span>
+    </template>
+  </UDropdown>
 </template>
 
 <script setup lang="ts">
