@@ -64,12 +64,14 @@ const items = computed((): InstanceType<typeof UDropdown>["items"] => [
       icon: "i-heroicons-code-bracket",
       to: "https://github.com/RensBoeser/minimal-dungeon-crawler",
       external: true,
+      target: "_blank",
     },
     {
       label: "Idea board",
       icon: "i-heroicons-book-open",
       to: "https://app.mural.co/t/rensie2960/m/rensie2960/1726247740200/4da1d3056cba2761efbca2f9ccdf46b8b6889d9f?sender=u5ca2d578e94fdf6f9e224957",
       external: true,
+      target: "_blank",
     },
     {
       label: "About",
