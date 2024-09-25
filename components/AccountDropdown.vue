@@ -2,11 +2,21 @@
   <UDropdown :items="items">
     <UAvatar :chip-color="loggedIn ? undefined : 'orange'" icon="i-material-symbols:person" :src="user?.avatar_url" />
 
-    <template #account="{ item }">
+    <template v-if="loggedIn" #account="{ item }">
+      <UAvatar v-if="user?.avatar_url" icon="i-material-symbols:person" :src="user.avatar_url" />
+
       <div class="text-left">
-        <p v-if="loggedIn">Signed in as</p>
-        <p class="truncate font-medium text-gray-900 dark:text-white">{{ item.label }}</p>
-        <p v-if="!loggedIn" class="mt-1 italic">Please sign in to keep your progress safe</p>
+        <p class="text-xs text-gray-400">Signed in as</p>
+        <p class="truncate max-w-28">{{ item.label }}</p>
+      </div>
+
+      <UIcon class="ml-auto text-gray-600" name="i-simple-icons-github" />
+    </template>
+
+    <template v-else #account="{ item }">
+      <div class="text-left">
+        <p>{{ item.label }}</p>
+        <p class="text-xs text-gray-400">Please sign in to keep your progress safe</p>
       </div>
     </template>
   </UDropdown>
@@ -25,31 +35,7 @@ const items = computed((): InstanceType<typeof UDropdown>["items"] => [
       label: user.value?.login ?? "Not signed in",
       slot: "account",
       disabled: true,
-    },
-  ],
-  [
-    {
-      label: "About",
-      icon: "i-heroicons-book-open",
-      to: "/about",
-    },
-    {
-      label: "Code",
-      icon: "i-heroicons-code-bracket",
-      to: "https://github.com/RensBoeser/minimal-dungeon-crawler",
-      external: true,
-    },
-  ],
-  [
-    {
-      label: "Reset progress",
-      icon: "i-heroicons-trash",
-      labelClass: "text-red-500",
-      iconClass: "dark:text-red-500 text-red-500",
-      click: async () => {
-        await resetProgress()
-        $router.go(0)
-      },
+      class: "opacity-100 cursor-default",
     },
   ],
   loggedIn.value
@@ -72,6 +58,37 @@ const items = computed((): InstanceType<typeof UDropdown>["items"] => [
           external: true,
         },
       ],
+  [
+    {
+      label: "Code",
+      icon: "i-heroicons-code-bracket",
+      to: "https://github.com/RensBoeser/minimal-dungeon-crawler",
+      external: true,
+    },
+    {
+      label: "Idea board",
+      icon: "i-heroicons-book-open",
+      to: "https://app.mural.co/t/rensie2960/m/rensie2960/1726247740200/4da1d3056cba2761efbca2f9ccdf46b8b6889d9f?sender=u5ca2d578e94fdf6f9e224957",
+      external: true,
+    },
+    {
+      label: "About",
+      icon: "i-heroicons-information-circle",
+      to: "/about",
+    },
+  ],
+  [
+    {
+      label: "Reset progress",
+      icon: "i-heroicons-trash",
+      labelClass: "text-red-500",
+      iconClass: "dark:text-red-500 text-red-500",
+      click: async () => {
+        await resetProgress()
+        $router.go(0)
+      },
+    },
+  ],
 ])
 
 const resetProgress = async () => {
