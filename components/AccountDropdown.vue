@@ -39,35 +39,6 @@ const items = computed((): InstanceType<typeof UDropdown>["items"] => [
       class: "opacity-100 cursor-default",
     },
   ],
-  loggedIn.value
-    ? [
-        {
-          label: "Sign out",
-          icon: "i-heroicons-arrow-left-on-rectangle",
-          click: async () => {
-            await clear()
-            $router.go(0)
-          },
-        },
-      ]
-    : [
-        {
-          label: "Sign in with Github",
-          icon: "i-simple-icons:github",
-          iconClass: "dark:text-white text-black",
-          slot: "login",
-          to: "/api/auth/github",
-          external: true,
-        },
-        {
-          label: "Sign in with Discord",
-          icon: "i-simple-icons:discord",
-          iconClass: "dark:text-indigo-400 text-indigo-400",
-          slot: "login",
-          to: "/api/auth/discord",
-          external: true,
-        },
-      ],
   [
     {
       label: "Code",
@@ -89,6 +60,35 @@ const items = computed((): InstanceType<typeof UDropdown>["items"] => [
       to: "/about",
     },
   ],
+  loggedIn.value
+    ? [
+        {
+          label: "Sign out",
+          icon: "i-heroicons-arrow-left-on-rectangle",
+          click: async () => {
+            await clear()
+            $router.go(0)
+          },
+        },
+      ]
+    : [
+        {
+          label: "Sign in with Discord",
+          icon: "i-simple-icons:discord",
+          iconClass: "dark:text-indigo-400 text-indigo-400",
+          slot: "login",
+          to: "/api/auth/discord",
+          external: true,
+        },
+        {
+          label: "Sign in with Github",
+          icon: "i-simple-icons:github",
+          iconClass: "dark:text-white text-black",
+          slot: "login",
+          to: "/api/auth/github",
+          external: true,
+        },
+      ],
   [
     {
       label: "Reset progress",
