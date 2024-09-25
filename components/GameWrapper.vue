@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-wrap gap-4 mb-12">
-    <UserInventory v-model:experience="experience" v-model:weapon="weapon" v-model:gold="gold" v-model:inventory="inventory" class="w-80" />
+    <UserInventory v-model:experience="experience" v-model:weapon="weapon" v-model:gold="gold" v-model:inventory="inventory" class="w-80 flex-grow" />
 
-    <DungeonRunner v-model:experience="experience" v-model:inventory="inventory" v-model:gold="gold" :weapon-id="weapon" class="w-96 flex-1" />
+    <DungeonRunner v-model:experience="experience" v-model:inventory="inventory" v-model:gold="gold" :weapon-id="weapon" class="w-96 flex-grow" />
 
-    <div class="flex flex-col gap-4 w-80">
+    <div class="flex flex-col gap-4 w-80 flex-grow">
       <DungeonViewer />
       <WeaponShop v-model:weapon="weapon" v-model:gold="gold" class="flex-1" />
     </div>

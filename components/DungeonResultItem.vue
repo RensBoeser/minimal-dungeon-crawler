@@ -1,7 +1,6 @@
 <template>
   <section>
     <h1 class="text-center">
-      <UIcon class="mr-1" size="18" name="i-game-icons:crypt-entrance" />
       <span>{{ $t(`dungeons.${run.dungeonId}.name`) }}</span>
     </h1>
 

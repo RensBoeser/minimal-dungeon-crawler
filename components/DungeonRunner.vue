@@ -12,7 +12,12 @@
     </template>
 
     <template #footer>
-      <div class="min-h-52">
+      <div class="min-h-52 relative">
+        <!-- background icon -->
+        <div class="absolute inset-0 flex justify-center items-center">
+          <UIcon :size="150" name="i-game-icons:crypt-entrance" class="opacity-5" />
+        </div>
+
         <Transition name="slide-y-fade" mode="out-in">
           <div v-if="isRunning || loading" key="progress" class="flex flex-col justify-center items-center gap-4">
             <UProgress :value="runProgress" color="amber" indicator />
