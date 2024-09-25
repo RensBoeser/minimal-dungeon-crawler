@@ -15,6 +15,7 @@ declare module "#auth-utils" {
     id: number
     login: string
     avatar_url: string
+    name: string
   }
 }
 export {}

@@ -1,6 +1,6 @@
 <template>
   <UDropdown :items="items" :popper="{ placement: 'bottom-start' }" v-bind="$attrs">
-    <UButton color="gray" variant="ghost" icon="i-material-symbols:translate" />
+    <UButton color="gray" variant="ghost" icon="i-material-symbols:translate-rounded" />
 
     <template v-for="code of localeCodes" :key="code" #[code]="{ item }">
       <code class="uppercase" :class="{ 'text-primary-400': locale === item.slot }">

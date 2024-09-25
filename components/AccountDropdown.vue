@@ -2,12 +2,12 @@
   <UDropdown :items="items">
     <UAvatar :chip-color="loggedIn ? undefined : 'orange'" icon="i-material-symbols:person" :src="user?.avatar_url" />
 
-    <template v-if="loggedIn" #account="{ item }">
+    <template v-if="loggedIn" #account>
       <UAvatar v-if="user?.avatar_url" icon="i-material-symbols:person" :src="user.avatar_url" />
 
       <div class="text-left">
-        <p class="text-xs text-gray-400">Signed in as</p>
-        <p class="truncate max-w-28">{{ item.label }}</p>
+        <p class="truncate max-w-28">{{ user?.login }}</p>
+        <p class="truncate text-gray-400 max-w-28">{{ user?.name }}</p>
       </div>
 
       <UIcon class="ml-auto text-gray-600" name="i-simple-icons-github" />
