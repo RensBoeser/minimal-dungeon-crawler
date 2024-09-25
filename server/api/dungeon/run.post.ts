@@ -91,7 +91,7 @@ export const fightEnemy = (enemy: Enemy, weapon: Weapon, stamina: number): Fight
 }
 
 export default defineEventHandler(async (event): Promise<RunDungeonResult> => {
-  const { getUser, setUser } = useUserService(event.context.userId)
+  const { getUser, setUser: setUser } = useUserService(event.context.userId)
   const user = await getUser()
 
   if (!user) {

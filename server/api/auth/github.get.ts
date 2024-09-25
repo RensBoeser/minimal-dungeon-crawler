@@ -5,7 +5,7 @@ export default oauthGitHubEventHandler({
   async onSuccess(event, { user }) {
     await setUserSession(event, { user, provider: "github" })
 
-    const { setUser, checkUserExistence } = useUserService(`github:${user?.id}`)
+    const { setUser: setUser, checkUserExistence } = useUserService(`github:${user?.id}`)
 
     // If the user is new, migrate the local user to the GitHub user and delete the local user
     const userExists = await checkUserExistence()
@@ -14,7 +14,7 @@ export default oauthGitHubEventHandler({
       if (localSession) {
         const { getUser: getLocalUser, setUser: setLocalUser } = useUserService(`local:${localSession}`)
 
-        console.log("Migrating local user to new GitHub user")
+        console.log("Migrating local user to new GitHub user", `local:${localSession}`, `github:${user?.id}`)
         const localUser = await getLocalUser()
         await setUser(localUser)
         await setLocalUser(starterUser)

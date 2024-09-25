@@ -8,7 +8,7 @@ const buyWeaponSchema = z.object({
 export default defineEventHandler(async (event) => {
   const { weapon } = await readValidatedBody(event, (body) => buyWeaponSchema.parse(body))
 
-  const { getUser, setUser } = useUserService(event.context.userId)
+  const { getUser, setUser: setUser } = useUserService(event.context.userId)
 
   const user = await getUser()
 

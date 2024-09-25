@@ -7,12 +7,12 @@ export interface DatabaseUser {
   weapon: WeaponId
   gold: number
   inventory: Record<EnemyDropId, number>
+  updatedAt?: number
+  createdAt?: number
 }
 
-export const TEMP_USER_ID = "TEMP"
-
 export const starterUser: DatabaseUser = {
-  id: TEMP_USER_ID,
+  id: "TEMP",
   experience: 0,
   gold: 0,
   weapon: "fists",
@@ -26,16 +26,23 @@ export const useUserService = (userId: string) => {
     const user = await storage.getItem<DatabaseUser>(`users:${userId}:user`)
 
     if (!user) {
-      console.log("Initializing user")
-      return setUser(starterUser)
+      return initializeUser()
     }
 
     return user
   }
 
   const setUser = async (user: DatabaseUser): Promise<DatabaseUser> => {
-    await storage.setItem(`users:${userId}:user`, user)
+    await storage.setItem<DatabaseUser>(`users:${userId}:user`, {
+      ...user,
+      updatedAt: Date.now(),
+    })
     return user
+  }
+
+  const initializeUser = async (): Promise<DatabaseUser> => {
+    console.log("Initializing user", userId)
+    return setUser({ ...starterUser, createdAt: Date.now(), updatedAt: Date.now(), id: userId })
   }
 
   const checkUserExistence = async (): Promise<boolean> => {
@@ -46,6 +53,7 @@ export const useUserService = (userId: string) => {
   return {
     getUser,
     setUser,
+    initializeUser,
     checkUserExistence,
   }
 }
