@@ -1,7 +1,5 @@
-import { TEMP_USER_ID, useUserService } from "~/server/utils/user"
-
-export default defineEventHandler(async () => {
-  const { getUser } = useUserService(TEMP_USER_ID)
+export default defineEventHandler(async (event) => {
+  const { getUser } = useUserService(event.context.userId)
   const user = await getUser()
 
   if (!user) {

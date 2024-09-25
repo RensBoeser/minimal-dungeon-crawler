@@ -22,17 +22,30 @@ export const starterUser: DatabaseUser = {
 export const useUserService = (userId: string) => {
   const storage = useStorage("data")
 
-  const getUser = async (): Promise<DatabaseUser | null> => {
+  const getUser = async (): Promise<DatabaseUser> => {
     const user = await storage.getItem<DatabaseUser>(`users:${userId}:user`)
+
+    if (!user) {
+      console.log("Initializing user")
+      return setUser(starterUser)
+    }
+
     return user
   }
 
-  const setUser = (user: DatabaseUser): Promise<void> => {
-    return storage.setItem(`users:${userId}:user`, user)
+  const setUser = async (user: DatabaseUser): Promise<DatabaseUser> => {
+    await storage.setItem(`users:${userId}:user`, user)
+    return user
+  }
+
+  const checkUserExistence = async (): Promise<boolean> => {
+    const user = await storage.getItem<DatabaseUser>(`users:${userId}:user`)
+    return !!user
   }
 
   return {
     getUser,
     setUser,
+    checkUserExistence,
   }
 }

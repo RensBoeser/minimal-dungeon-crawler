@@ -1,4 +1,3 @@
-import { TEMP_USER_ID, useUserService } from "~/server/utils/user"
 import type { EnemyDropId } from "~/utils/drops"
 import type { Enemy, EnemyId, RunDungeonResult } from "~/utils/dungeons"
 import { dungeons } from "~/utils/dungeons"
@@ -91,8 +90,8 @@ export const fightEnemy = (enemy: Enemy, weapon: Weapon, stamina: number): Fight
   }
 }
 
-export default defineEventHandler(async (): Promise<RunDungeonResult> => {
-  const { getUser, setUser } = useUserService(TEMP_USER_ID)
+export default defineEventHandler(async (event): Promise<RunDungeonResult> => {
+  const { getUser, setUser } = useUserService(event.context.userId)
   const user = await getUser()
 
   if (!user) {

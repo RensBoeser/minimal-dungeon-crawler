@@ -17,6 +17,8 @@ import type { UDropdown } from "#build/components"
 
 const { loggedIn, user, clear } = useUserSession()
 
+const $router = useRouter()
+
 const items = computed((): InstanceType<typeof UDropdown>["items"] => [
   [
     {
@@ -43,7 +45,10 @@ const items = computed((): InstanceType<typeof UDropdown>["items"] => [
         {
           label: "Sign out",
           icon: "i-heroicons-arrow-left-on-rectangle",
-          click: clear,
+          click: async () => {
+            await clear()
+            $router.go(0)
+          },
         },
       ]
     : [

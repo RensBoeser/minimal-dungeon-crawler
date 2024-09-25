@@ -1,5 +1,4 @@
 import { z } from "zod"
-import { TEMP_USER_ID, useUserService } from "~/server/utils/user"
 import { weaponIds, weapons } from "~/utils/weapons"
 
 const buyWeaponSchema = z.object({
@@ -9,7 +8,7 @@ const buyWeaponSchema = z.object({
 export default defineEventHandler(async (event) => {
   const { weapon } = await readValidatedBody(event, (body) => buyWeaponSchema.parse(body))
 
-  const { getUser, setUser } = useUserService(TEMP_USER_ID)
+  const { getUser, setUser } = useUserService(event.context.userId)
 
   const user = await getUser()
 
