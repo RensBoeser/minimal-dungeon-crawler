@@ -91,7 +91,7 @@ export const cryptOfTheForgotten: Dungeon = {
       armor: 1,
       xp: 8,
       encounterRate: 0.1,
-      blockChance: 0.1,
+      blockChance: 0.05,
       lootTable: [
         { item: "bone", probability: 0.9, amount: 2 },
         { item: "potteryShard", probability: 0.3, amount: 1 },

@@ -20,9 +20,13 @@
               <td>{{ $t("ui.enemy.health") }}</td>
               <td class="text-right font-mono">{{ enemy.health }} HP</td>
             </tr>
-            <tr>
+            <tr v-if="enemy.armor">
               <td>{{ $t("ui.enemy.armor") }}</td>
               <td class="text-right font-mono">{{ enemy.armor }}</td>
+            </tr>
+            <tr v-if="enemy.blockChance">
+              <td>{{ $t("ui.enemy.blockChance") }}</td>
+              <td class="text-right font-mono">{{ enemy.blockChance * 100 }}%</td>
             </tr>
           </tbody>
         </table>

@@ -106,6 +106,7 @@ export default defineI18nConfig(() => ({
           health: "Health",
           armor: "Armor",
           xp: "XP reward",
+          blockChance: "Block chance",
           drops: "Drops",
         },
       },
