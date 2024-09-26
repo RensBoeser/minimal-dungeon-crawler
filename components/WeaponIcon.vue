@@ -4,9 +4,13 @@
 
     <template #panel>
       <div class="p-3 w-56 text-sm">
-        <img width="32px" class="mb-2 object-contain" :src="weapon.icon" :alt="$t(`weapons.${weapon.id}.name`)" />
-        <h1>{{ $t(`weapons.${weapon.id}.name`) }}</h1>
-        <p class="text-xs">{{ $t(`weapons.${weapon.id}.description`) }}</p>
+        <div class="flex gap-3 items-start">
+          <img width="32px" class="mb-2 object-contain" :src="weapon.icon" :alt="$t(`weapons.${weapon.id}.name`)" />
+          <div>
+            <h1 class="font-medium">{{ $t(`weapons.${weapon.id}.name`) }}</h1>
+            <p class="text-xs">{{ $t(`weapons.${weapon.id}.description`) }}</p>
+          </div>
+        </div>
 
         <UDivider class="mt-2">{{ $t("ui.general.stats") }}</UDivider>
 
