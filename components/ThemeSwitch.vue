@@ -9,7 +9,7 @@
       @click="() => (isDark = !isDark)"
     />
     <template #fallback>
-      <div class="w-8 h-8" />
+      <UButton v-bind="$attrs" icon="i-heroicons-moon-20-solid" color="gray" variant="ghost" aria-label="Theme" />
     </template>
   </ClientOnly>
 </template>
