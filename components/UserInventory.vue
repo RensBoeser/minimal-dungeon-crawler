@@ -6,7 +6,7 @@
 
         <div class="flex-1" />
 
-        <UButton :disabled="hasEmptyInventory" @click="sellInventory">
+        <UButton :disabled="hasEmptyInventory" :loading="loading" @click="sellInventory">
           <span>{{ $t("actions.sell") }}</span>
           <div>
             <span>{{ $n(inventoryValue) }}</span>
@@ -41,6 +41,8 @@
 <script setup lang="ts">
 const user = defineModel<DatabaseUser>("user", { required: true })
 
+const loading = ref(false)
+
 const hasEmptyInventory = computed(() => Object.values(user.value.inventory).every((value) => value === 0))
 
 const inventoryValue = computed(() => {
@@ -53,7 +55,8 @@ const inventoryValue = computed(() => {
 })
 
 const sellInventory = async () => {
-  const { gold: newGold } = await $fetch("/api/inventory/sell", { method: "POST" })
+  loading.value = true
+  const { gold: newGold } = await $fetch("/api/inventory/sell", { method: "POST" }).finally(() => (loading.value = false))
 
   for (const key of Object.keys(user.value.inventory) as EnemyDropId[]) {
     user.value.inventory[key] = 0

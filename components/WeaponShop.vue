@@ -14,7 +14,7 @@
         </div>
 
         <UButton
-          :disabled="user.weapon === weaponShopItem.id || user.gold < weaponShopItem.cost"
+          :disabled="user.weapon === weaponShopItem.id || user.gold < weaponShopItem.cost || loading"
           :color="user.weapon === weaponShopItem.id ? 'amber' : 'primary'"
           @click="() => buySword(weaponShopItem.id)"
         >
@@ -33,10 +33,15 @@
 <script setup lang="ts">
 const user = defineModel<DatabaseUser>("user", { required: true })
 
+const loading = ref(false)
+
 const weaponShopItems = computed(() => weapons.filter((weapon) => weapon.cost))
 
 const buySword = async (weaponToBuy: WeaponId) => {
-  const { gold: newGoldBalance, weapon: newWeapon } = await $fetch("/api/shop/weapon/buy", { method: "POST", body: { weapon: weaponToBuy } })
+  loading.value = true
+  const { gold: newGoldBalance, weapon: newWeapon } = await $fetch("/api/shop/weapon/buy", { method: "POST", body: { weapon: weaponToBuy } }).finally(
+    () => (loading.value = false),
+  )
 
   user.value.gold = newGoldBalance
   user.value.weapon = newWeapon
