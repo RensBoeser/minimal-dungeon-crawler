@@ -60,6 +60,7 @@ export default defineI18nConfig(() => ({
       ui: {
         general: {
           stats: "Stats",
+          new: "New",
         },
         user: {
           weapon: "Weapon",
@@ -177,6 +178,7 @@ export default defineI18nConfig(() => ({
       ui: {
         general: {
           stats: "Stats",
+          new: "Nieuw",
         },
         user: {
           weapon: "Wapen",

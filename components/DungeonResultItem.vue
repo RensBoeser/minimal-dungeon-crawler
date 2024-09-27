@@ -34,7 +34,9 @@
           <li v-for="dropRecord of enemyDrops" :key="dropRecord.drop.id" class="flex gap-2 justify-center">
             <DropIcon :enemy-drop-id="dropRecord.drop.id" />
             <span>{{ dropRecord.count }}x</span>
-            <span v-if="statistics.totalDropsGathered[dropRecord.drop.id] === dropRecord.count" class="text-primary"> *NEW* </span>
+            <UBadge v-if="statistics.totalDropsGathered[dropRecord.drop.id] === dropRecord.count" variant="soft" color="primary">
+              {{ $t("ui.general.new") }}!
+            </UBadge>
           </li>
 
           <li v-if="!enemyDrops.length" class="text-center italic text-gray-400 mt-1">{{ $t("ui.run.noEnemyDrops") }}</li>
