@@ -5,7 +5,7 @@
         <h1 class="text-xl">{{ $t("ui.inventory.title") }}</h1>
 
         <span class="flex-1" />
-        <UButton icon="i-material-symbols:refresh" color="gray" variant="ghost" @click="getInventory" />
+        <UButton icon="i-material-symbols:refresh" color="gray" variant="ghost" @click="getUser" />
       </div>
     </template>
 
@@ -14,16 +14,16 @@
         <ul>
           <li class="flex gap-1">
             <span>{{ $t("ui.user.gold") }}:</span>
-            <span class="font-bold">{{ $n(gold) }}</span>
+            <span class="font-bold">{{ $n(user.gold) }}</span>
             <img width="20px" class="object-contain" src="~/public/gameplay/gold.webp" alt="Gold" />
           </li>
           <li class="flex gap-1">
             <span>{{ $t("ui.user.level") }}:</span>
             <span class="font-bold">{{ userLevel.level }}</span>
             <span v-if="nextLevel?.requiredXp && nextLevel.requiredXp !== Infinity" class="font-mono">
-              ({{ $n(experience) }}/{{ $n(nextLevel?.requiredXp ?? 0) }} {{ $t("ui.user.xp") }})
+              ({{ $n(user.experience) }}/{{ $n(nextLevel?.requiredXp ?? 0) }} {{ $t("ui.user.xp") }})
             </span>
-            <span v-else class="font-mono">({{ $n(experience) }} {{ $t("ui.user.xp") }})</span>
+            <span v-else class="font-mono">({{ $n(user.experience) }} {{ $t("ui.user.xp") }})</span>
           </li>
 
           <li class="flex gap-1">
@@ -32,23 +32,25 @@
           </li>
           <li class="flex gap-1">
             <span>{{ $t("ui.user.weapon") }}:</span>
-            <weapon-icon :weapon-id="currentWeaponId" />
-            <span class="font-bold">{{ $t(`weapons.${currentWeaponId}.name`) }}</span>
+            <weapon-icon :weapon-id="user.weapon" />
+            <span class="font-bold">{{ $t(`weapons.${user.weapon}.name`) }}</span>
           </li>
         </ul>
       </div>
 
-      <div>
-        <h1>{{ $t("ui.inventory.sellableLoot") }}</h1>
+      <Transition name="fade" mode="out-in" appear>
+        <div v-if="Object.keys(user.inventory).length" key="inventory">
+          <h1>{{ $t("ui.inventory.sellableLoot") }}</h1>
 
-        <ul>
-          <li v-for="[enemyDropId, amount] of Object.entries(inventory) as [EnemyDropId, number][]" :key="enemyDropId" class="flex gap-1">
-            <span class="font-bold">{{ $n(amount) }}</span>
-            <drop-icon :enemy-drop-id="enemyDropId" />
-            <span>{{ $t(`drops.${enemyDropId}.name`, amount) }}</span>
-          </li>
-        </ul>
-      </div>
+          <TransitionGroup name="slide-fade" tag="ul">
+            <li v-for="[enemyDropId, amount] of Object.entries(user.inventory) as Array<[EnemyDropId, number]>" :key="enemyDropId" class="flex gap-1">
+              <span class="font-bold">{{ $n(amount) }}</span>
+              <drop-icon :enemy-drop-id="enemyDropId" />
+              <span>{{ $t(`drops.${enemyDropId}.name`, amount) }}</span>
+            </li>
+          </TransitionGroup>
+        </div>
+      </Transition>
     </div>
 
     <template #footer>
@@ -64,41 +66,60 @@
 </template>
 
 <script setup lang="ts">
-const experience = defineModel<number>("experience", { required: true })
-const currentWeaponId = defineModel<WeaponId>("weapon", { required: true })
-const gold = defineModel<number>("gold", { required: true })
-const inventory = defineModel<Record<EnemyDropId, number>>("inventory", { required: true })
+const user = defineModel<DatabaseUser>("user", { required: true })
 
-const hasEmptyInventory = computed(() => Object.values(inventory.value).every((value) => value === 0))
+const hasEmptyInventory = computed(() => Object.values(user.value.inventory).every((value) => value === 0))
 
 const inventoryValue = computed(() => {
   let amount = 0
   for (const drop of drops) {
-    amount += inventory.value[drop.id] * drop.goldValue
+    amount += (user.value.inventory[drop.id] ?? 0) * drop.goldValue
   }
 
   return amount
 })
 
-const userLevel = computed(() => getLevel(experience.value))
-const nextLevel = computed(() => getNextLevel(experience.value))
+const userLevel = computed(() => getLevel(user.value.experience))
+const nextLevel = computed(() => getNextLevel(user.value.experience))
 
-const getInventory = async () => {
+const getUser = async () => {
   const currentUser = await $fetch("/api/inventory")
-
-  inventory.value = currentUser.inventory
-  gold.value = currentUser.gold
-  experience.value = currentUser.experience
-  currentWeaponId.value = currentUser.weapon
+  user.value = currentUser
 }
 
 const sellInventory = async () => {
   const { gold: newGold } = await $fetch("/api/inventory/sell", { method: "POST" })
 
-  for (const key of Object.keys(inventory.value) as EnemyDropId[]) {
-    inventory.value[key] = 0
+  for (const key of Object.keys(user.value.inventory) as EnemyDropId[]) {
+    user.value.inventory[key] = 0
   }
 
-  gold.value = newGold
+  user.value.gold = newGold
 }
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+</style>

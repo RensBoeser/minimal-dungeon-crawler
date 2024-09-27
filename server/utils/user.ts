@@ -1,4 +1,5 @@
-import { drops, type EnemyDropId } from "~/utils/drops"
+import type { EnemyDropId } from "~/utils/drops"
+import type { DungeonId, EnemyId } from "~/utils/dungeons"
 import type { WeaponId } from "~/utils/weapons"
 
 export interface DatabaseUser {
@@ -6,9 +7,17 @@ export interface DatabaseUser {
   experience: number
   weapon: WeaponId
   gold: number
-  inventory: Record<EnemyDropId, number>
+  inventory: Partial<Record<EnemyDropId, number>>
   updatedAt?: number
   createdAt?: number
+  statistics: UserStatistics
+}
+
+export interface UserStatistics {
+  totalGoldEarned: number
+  totalDropsGathered: Partial<Record<EnemyDropId, number>>
+  totalEnemiesDefeated: Partial<Record<EnemyId, number>>
+  totalDungeonRuns: Partial<Record<DungeonId, number>>
 }
 
 export const starterUser: DatabaseUser = {
@@ -16,7 +25,13 @@ export const starterUser: DatabaseUser = {
   experience: 0,
   gold: 0,
   weapon: "fists",
-  inventory: drops.reduce((acc, drop) => ({ ...acc, [drop.id]: 0 }), {}) as Record<EnemyDropId, number>,
+  inventory: {},
+  statistics: {
+    totalGoldEarned: 0,
+    totalDropsGathered: {},
+    totalEnemiesDefeated: {},
+    totalDungeonRuns: {},
+  },
 }
 
 export const useUserService = (userId: string) => {
@@ -27,6 +42,16 @@ export const useUserService = (userId: string) => {
 
     if (!user) {
       return initializeUser()
+    }
+
+    // Add statistics for outdated users
+    if (!user.statistics) {
+      user.statistics = {
+        totalGoldEarned: 0,
+        totalDropsGathered: {},
+        totalEnemiesDefeated: {},
+        totalDungeonRuns: {},
+      }
     }
 
     return user

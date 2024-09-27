@@ -15,7 +15,7 @@ export default oauthDiscordEventHandler({
       },
     })
 
-    const { setUser: setUser, checkUserExistence } = useUserService(`discord:${user?.id}`)
+    const { setUser, checkUserExistence } = useUserService(`discord:${user?.id}`)
 
     // If the user is new, migrate the local user to the GitHub user and delete the local user
     const userExists = await checkUserExistence()

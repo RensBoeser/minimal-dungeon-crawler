@@ -15,7 +15,7 @@ export default oauthGitHubEventHandler({
       },
     })
 
-    const { setUser: setUser, checkUserExistence } = useUserService(`github:${user?.id}`)
+    const { setUser, checkUserExistence } = useUserService(`github:${user?.id}`)
 
     // If the user is new, migrate the local user to the GitHub user and delete the local user
     const userExists = await checkUserExistence()

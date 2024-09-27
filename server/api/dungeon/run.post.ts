@@ -126,7 +126,14 @@ export default defineEventHandler(async (event): Promise<RunDungeonResult> => {
 
   for (const drop of enemyDrops) {
     user.inventory[drop] = (user.inventory[drop] ?? 0) + 1
+    user.statistics.totalDropsGathered[drop] = (user.statistics.totalDropsGathered[drop] ?? 0) + 1
   }
+
+  for (const enemy of enemiesDefeated) {
+    user.statistics.totalEnemiesDefeated[enemy] = (user.statistics.totalEnemiesDefeated[enemy] ?? 0) + 1
+  }
+
+  user.statistics.totalDungeonRuns[currentDungeon.id] = (user.statistics.totalDungeonRuns[currentDungeon.id] ?? 0) + 1
 
   user.experience += xpGained
 
@@ -135,17 +142,21 @@ export default defineEventHandler(async (event): Promise<RunDungeonResult> => {
   const levelledUp = newLevel.level > currentLevel.level
   if (levelledUp) {
     user.gold += newLevel.reward?.gold ?? 0
+    user.statistics.totalGoldEarned += newLevel.reward?.gold ?? 0
   }
 
   await setUser(user)
 
   return {
-    dateTime: new Date().toISOString(),
-    dungeonId: currentDungeon.id,
-    enemiesDefeated,
-    enemyDrops,
-    xpGained,
-    currentLevel,
-    levelledUpTo: levelledUp ? newLevel : undefined,
+    run: {
+      dateTime: new Date().toISOString(),
+      dungeonId: currentDungeon.id,
+      enemiesDefeated,
+      enemyDrops,
+      xpGained,
+      currentLevel,
+      levelledUpTo: levelledUp ? newLevel : undefined,
+    },
+    user,
   }
 })

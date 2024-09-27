@@ -1,10 +1,10 @@
 <template>
   <UCard>
     <template #header>
-      <h1 class="text-xl">{{ $t('ui.shop.title') }}</h1>
+      <h1 class="text-xl">{{ $t("ui.shop.title") }}</h1>
     </template>
 
-    <h1>{{ $t('ui.shop.weapons') }}</h1>
+    <h1>{{ $t("ui.shop.weapons") }}</h1>
 
     <ul class="flex flex-col gap-1">
       <li v-for="weaponShopItem of weaponShopItems" :key="weaponShopItem.id" class="flex items-center justify-between">
@@ -14,11 +14,11 @@
         </div>
 
         <UButton
-          :disabled="currentWeapon === weaponShopItem.id || gold < weaponShopItem.cost"
-          :color="currentWeapon === weaponShopItem.id ? 'amber' : 'primary'"
+          :disabled="user.weapon === weaponShopItem.id || user.gold < weaponShopItem.cost"
+          :color="user.weapon === weaponShopItem.id ? 'amber' : 'primary'"
           @click="() => buySword(weaponShopItem.id)"
         >
-          <span v-if="currentWeapon === weaponShopItem.id"> {{ $t('actions.equipped') }} </span>
+          <span v-if="user.weapon === weaponShopItem.id"> {{ $t("actions.equipped") }} </span>
 
           <div v-else>
             {{ weaponShopItem.cost }}
@@ -31,15 +31,14 @@
 </template>
 
 <script setup lang="ts">
-const currentWeapon = defineModel<WeaponId>("weapon", { required: true })
-const gold = defineModel<number>("gold", { required: true })
+const user = defineModel<DatabaseUser>("user", { required: true })
 
 const weaponShopItems = computed(() => weapons.filter((weapon) => weapon.cost))
 
 const buySword = async (weaponToBuy: WeaponId) => {
   const { gold: newGoldBalance, weapon: newWeapon } = await $fetch("/api/shop/weapon/buy", { method: "POST", body: { weapon: weaponToBuy } })
 
-  gold.value = newGoldBalance
-  currentWeapon.value = newWeapon
+  user.value.gold = newGoldBalance
+  user.value.weapon = newWeapon
 }
 </script>

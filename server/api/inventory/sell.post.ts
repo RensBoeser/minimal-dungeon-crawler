@@ -10,11 +10,12 @@ export default defineEventHandler(async (event) => {
 
   let soldGold = 0
   for (const drop of drops) {
-    soldGold += user.inventory[drop.id] * drop.goldValue
+    soldGold += (user.inventory[drop.id] ?? 0) * drop.goldValue
     user.inventory[drop.id] = 0
   }
 
   user.gold += soldGold
+  user.statistics.totalGoldEarned += soldGold
   await setUser(user)
 
   return {

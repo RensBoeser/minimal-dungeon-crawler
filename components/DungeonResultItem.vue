@@ -34,6 +34,7 @@
           <li v-for="dropRecord of enemyDrops" :key="dropRecord.drop.id" class="flex gap-2 justify-center">
             <DropIcon :enemy-drop-id="dropRecord.drop.id" />
             <span>{{ dropRecord.count }}x</span>
+            <span v-if="statistics.totalDropsGathered[dropRecord.drop.id] === dropRecord.count" class="text-primary"> *NEW* </span>
           </li>
 
           <li v-if="!enemyDrops.length" class="text-center italic text-gray-400 mt-1">{{ $t("ui.run.noEnemyDrops") }}</li>
@@ -57,10 +58,14 @@
 </template>
 
 <script setup lang="ts">
+import type { UserStatistics } from "~/server/utils/user"
+import type { DungeonRun } from "~/utils/dungeons"
+
 const props = defineProps<{
-  run: RunDungeonResult
+  run: DungeonRun
+  statistics: UserStatistics
 }>()
-const { run } = toRefs(props)
+const { run, statistics } = toRefs(props)
 
 const enemiesDefeated = computed(() => {
   const possibleEnemies = dungeons.find((dungeon) => dungeon.id === run.value.dungeonId)!.enemies

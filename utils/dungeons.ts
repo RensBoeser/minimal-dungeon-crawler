@@ -43,6 +43,11 @@ export interface Dungeon {
 }
 
 export interface RunDungeonResult {
+  run: DungeonRun
+  user: DatabaseUser
+}
+
+export interface DungeonRun {
   dateTime: string
   dungeonId: DungeonId
   enemiesDefeated: Array<EnemyId>

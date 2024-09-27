@@ -18,12 +18,12 @@
             <UProgress :value="runProgress" color="amber" indicator />
 
             <div class="flex flex-col justify-center items-center">
-              <WeaponIcon :weapon-id="weaponId" />
+              <WeaponIcon :weapon-id="user.weapon" />
               <span>{{ $t("actions.fighting") }}...</span>
             </div>
           </div>
 
-          <DungeonResultItem v-else-if="lastRun" :key="lastRun.dateTime" :run="lastRun" />
+          <DungeonResultItem v-else-if="lastRun" :key="lastRun.dateTime" :run="lastRun" :statistics="user.statistics" />
 
           <div v-else key="no-runs" class="text-gray-400 text-center">{{ $t("ui.run.noRuns") }}</div>
         </Transition>
@@ -33,14 +33,9 @@
 </template>
 
 <script setup lang="ts">
-const experience = defineModel<number>("experience", { required: true })
-const gold = defineModel<number>("gold", { required: true })
-const inventory = defineModel<Record<EnemyDropId, number>>("inventory", { required: true })
+const user = defineModel<DatabaseUser>("user", { required: true })
 
-const props = defineProps<{ weaponId: WeaponId }>()
-const { weaponId } = toRefs(props)
-
-const lastRun = ref<RunDungeonResult | null>(null)
+const lastRun = ref<DungeonRun | null>(null)
 const runProgress = ref(0)
 
 const loading = ref(false)
@@ -48,20 +43,11 @@ const loading = ref(false)
 const { isPending: isRunning, start: startRun } = useTimeoutFn(
   async () => {
     loading.value = true
-    const runDungeonResult = await $fetch("/api/dungeon/run", { method: "POST" })
+    const { run, user: currentUser } = await $fetch("/api/dungeon/run", { method: "POST" })
     loading.value = false
 
-    // add drops to inventory
-    for (const drop of runDungeonResult.enemyDrops) {
-      inventory.value[drop]++
-    }
-
-    // add gold and experience
-    experience.value += runDungeonResult.xpGained
-    gold.value += runDungeonResult.levelledUpTo?.reward?.gold ?? 0
-
-    // update last run
-    lastRun.value = runDungeonResult
+    user.value = currentUser
+    lastRun.value = run
   },
   3000,
   { immediate: false },
