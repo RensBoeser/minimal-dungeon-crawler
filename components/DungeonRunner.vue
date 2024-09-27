@@ -1,9 +1,5 @@
 <template>
   <UCard>
-    <template #header>
-      <h1 class="text-xl">{{ $t("ui.run.title") }}</h1>
-    </template>
-
     <template #default>
       <UButton icon="i-ph:sword" size="xl" block :loading="isRunning" class="relative" @click="startRun">
         <span v-if="isRunning">{{ $t("actions.runningDungeon") }}...</span>

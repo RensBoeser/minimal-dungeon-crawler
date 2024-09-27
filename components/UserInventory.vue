@@ -4,71 +4,36 @@
       <div class="flex gap-2">
         <h1 class="text-xl">{{ $t("ui.inventory.title") }}</h1>
 
-        <span class="flex-1" />
-        <UButton icon="i-material-symbols:refresh" color="gray" variant="ghost" @click="getUser" />
+        <div class="flex-1" />
+
+        <UButton :disabled="hasEmptyInventory" @click="sellInventory">
+          <span>{{ $t("actions.sell") }}</span>
+          <div>
+            <span>{{ $n(inventoryValue) }}</span>
+            <img width="20px" class="object-contain inline" src="~/public/gameplay/gold.webp" alt="Gold" />
+          </div>
+        </UButton>
       </div>
     </template>
 
-    <div class="flex flex-col gap-2 h-72">
-      <div>
-        <ul>
-          <li class="flex gap-1">
-            <span>{{ $t("ui.user.gold") }}:</span>
-            <span class="font-bold">{{ $n(user.gold) }}</span>
-            <img width="20px" class="object-contain" src="~/public/gameplay/gold.webp" alt="Gold" />
-          </li>
-          <li class="flex gap-1">
-            <span>{{ $t("ui.user.level") }}:</span>
-            <span class="font-bold">{{ userLevel.level }}</span>
-            <span v-if="nextLevel?.requiredXp && nextLevel.requiredXp !== Infinity" class="font-mono">
-              ({{ $n(user.experience) }}/{{ $n(nextLevel?.requiredXp ?? 0) }} {{ $t("ui.user.xp") }})
-            </span>
-            <span v-else class="font-mono">({{ $n(user.experience) }} {{ $t("ui.user.xp") }})</span>
-          </li>
+    <template #default>
+      <TransitionGroup name="slide-fade" tag="ul" class="flex-1">
+        <li
+          v-for="[enemyDropId, amount] of Object.entries(user.inventory).filter(([_, amount]) => !!amount) as Array<[EnemyDropId, number]>"
+          :key="enemyDropId"
+          class="flex gap-1"
+        >
+          <span class="font-mono">{{ $n(amount) }}</span>
+          <drop-icon :enemy-drop-id="enemyDropId" />
+          <span>{{ $t(`drops.${enemyDropId}.name`, amount) }}</span>
+        </li>
+      </TransitionGroup>
 
-          <li class="flex gap-1">
-            <span>{{ $t("ui.user.stamina") }}:</span>
-            <span class="font-bold">{{ $n(userLevel.baseStamina) }}</span>
-          </li>
-          <li class="flex gap-1">
-            <span>{{ $t("ui.user.weapon") }}:</span>
-            <weapon-icon :weapon-id="user.weapon" />
-            <span class="font-bold">{{ $t(`weapons.${user.weapon}.name`) }}</span>
-          </li>
-        </ul>
-      </div>
-
-      <Transition name="fade" mode="out-in" appear>
-        <div v-if="Object.keys(user.inventory).length" key="inventory">
-          <h1>{{ $t("ui.inventory.sellableLoot") }}</h1>
-
-          <TransitionGroup name="slide-fade" tag="ul">
-            <li
-              v-for="[enemyDropId, amount] of Object.entries(user.inventory).filter(([_, amount]) => !!amount) as Array<[EnemyDropId, number]>"
-              :key="enemyDropId"
-              class="flex gap-1"
-            >
-              <span class="font-bold">{{ $n(amount) }}</span>
-              <drop-icon :enemy-drop-id="enemyDropId" />
-              <span>{{ $t(`drops.${enemyDropId}.name`, amount) }}</span>
-            </li>
-          </TransitionGroup>
-
-          <Transition name="fade-delayed" appear>
-            <span v-if="Object.values(user.inventory).every((value) => !value)" key="empty" class="text-gray-400 italic">No items in inventory</span>
-          </Transition>
+      <Transition name="fade-delayed" appear>
+        <div v-if="Object.values(user.inventory).every((value) => !value)">
+          <span key="empty" class="text-gray-400">No items in inventory</span>
         </div>
       </Transition>
-    </div>
-
-    <template #footer>
-      <UButton block :disabled="hasEmptyInventory" @click="sellInventory">
-        <span>{{ $t("actions.sell") }}</span>
-        <div>
-          <span>{{ $n(inventoryValue) }}</span>
-          <img width="20px" class="object-contain inline" src="~/public/gameplay/gold.webp" alt="Gold" />
-        </div>
-      </UButton>
     </template>
   </UCard>
 </template>
@@ -86,14 +51,6 @@ const inventoryValue = computed(() => {
 
   return amount
 })
-
-const userLevel = computed(() => getLevel(user.value.experience))
-const nextLevel = computed(() => getNextLevel(user.value.experience))
-
-const getUser = async () => {
-  const currentUser = await $fetch("/api/inventory")
-  user.value = currentUser
-}
 
 const sellInventory = async () => {
   const { gold: newGold } = await $fetch("/api/inventory/sell", { method: "POST" })
