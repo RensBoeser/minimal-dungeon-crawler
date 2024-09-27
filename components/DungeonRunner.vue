@@ -21,7 +21,11 @@
 
           <DungeonResultItem v-else-if="lastRun" :key="lastRun.dateTime" :run="lastRun" :statistics="user.statistics" />
 
-          <div v-else key="no-runs" class="text-gray-400 text-center">{{ $t("ui.run.noRuns") }}</div>
+          <div v-else key="no-runs" class="text-gray-400 text-center flex flex-col items-center">
+            <span>{{ $t("ui.run.noRuns") }}</span>
+
+            <UIcon name="i-game-icons:crypt-entrance" size="160" class="mt-4 opacity-10" />
+          </div>
         </Transition>
       </div>
     </template>
