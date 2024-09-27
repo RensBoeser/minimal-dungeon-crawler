@@ -43,12 +43,20 @@
           <h1>{{ $t("ui.inventory.sellableLoot") }}</h1>
 
           <TransitionGroup name="slide-fade" tag="ul">
-            <li v-for="[enemyDropId, amount] of Object.entries(user.inventory) as Array<[EnemyDropId, number]>" :key="enemyDropId" class="flex gap-1">
+            <li
+              v-for="[enemyDropId, amount] of Object.entries(user.inventory).filter(([_, amount]) => !!amount) as Array<[EnemyDropId, number]>"
+              :key="enemyDropId"
+              class="flex gap-1"
+            >
               <span class="font-bold">{{ $n(amount) }}</span>
               <drop-icon :enemy-drop-id="enemyDropId" />
               <span>{{ $t(`drops.${enemyDropId}.name`, amount) }}</span>
             </li>
           </TransitionGroup>
+
+          <Transition name="fade-delayed" appear>
+            <span v-if="Object.values(user.inventory).every((value) => !value)" key="empty" class="text-gray-400 italic">No items in inventory</span>
+          </Transition>
         </div>
       </Transition>
     </div>
@@ -109,12 +117,25 @@ const sellInventory = async () => {
   opacity: 0;
 }
 
+.fade-delayed-enter-active {
+  transition: opacity 0.5s ease 0.5s;
+}
+
+.fade-delayed-leave-active {
+  transition: none;
+}
+
+.fade-delayed-enter-from,
+.fade-delayed-leave-to {
+  opacity: 0;
+}
+
 .slide-fade-enter-active {
   transition: all 0.3s ease-out;
 }
 
 .slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 .slide-fade-enter-from,
