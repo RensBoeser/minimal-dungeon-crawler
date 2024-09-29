@@ -30,7 +30,7 @@
         <img width="20px" class="object-contain inline-block" src="~/public/gameplay/gold.webp" :alt="$t('ui.user.gold')" />
       </UButton>
 
-      <UButton v-else block color="primary" :disabled="loading" @click="() => equipWeapon(weapon.id)">
+      <UButton v-else block color="primary" variant="soft" :disabled="loading" @click="() => equipWeapon(weapon.id)">
         {{ $t("actions.equip") }}
       </UButton>
     </div>
