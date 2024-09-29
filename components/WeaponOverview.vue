@@ -5,7 +5,14 @@
     </template>
 
     <div class="flex flex-wrap gap-2">
-      <WeaponItem v-for="weapon of weapons" :key="weapon.id" v-model:user="user" :weapon="weapon" :is-bought="user.weaponsBought.includes(weapon.id)" />
+      <WeaponItem
+        v-for="weapon of weapons"
+        :key="weapon.id"
+        v-model:user="user"
+        :weapon="weapon"
+        :is-bought="user.weaponsBought.includes(weapon.id)"
+        class="flex-1"
+      />
     </div>
   </UCard>
 </template>
