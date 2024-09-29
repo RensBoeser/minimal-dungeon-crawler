@@ -1,5 +1,6 @@
 export const weaponIds = ["fists", "woodenSword", "stoneSword", "ironSword", "diamondSword", "netheriteSword"] as const
 export type WeaponId = (typeof weaponIds)[number]
+export type ClassModifier = Record<string, number>
 
 export interface Weapon {
   id: WeaponId
@@ -19,6 +20,8 @@ export interface Weapon {
   criticalChance?: number
   /** Multiplication of damage on critical hit */
   criticalMultiplier?: number
+  /** Class modifiers */
+  classModifiers?: ClassModifier
 }
 
 export const fists: Weapon = {
@@ -61,6 +64,9 @@ export const ironSword: Weapon = {
   staminaCost: 1,
   criticalChance: 0.1,
   criticalMultiplier: 1.5,
+  classModifiers: {
+    undead: 1.05,
+  },
 }
 
 export const diamondSword: Weapon = {
@@ -73,6 +79,9 @@ export const diamondSword: Weapon = {
   staminaCost: 1,
   criticalChance: 0.2,
   criticalMultiplier: 1.8,
+  classModifiers: {
+    undead: 1.15,
+  },
 }
 
 export const netheriteSword: Weapon = {
@@ -85,6 +94,10 @@ export const netheriteSword: Weapon = {
   staminaCost: 1,
   criticalChance: 0.3,
   criticalMultiplier: 2,
+  classModifiers: {
+    undead: 1.15,
+    nether: 1.2,
+  },
 }
 
 export const weapons: Array<Weapon> = [fists, woodenSword, stoneSword, ironSword, diamondSword, netheriteSword]

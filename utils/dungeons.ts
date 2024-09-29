@@ -17,6 +17,8 @@ export interface Enemy {
   sortOrder: number
   icon: string
   health: number
+  /** Class of the enemy */
+  class: string
   /** Damage the enemy negates */
   armor: number
   /** Amount of XP the enemy gives */
@@ -68,6 +70,7 @@ export const cryptOfTheForgotten: Dungeon = {
       sortOrder: 0,
       icon: "characters/skeleton-straggler.png",
       health: 10,
+      class: "undead",
       armor: 0,
       xp: 1,
       encounterRate: 0.5,
@@ -79,6 +82,7 @@ export const cryptOfTheForgotten: Dungeon = {
       sortOrder: 1,
       icon: "characters/zombie-walker.png",
       health: 15,
+      class: "undead",
       armor: 0,
       xp: 3,
       encounterRate: 0.3,
@@ -93,6 +97,7 @@ export const cryptOfTheForgotten: Dungeon = {
       sortOrder: 2,
       icon: "characters/skeleton-warrior.png",
       health: 30,
+      class: "undead",
       armor: 1,
       xp: 8,
       encounterRate: 0.1,

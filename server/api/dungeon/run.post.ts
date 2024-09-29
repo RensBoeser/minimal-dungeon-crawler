@@ -49,13 +49,14 @@ export const fightEnemy = (enemy: Enemy, weapon: Weapon, stamina: number): Fight
       continue
     }
 
-    let compositeWeaponDamage = weapon.damage
+    const classModifier = weapon.classModifiers?.[enemy.class] ?? 1
+    let compositeWeaponDamage = weapon.damage * classModifier
     // Check if the player lands a critical hit
     if (weapon.criticalChance) {
       const hitCritically = Math.random() <= weapon.criticalChance
       if (hitCritically) {
         // Multiply the weapon's damage by the critical multiplier, if none is set, default to 1
-        compositeWeaponDamage = weapon.damage * (weapon.criticalMultiplier ?? 1)
+        compositeWeaponDamage = compositeWeaponDamage * (weapon.criticalMultiplier ?? 1)
       }
     }
 
