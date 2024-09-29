@@ -75,9 +75,8 @@ export default defineI18nConfig(() => ({
           sellableLoot: "Sellable loot",
           inventoryValue: "Inventory value",
         },
-        shop: {
-          title: "Shop",
-          weapons: "Weapons",
+        weapons: {
+          title: "Weapons",
         },
         dungeonPicker: {
           title: "Dungeon",
@@ -117,8 +116,9 @@ export default defineI18nConfig(() => ({
         runDungeon: "Run dungeon",
         runningDungeon: "Running dungeon",
         recovering: "Recovering",
-        equipped: "Equipped",
         fighting: "Fighting",
+        equipped: "Equipped",
+        equip: "Equip",
       },
     },
     nl: {
@@ -193,9 +193,8 @@ export default defineI18nConfig(() => ({
           sellableLoot: "Verkoopbare buit",
           inventoryValue: "Inventaris waarde",
         },
-        shop: {
-          title: "Winkel",
-          weapons: "Wapens",
+        weapons: {
+          title: "Wapens",
         },
         dungeonPicker: {
           title: "Dungeon",
@@ -236,6 +235,7 @@ export default defineI18nConfig(() => ({
         recovering: "Bijkomen",
         fighting: "Vechten",
         equipped: "Uitgerust",
+        equip: "Uitrusten",
       },
     },
   },

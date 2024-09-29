@@ -8,6 +8,7 @@ export interface DatabaseUser {
   weapon: WeaponId
   gold: number
   inventory: Partial<Record<EnemyDropId, number>>
+  weaponsBought: Array<WeaponId>
   updatedAt?: number
   createdAt?: number
   statistics: UserStatistics
@@ -26,6 +27,7 @@ export const starterUser: DatabaseUser = {
   gold: 0,
   weapon: "fists",
   inventory: {},
+  weaponsBought: ["fists"],
   statistics: {
     totalGoldEarned: 0,
     totalDropsGathered: {},
@@ -44,7 +46,7 @@ export const useUserService = (userId: string) => {
       return initializeUser()
     }
 
-    // Add statistics for outdated users
+    // Makeshift migration for adding statistics to existing users
     if (!user.statistics) {
       user.statistics = {
         totalGoldEarned: 0,
@@ -52,6 +54,11 @@ export const useUserService = (userId: string) => {
         totalEnemiesDefeated: {},
         totalDungeonRuns: {},
       }
+    }
+
+    // Makeshift migration for adding weaponsBought to existing users
+    if (!user.weaponsBought) {
+      user.weaponsBought = ["fists"]
     }
 
     return user

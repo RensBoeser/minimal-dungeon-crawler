@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { weaponIds, weapons } from "~/utils/weapons"
+import { weaponIds } from "~/utils/weapons"
 
 const buyWeaponSchema = z.object({
   weapon: z.enum(weaponIds),
@@ -16,18 +16,14 @@ export default defineEventHandler(async (event) => {
     throw createError("User not found")
   }
 
-  const weaponCost = weapons.find(({ id }) => id === weapon)!.cost
-
-  if (user.gold < weaponCost) {
+  if (!user.weaponsBought.includes(weapon)) {
     throw createError({
       status: 400,
-      statusMessage: "You don't have enough gold to buy this sword.",
+      statusMessage: "You can't equip a weapon you haven't bought.",
     })
   }
 
-  user.gold -= weaponCost
   user.weapon = weapon
-
   await setUser(user)
 
   return {
