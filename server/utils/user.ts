@@ -58,7 +58,7 @@ export const useUserService = (userId: string) => {
 
     // Makeshift migration for adding weaponsBought to existing users
     if (!user.weaponsBought) {
-      user.weaponsBought = ["fists"]
+      user.weaponsBought = [user.weapon]
     }
 
     return user
