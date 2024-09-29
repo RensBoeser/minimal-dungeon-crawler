@@ -29,7 +29,12 @@ export const levels: Array<UserLevel> = [
   { level: 13, requiredXp: 7000, baseStamina: 85, reward: { gold: 200 } },
   { level: 14, requiredXp: 8500, baseStamina: 85, reward: { gold: 200 } },
   { level: 15, requiredXp: 10000, baseStamina: 90, reward: { gold: 500 } },
-  { level: 16, requiredXp: Infinity, baseStamina: 80 },
+  { level: 16, requiredXp: 12000, baseStamina: 90, reward: { gold: 500 } },
+  { level: 17, requiredXp: 14500, baseStamina: 95, reward: { gold: 500 } },
+  { level: 18, requiredXp: 17000, baseStamina: 95, reward: { gold: 500 } },
+  { level: 19, requiredXp: 20000, baseStamina: 100, reward: { gold: 1000 } },
+  { level: 20, requiredXp: 25000, baseStamina: 100, reward: { gold: 1000 } },
+  { level: 21, requiredXp: Infinity, baseStamina: 90 },
 ]
 
 export const getLevel = (xp: number) => {
