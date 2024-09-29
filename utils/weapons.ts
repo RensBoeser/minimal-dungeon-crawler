@@ -1,4 +1,4 @@
-export const weaponIds = ["fists", "woodenSword", "stoneSword", "ironSword"] as const
+export const weaponIds = ["fists", "woodenSword", "stoneSword", "ironSword", "diamondSword", "netheriteSword"] as const
 export type WeaponId = (typeof weaponIds)[number]
 
 export interface Weapon {
@@ -59,9 +59,32 @@ export const ironSword: Weapon = {
   damage: 3,
   armorPenetration: 2,
   staminaCost: 1,
-  levelRequirement: 10,
-  criticalChance: 0.2,
+  criticalChance: 0.1,
   criticalMultiplier: 1.5,
 }
 
-export const weapons: Array<Weapon> = [fists, woodenSword, stoneSword, ironSword]
+export const diamondSword: Weapon = {
+  id: "diamondSword",
+  sortOrder: 4,
+  icon: "weapons/diamond-sword.webp",
+  cost: 8000,
+  damage: 4,
+  armorPenetration: 3,
+  staminaCost: 1,
+  criticalChance: 0.2,
+  criticalMultiplier: 1.8,
+}
+
+export const netheriteSword: Weapon = {
+  id: "netheriteSword",
+  sortOrder: 5,
+  icon: "weapons/netherite-sword.webp",
+  cost: 20000,
+  damage: 5,
+  armorPenetration: 4,
+  staminaCost: 1,
+  criticalChance: 0.3,
+  criticalMultiplier: 2,
+}
+
+export const weapons: Array<Weapon> = [fists, woodenSword, stoneSword, ironSword, diamondSword, netheriteSword]

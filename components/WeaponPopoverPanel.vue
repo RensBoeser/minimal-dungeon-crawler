@@ -24,12 +24,12 @@
 
         <tr v-if="weapon.criticalChance">
           <td>{{ $t("ui.weapon.criticalChance") }}:</td>
-          <td class="text-right font-mono">{{ weapon.criticalChance }}%</td>
+          <td class="text-right font-mono">{{ weapon.criticalChance * 100 }}%</td>
         </tr>
 
         <tr v-if="weapon.criticalMultiplier">
           <td>{{ $t("ui.weapon.criticalMultiplier") }}:</td>
-          <td class="text-right font-mono">{{ weapon.criticalMultiplier }}x</td>
+          <td class="text-right font-mono">{{ weapon.criticalMultiplier.toFixed(1) }}x</td>
         </tr>
       </tbody>
     </table>

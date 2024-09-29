@@ -22,6 +22,14 @@ export default defineI18nConfig(() => ({
           name: "Iron sword",
           description: "A strong sword made of iron",
         },
+        diamondSword: {
+          name: "Diamond sword",
+          description: "A powerful sword made of diamonds",
+        },
+        netheriteSword: {
+          name: "Netherite sword",
+          description: "A mighty sword made of netherite",
+        },
       },
       drops: {
         bone: {
@@ -143,6 +151,14 @@ export default defineI18nConfig(() => ({
         ironSword: {
           name: "Ijzeren zwaard",
           description: "Een sterk zwaard gemaakt van ijzer",
+        },
+        diamondSword: {
+          name: "Diamanten zwaard",
+          description: "Een krachtig zwaard gemaakt van diamanten",
+        },
+        netheriteSword: {
+          name: "Netherite zwaard",
+          description: "Een machtig zwaard gemaakt van netherite",
         },
       },
       drops: {
