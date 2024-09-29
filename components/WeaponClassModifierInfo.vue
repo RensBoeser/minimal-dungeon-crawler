@@ -1,10 +1,9 @@
 <template>
-  <tr>
+  <tbody>
     <td v-for="modifier in Object.keys(modifiers)" :key="modifier" class="text-right font-mono">
-      {{ modifier }}: {{ modifiers[modifier] }}
+      <tr>{{ modifier }}: {{ modifiers[modifier] }} </tr>
     </td>
-  </tr>
-  
+  </tbody>
 </template>
 
 <script setup lang="ts">

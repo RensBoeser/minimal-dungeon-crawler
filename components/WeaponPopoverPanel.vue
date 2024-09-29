@@ -34,7 +34,9 @@
 
         <tr v-if="weapon.classModifiers">
           <td> {{ $t("ui.weapon.classModifiers") }}:</td>
+          <td>
             <WeaponClassModifierInfo :modifiers="weapon.classModifiers" />
+          </td>
         </tr>
       </tbody>
     </table>
