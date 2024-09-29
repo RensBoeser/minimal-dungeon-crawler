@@ -17,6 +17,11 @@
           <td class="text-right font-mono">{{ weapon.damage }}</td>
         </tr>
 
+        <tr>
+          <td>{{ $t("ui.weapon.staminaCost") }}:</td>
+          <td class="text-right font-mono">{{ weapon.staminaCost }}</td>
+        </tr>
+
         <tr v-if="weapon.criticalChance">
           <td>{{ $t("ui.weapon.criticalChance") }}:</td>
           <td class="text-right font-mono">{{ weapon.criticalChance }}%</td>
@@ -26,11 +31,6 @@
           <td>{{ $t("ui.weapon.criticalMultiplier") }}:</td>
           <td class="text-right font-mono">{{ weapon.criticalMultiplier }}x</td>
         </tr>
-
-        <tr>
-          <td>{{ $t("ui.weapon.staminaCost") }}:</td>
-          <td class="text-right font-mono">{{ weapon.staminaCost }}</td>
-        </tr>
       </tbody>
     </table>
   </div>
@@ -38,4 +38,5 @@
 
 <script setup lang="ts">
 const props = defineProps<{ weapon: Weapon }>()
+const { weapon } = toRefs(props)
 </script>

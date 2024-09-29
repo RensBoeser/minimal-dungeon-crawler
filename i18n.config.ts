@@ -18,6 +18,10 @@ export default defineI18nConfig(() => ({
           name: "Stone sword",
           description: "A sword made of stone",
         },
+        ironSword: {
+          name: "Iron sword",
+          description: "A strong sword made of iron",
+        },
       },
       drops: {
         bone: {
@@ -135,6 +139,10 @@ export default defineI18nConfig(() => ({
         stoneSword: {
           name: "Stenen zwaard",
           description: "Een zwaard gemaakt van steen",
+        },
+        ironSword: {
+          name: "Ijzeren zwaard",
+          description: "Een sterk zwaard gemaakt van ijzer",
         },
       },
       drops: {
