@@ -31,6 +31,11 @@
           <td>{{ $t("ui.weapon.criticalMultiplier") }}:</td>
           <td class="text-right font-mono">{{ weapon.criticalMultiplier.toFixed(1) }}x</td>
         </tr>
+
+        <tr v-if="weapon.classModifiers">
+          <td> {{ $t("ui.weapon.classModifiers") }}:</td>
+            <WeaponClassModifierInfo :modifiers="weapon.classModifiers" />
+        </tr>
       </tbody>
     </table>
   </div>

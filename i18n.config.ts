@@ -113,6 +113,7 @@ export default defineI18nConfig(() => ({
           staminaCost: "Stamina cost",
           criticalChance: "Crit chance",
           criticalMultiplier: "Crit multiplier",
+          classModifiers: "Class modifiers",
         },
         enemy: {
           health: "Health",
@@ -243,6 +244,7 @@ export default defineI18nConfig(() => ({
           staminaCost: "Stamina kosten",
           criticalChance: "Kans op kritiek",
           criticalMultiplier: "Kritieke vermenigvuldiger",
+          classModifiers: "Klasse modificaties",
         },
         enemy: {
           health: "Levens",
