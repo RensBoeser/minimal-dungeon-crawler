@@ -21,12 +21,12 @@
       </UButton>
 
       <UButton v-else-if="!isBought && user.gold >= weapon.cost" class="font-mono" block :disabled="loading" @click="() => buyWeapon(weapon.id)">
-        {{ weapon.cost }}
+        {{ $n(weapon.cost) }}
         <img width="20px" class="object-contain inline-block" src="~/public/gameplay/gold.webp" :alt="$t('ui.user.gold')" />
       </UButton>
 
       <UButton v-else-if="!isBought" variant="soft" class="font-mono" block disabled>
-        {{ weapon.cost }}
+        {{ $n(weapon.cost) }}
         <img width="20px" class="object-contain inline-block" src="~/public/gameplay/gold.webp" :alt="$t('ui.user.gold')" />
       </UButton>
 
