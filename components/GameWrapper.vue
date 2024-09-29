@@ -19,27 +19,5 @@
 <script setup lang="ts">
 import type { DatabaseUser } from "~/server/utils/user"
 
-// const user = ref<DatabaseUser>({
-//   id: "TEMP",
-//   experience: 0,
-//   gold: 0,
-//   weapon: "fists",
-//   inventory: {},
-//   weaponsBought: [],
-//   statistics: {
-//     totalDropsGathered: {},
-//     totalDungeonRuns: {},
-//     totalEnemiesDefeated: {},
-//     totalGoldEarned: 0,
-//   },
-// })
-
-// const getUser = async () => {
-//   const currentUser = await $fetch("/api/inventory")
-//   user.value = currentUser
-// }
-
-// onMounted(getUser)
-
 const { data: user } = useFetch<DatabaseUser>("/api/inventory")
 </script>
