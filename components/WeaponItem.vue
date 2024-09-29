@@ -16,7 +16,7 @@
         </template>
       </UPopover>
 
-      <UButton v-if="user.weapon === weapon.id" color="cyan" variant="soft" class="font-mono" block disabled>
+      <UButton v-if="user.weapon === weapon.id" color="cyan" variant="soft" block disabled>
         {{ $t("actions.equipped") }}
       </UButton>
 
@@ -30,7 +30,7 @@
         <img width="20px" class="object-contain inline-block" src="~/public/gameplay/gold.webp" :alt="$t('ui.user.gold')" />
       </UButton>
 
-      <UButton v-else class="font-mono" block color="primary" :disabled="loading" @click="() => equipWeapon(weapon.id)">
+      <UButton v-else block color="primary" :disabled="loading" @click="() => equipWeapon(weapon.id)">
         {{ $t("actions.equip") }}
       </UButton>
     </div>
