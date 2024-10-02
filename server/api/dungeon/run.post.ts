@@ -36,7 +36,8 @@ interface FightEnemyResult {
 
 export const calculateDamage = (weapon: Weapon, enemy: Enemy): number => {
   // Check if the enemy class is weak to the player's weapon and apply the class modifier
-  const classModifier = weapon.classModifiers?.[enemy.class] ?? 1
+  const classes = Array.isArray(enemy.class) ? enemy.class : [enemy.class]
+  const classModifier = classes.reduce((modifier, enemyClass) => modifier * (weapon.classModifiers?.[enemyClass] ?? 1), 1)
   let compositeWeaponDamage = weapon.damage * classModifier
 
   // Check if the player lands a critical hit and apply the critical multiplier

@@ -26,7 +26,7 @@ export interface Enemy {
   icon: string
   health: number
   /** Class of the enemy */
-  class: EnemyClassId
+  class: EnemyClassId | Array<EnemyClassId>
   /** Damage the enemy negates */
   armor: number
   /** Amount of XP the enemy gives */
@@ -105,7 +105,7 @@ export const cryptOfTheForgotten: Dungeon = {
       sortOrder: 2,
       icon: "characters/skeleton-warrior.png",
       health: 30,
-      class: "undead",
+      class: ["undead", "nether"],
       armor: 1,
       xp: 8,
       encounterRate: 0.1,
