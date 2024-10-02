@@ -31,15 +31,21 @@
           <td>{{ $t("ui.weapon.criticalMultiplier") }}:</td>
           <td class="text-right font-mono">{{ weapon.criticalMultiplier.toFixed(1) }}x</td>
         </tr>
-
-        <tr v-if="weapon.classModifiers">
-          <td> {{ $t("ui.weapon.classModifiers") }}:</td>
-          <td>
-            <WeaponClassModifierInfo :modifiers="weapon.classModifiers" />
-          </td>
-        </tr>
       </tbody>
     </table>
+
+    <template v-if="weapon.classModifiers">
+      <UDivider class="mt-2">{{ $t("ui.weapon.classModifiers") }}</UDivider>
+
+      <table class="w-full">
+        <tbody>
+          <tr v-for="[modifier, value] of Object.entries(weapon.classModifiers)" :key="modifier">
+            <td>{{ modifier }}:</td>
+            <td class="text-right font-mono">{{ value }}x</td>
+          </tr>
+        </tbody>
+      </table>
+    </template>
   </div>
 </template>
 
