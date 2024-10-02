@@ -34,42 +34,42 @@ interface FightEnemyResult {
   drops: Array<EnemyDropId>
 }
 
-export const fightEnemy = (enemy: Enemy, weapon: Weapon, stamina: number): FightEnemyResult => {
-  let { health: enemyHealth } = enemy
-  let staminaLost = 0
+export const calculateDamage = (weapon: Weapon, enemy: Enemy): number => {
+  // Check if the enemy class is weak to the player's weapon and apply the class modifier
+  const classes = Array.isArray(enemy.class) ? enemy.class : [enemy.class]
+  const classModifier = classes.reduce((modifier, enemyClass) => modifier * (weapon.classModifiers?.[enemyClass] ?? 1), 1)
+  let compositeWeaponDamage = weapon.damage * classModifier
+
+  // Check if the player lands a critical hit and apply the critical multiplier
+  if (weapon.criticalChance) {
+    const hitCritically = Math.random() <= weapon.criticalChance
+    if (hitCritically) {
+      // Multiply the weapon's damage by the critical multiplier, if none is set, default to 1
+      compositeWeaponDamage = compositeWeaponDamage * (weapon.criticalMultiplier ?? 1)
+    }
+  }
 
   // Calculate the damage negation based on the enemy's armor and the weapon's armor penetration
   const damageNegation = enemy.armor - weapon.armorPenetration
 
+  // Calculate the damage dealt by the player
+  return compositeWeaponDamage - damageNegation
+}
+
+export const fightEnemy = (enemy: Enemy, weapon: Weapon, stamina: number): FightEnemyResult => {
+  let { health: enemyHealth } = enemy
+  let staminaLost = 0
+
   // every iteration of the loop is a swing of the weapon
   while (enemyHealth > 0 && staminaLost < stamina) {
-    // Check if the player lands a hit on the enemy
-    if (Math.random() <= enemy.blockChance) {
-      staminaLost = weapon.staminaCost
-      continue
-    }
-
-    let compositeWeaponDamage = weapon.damage
-    // Check if the player lands a critical hit
-    if (weapon.criticalChance) {
-      const hitCritically = Math.random() <= weapon.criticalChance
-      if (hitCritically) {
-        // Multiply the weapon's damage by the critical multiplier, if none is set, default to 1
-        compositeWeaponDamage = weapon.damage * (weapon.criticalMultiplier ?? 1)
-      }
-    }
-
-    // Calculate the damage dealt by the player
-    const damageDealt = compositeWeaponDamage - damageNegation
+    const damageDealt = calculateDamage(weapon, enemy)
 
     if (damageDealt <= 0) {
-      staminaLost = stamina
-      break
+      staminaLost += weapon.staminaCost
+    } else {
+      enemyHealth -= damageDealt
+      staminaLost += weapon.staminaCost
     }
-
-    // Deal the damage to the enemy
-    enemyHealth -= damageDealt
-    staminaLost += weapon.staminaCost
   }
 
   // Calculate the drops

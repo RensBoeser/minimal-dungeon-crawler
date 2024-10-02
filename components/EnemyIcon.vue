@@ -9,6 +9,13 @@
           <div>
             <h1 class="font-medium">{{ $t(`enemies.${enemy.id}.name`) }}</h1>
             <p class="text-xs">{{ $t(`enemies.${enemy.id}.description`) }}</p>
+
+            <div v-if="Array.isArray(enemy.class)" class="mt-1 flex flex-wrap gap-1">
+              <EnemyClassTag v-for="enemyClass of enemy.class" :key="enemyClass" :enemy-class-id="enemyClass" />
+            </div>
+            <div v-else class="mt-1">
+              <EnemyClassTag :enemy-class-id="enemy.class" />
+            </div>
           </div>
         </div>
 

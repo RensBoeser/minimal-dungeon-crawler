@@ -3,6 +3,14 @@ import type { EnemyDropId } from "./drops"
 export const enemyIds = ["skeleton:straggler", "zombie:walker", "skeleton:warrior"]
 export type EnemyId = (typeof enemyIds)[number]
 
+export const enemyClasses = [
+  { id: "undead", color: "gray" },
+  { id: "nether", color: "red" },
+] as const
+
+export const enemyClassIds = enemyClasses.map(({ id }) => id)
+export type EnemyClassId = (typeof enemyClassIds)[number]
+
 export interface LootTableEntry {
   /** Name of the item */
   item: EnemyDropId
@@ -17,6 +25,8 @@ export interface Enemy {
   sortOrder: number
   icon: string
   health: number
+  /** Class of the enemy */
+  class: EnemyClassId | Array<EnemyClassId>
   /** Damage the enemy negates */
   armor: number
   /** Amount of XP the enemy gives */
@@ -68,6 +78,7 @@ export const cryptOfTheForgotten: Dungeon = {
       sortOrder: 0,
       icon: "characters/skeleton-straggler.png",
       health: 10,
+      class: "undead",
       armor: 0,
       xp: 1,
       encounterRate: 0.5,
@@ -79,6 +90,7 @@ export const cryptOfTheForgotten: Dungeon = {
       sortOrder: 1,
       icon: "characters/zombie-walker.png",
       health: 15,
+      class: "undead",
       armor: 0,
       xp: 3,
       encounterRate: 0.3,
@@ -93,6 +105,7 @@ export const cryptOfTheForgotten: Dungeon = {
       sortOrder: 2,
       icon: "characters/skeleton-warrior.png",
       health: 30,
+      class: ["undead", "nether"],
       armor: 1,
       xp: 8,
       encounterRate: 0.1,
