@@ -3,6 +3,14 @@ import type { EnemyDropId } from "./drops"
 export const enemyIds = ["skeleton:straggler", "zombie:walker", "skeleton:warrior"]
 export type EnemyId = (typeof enemyIds)[number]
 
+export const enemyClasses = [
+  { id: "undead", color: "gray" },
+  { id: "nether", color: "red" },
+] as const
+
+export const enemyClassIds = enemyClasses.map(({ id }) => id)
+export type EnemyClassId = (typeof enemyClassIds)[number]
+
 export interface LootTableEntry {
   /** Name of the item */
   item: EnemyDropId
@@ -18,7 +26,7 @@ export interface Enemy {
   icon: string
   health: number
   /** Class of the enemy */
-  class: string
+  class: EnemyClassId
   /** Damage the enemy negates */
   armor: number
   /** Amount of XP the enemy gives */

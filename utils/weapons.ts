@@ -1,6 +1,8 @@
+import type { EnemyClassId } from "./dungeons"
+
 export const weaponIds = ["fists", "woodenSword", "stoneSword", "ironSword", "diamondSword", "netheriteSword"] as const
 export type WeaponId = (typeof weaponIds)[number]
-export type ClassModifier = Record<string, number>
+export type ClassModifier = Partial<Record<EnemyClassId, number>>
 
 export interface Weapon {
   id: WeaponId

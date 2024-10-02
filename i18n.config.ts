@@ -121,6 +121,7 @@ export default defineI18nConfig(() => ({
           xp: "XP reward",
           blockChance: "Block chance",
           drops: "Drops",
+          class: "Class",
         },
       },
       actions: {
@@ -251,6 +252,7 @@ export default defineI18nConfig(() => ({
           armor: "Pantser",
           xp: "XP beloning",
           drops: "Loot",
+          class: "Klasse",
         },
       },
       actions: {

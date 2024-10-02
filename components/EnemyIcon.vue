@@ -9,6 +9,7 @@
           <div>
             <h1 class="font-medium">{{ $t(`enemies.${enemy.id}.name`) }}</h1>
             <p class="text-xs">{{ $t(`enemies.${enemy.id}.description`) }}</p>
+            <EnemyClassTag class="mt-1" :enemy-class-id="enemy.class" />
           </div>
         </div>
 

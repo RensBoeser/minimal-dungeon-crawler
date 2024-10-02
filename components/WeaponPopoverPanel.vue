@@ -38,9 +38,18 @@
       <UDivider class="mt-2">{{ $t("ui.weapon.classModifiers") }}</UDivider>
 
       <table class="w-full">
+        <thead>
+          <tr class="text-gray-500">
+            <td class="text-left">{{ $t("ui.enemy.class") }}</td>
+            <td class="text-right">{{ $t("ui.weapon.damage") }}</td>
+          </tr>
+        </thead>
         <tbody>
-          <tr v-for="[modifier, value] of Object.entries(weapon.classModifiers)" :key="modifier">
-            <td>{{ modifier }}:</td>
+          <tr v-for="[enemyClass, value] of Object.entries(weapon.classModifiers)" :key="enemyClass">
+            <td>
+              <!-- prettier-ignore -->
+              <EnemyClassTag :enemy-class-id="(enemyClass as EnemyClassId)" />
+            </td>
             <td class="text-right font-mono">{{ value }}x</td>
           </tr>
         </tbody>
@@ -50,6 +59,8 @@
 </template>
 
 <script setup lang="ts">
+import type { EnemyClassId } from "~/utils/dungeons"
+
 const props = defineProps<{ weapon: Weapon }>()
 const { weapon } = toRefs(props)
 </script>
