@@ -16,7 +16,7 @@
 
     <template v-else #account="{ item }">
       <div class="text-left">
-        <p>{{ item.label }} <UBadge color="orange" /></p>
+        <p>{{ item.label }}</p>
         <p class="text-xs text-gray-400">Please sign in to keep your progress safe</p>
       </div>
     </template>

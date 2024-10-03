@@ -18,8 +18,12 @@
 
     <template #default>
       <TransitionGroup name="slide-fade" tag="ul" class="flex-1">
+        <li v-if="Object.values(user.inventory).every((value) => !value)" key="empty">
+          <span key="empty" class="text-gray-400">No items in inventory</span>
+        </li>
+        <!-- prettier-ignore -->
         <li
-          v-for="[enemyDropId, amount] of Object.entries(user.inventory).filter(([_, amount]) => !!amount) as Array<[EnemyDropId, number]>"
+          v-for="[enemyDropId, amount] of (Object.entries(user.inventory).filter(([_, amount]) => !!amount) as Array<[EnemyDropId, number]>)"
           :key="enemyDropId"
           class="flex gap-1"
         >
@@ -28,12 +32,6 @@
           <span>{{ $t(`drops.${enemyDropId}.name`, amount) }}</span>
         </li>
       </TransitionGroup>
-
-      <Transition name="fade-delayed" appear>
-        <div v-if="Object.values(user.inventory).every((value) => !value)">
-          <span key="empty" class="text-gray-400">No items in inventory</span>
-        </div>
-      </Transition>
     </template>
   </UCard>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div class="py-2 flex gap-2 items-start">
+  <div class="py-2 flex gap-1 items-start">
     <h1 class="text-xl">Virtual Dungeon Crawler</h1>
 
     <div class="flex-1" />
