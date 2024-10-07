@@ -1,4 +1,4 @@
-export default oauthDiscordEventHandler({
+export default defineOAuthDiscordEventHandler({
   config: {
     scope: [],
   },

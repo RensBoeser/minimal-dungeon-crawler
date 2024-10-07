@@ -11,9 +11,6 @@ export default defineNuxtConfig({
   },
   nitro: {
     preset: "vercel",
-    experimental: {
-      openAPI: true,
-    },
     storage: {
       data: {
         driver: "vercelKV",
