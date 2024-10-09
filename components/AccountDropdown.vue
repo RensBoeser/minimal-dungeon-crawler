@@ -6,12 +6,13 @@
       <UAvatar v-if="user?.generic.avatarUrl" icon="i-material-symbols:person" :src="user.generic.avatarUrl" />
 
       <div class="text-left">
-        <p class="truncate max-w-28">{{ user?.generic.username }}</p>
-        <p class="truncate text-gray-400 max-w-28">{{ user?.generic.name }}</p>
+        <p class="truncate max-w-28">{{ user?.generic.name }}</p>
+        <p v-if="user?.generic.username" class="truncate text-gray-400 max-w-28">{{ user?.generic.username }}</p>
       </div>
 
       <UIcon v-if="user?.generic.provider === 'github'" class="ml-auto" name="i-simple-icons:github" />
-      <UIcon v-else-if="user?.generic.provider === 'discord'" class="ml-auto dark:text-indigo-400 text-indigo-400" name="i-simple-icons:discord" />
+      <UIcon v-else-if="user?.generic.provider === 'discord'" class="ml-auto" name="i-simple-icons:discord" />
+      <UIcon v-else-if="user?.generic.provider === 'microsoft'" class="ml-auto" name="i-simple-icons:microsoft" />
     </template>
 
     <template v-else #account="{ item }">
@@ -75,7 +76,6 @@ const items = computed((): InstanceType<typeof UDropdown>["items"] => [
         {
           label: "Sign in with Discord",
           icon: "i-simple-icons:discord",
-          iconClass: "dark:text-indigo-400 text-indigo-400",
           slot: "login",
           to: "/api/auth/discord",
           external: true,
@@ -83,9 +83,15 @@ const items = computed((): InstanceType<typeof UDropdown>["items"] => [
         {
           label: "Sign in with Github",
           icon: "i-simple-icons:github",
-          iconClass: "dark:text-white text-black",
           slot: "login",
           to: "/api/auth/github",
+          external: true,
+        },
+        {
+          label: "Sign in with Microsoft",
+          icon: "i-simple-icons:microsoft",
+          slot: "login",
+          to: "/api/auth/microsoft",
           external: true,
         },
       ],

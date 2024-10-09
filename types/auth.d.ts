@@ -1,41 +1,25 @@
-// type Test =
-//   | {
-//       provider: "github"
-//       id: number
-//       login: string
-//       avatar_url: string
-//       name: string
-//     }
-//   | {
-//       provider: "discord"
-//       id: string
-//       username: string
-//       avatar: string
-//     }
-
 declare module "#auth-utils" {
   interface User {
-    // sso:
-    //   | {
-    //       provider: "github"
-    //       id: number
-    //       login: string
-    //       avatar_url: string
-    //       name: string
-    //     }
-    //   | {
-    //       provider: "discord"
-    //       id: string
-    //       username: string
-    //       avatar: string
-    //       global_name: string
-    //     }
     generic: {
-      provider: "discord" | "github"
+      provider: "discord" | "github" | "microsoft"
       id: string | number
-      username: string
+      username?: string
       name: string
-      avatarUrl: string
+      avatarUrl?: string
+    }
+    microsoft?: {
+      "@odata.context": string
+      businessPhones: Array<unknown>
+      displayName: string
+      givenName: string
+      jobTitle: unknown | null
+      mail: unknown | null
+      mobilePhone: unknown | null
+      officeLocation: unknown | null
+      preferredLanguage: string
+      surname: string
+      userPrincipalName: string
+      id: string
     }
   }
 }
