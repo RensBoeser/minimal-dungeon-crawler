@@ -1,9 +1,10 @@
 <template>
   <UDropdown :items="items">
-    <UAvatar :chip-color="loggedIn ? undefined : 'orange'" icon="i-material-symbols:person" :src="user?.generic.avatarUrl" />
+    <UAvatar v-if="loggedIn" :alt="user?.generic.name" :src="user?.generic.avatarUrl" />
+    <UAvatar v-else chip-color="orange" icon="i-material-symbols:person" :src="user?.generic.avatarUrl" />
 
     <template v-if="loggedIn" #account>
-      <UAvatar v-if="user?.generic.avatarUrl" icon="i-material-symbols:person" :src="user.generic.avatarUrl" />
+      <UAvatar :src="user?.generic.avatarUrl" :alt="user?.generic.name" />
 
       <div class="text-left">
         <p class="truncate max-w-28">{{ user?.generic.name }}</p>
