@@ -14,6 +14,7 @@ export default defineOAuthMicrosoftEventHandler({
           username: undefined,
           name: user.displayName,
         },
+        microsoft: user,
       },
     })
 
