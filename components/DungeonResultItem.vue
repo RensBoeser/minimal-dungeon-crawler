@@ -14,7 +14,7 @@
           <h2 class="text-sm">{{ $t("ui.run.enemiesDefeated") }}</h2>
         </UDivider>
 
-        <ul class="flex flex-col gap-1">
+        <ul class="flex flex-col">
           <li v-for="enemyRecord of enemiesDefeated" :key="enemyRecord.enemy.id" class="flex gap-2 justify-center">
             <EnemyIcon :dungeon-id="run.dungeonId" :enemy-id="enemyRecord.enemy.id" />
             <span class="font-mono">{{ enemyRecord.count }}x</span>
@@ -30,7 +30,7 @@
           <h2 class="text-sm">{{ $t("ui.run.enemyDrops") }}</h2>
         </UDivider>
 
-        <ul class="flex flex-col gap-1">
+        <ul class="flex flex-col">
           <li v-for="dropRecord of enemyDrops" :key="dropRecord.drop.id" class="flex gap-2 justify-center">
             <DropIcon :enemy-drop-id="dropRecord.drop.id" />
             <span class="font-mono">{{ dropRecord.count }}x</span>
