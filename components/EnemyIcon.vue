@@ -1,6 +1,6 @@
 <template>
   <UPopover v-if="enemy" mode="hover">
-    <img v-bind="$attrs" width="20px" class="object-contain" :src="enemy.icon" :alt="$t(`enemies.${enemy.id}.name`)" />
+    <img v-bind="$attrs" width="24px" class="object-contain" :src="enemy.icon" :alt="$t(`enemies.${enemy.id}.name`)" />
 
     <template #panel>
       <div class="p-3 w-56 text-sm">

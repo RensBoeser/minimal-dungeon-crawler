@@ -1,6 +1,6 @@
 <template>
   <UPopover mode="hover">
-    <img width="20px" class="object-contain" :src="weapon.icon" :alt="$t(`weapons.${weapon.id}.name`)" />
+    <img width="24px" class="object-contain" :src="weapon.icon" :alt="$t(`weapons.${weapon.id}.name`)" />
 
     <template #panel>
       <WeaponPopoverPanel :weapon="weapon" />

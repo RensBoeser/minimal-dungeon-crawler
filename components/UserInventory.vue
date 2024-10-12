@@ -17,21 +17,21 @@
     </template>
 
     <template #default>
-      <TransitionGroup name="slide-fade" tag="ul" class="flex-1">
-        <li v-if="Object.values(user.inventory).every((value) => !value)" key="empty">
-          <span key="empty" class="text-gray-400">No items in inventory</span>
-        </li>
+      <div class="flex flex-wrap gap-1">
         <!-- prettier-ignore -->
-        <li
-          v-for="[enemyDropId, amount] of (Object.entries(user.inventory).filter(([_, amount]) => !!amount) as Array<[EnemyDropId, number]>)"
-          :key="enemyDropId"
-          class="flex gap-1"
-        >
-          <span class="font-mono">{{ $n(amount) }}</span>
-          <drop-icon :enemy-drop-id="enemyDropId" />
-          <span>{{ $t(`drops.${enemyDropId}.name`, amount) }}</span>
-        </li>
-      </TransitionGroup>
+        <ui-item-avatar
+            v-for="[enemyDropId, amount] of (Object.entries(user.inventory).filter(([_, amount]) => !!amount) as Array<[EnemyDropId, number]>)"
+            :key="enemyDropId"
+            :src="drops.find((drop) => drop.id === enemyDropId)!.icon"
+            :count="amount"
+          >
+            <template #panel>
+              <DropPopoverPanel :enemy-drop-id="enemyDropId" />
+            </template>
+          </ui-item-avatar>
+
+        <ui-item-avatar v-for="emptyItem of emptyInventorySlots" :key="emptyItem" />
+      </div>
     </template>
   </UCard>
 </template>
@@ -51,6 +51,9 @@ const inventoryValue = computed(() => {
 
   return amount
 })
+
+const inventorySize = 24
+const emptyInventorySlots = computed(() => inventorySize - Object.values(user.value.inventory).filter((amount) => !!amount).length)
 
 const sellInventory = async () => {
   loading.value = true

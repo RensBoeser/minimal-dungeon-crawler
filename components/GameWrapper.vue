@@ -2,7 +2,7 @@
   <div v-if="user" class="flex flex-wrap gap-4 mb-12">
     <div class="flex flex-col gap-4 w-80 flex-grow">
       <UserDetails v-model:user="user" />
-      <UserInventory v-model:user="user" class="flex-1" />
+      <UserInventory v-model:user="user" />
     </div>
 
     <DungeonRunner v-model:user="user" class="w-96 flex-grow" />
