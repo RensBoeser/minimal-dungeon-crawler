@@ -1,7 +1,7 @@
 <template>
-  <UPopover class="w-10 h-10">
+  <UPopover :class="size === 'md' ? '-mb-1.5' : undefined" :disabled="$slots.panel === undefined" overlay>
     <UChip :show="!!count && count > 1" position="bottom-right" size="lg" :color="addedToCount ? 'primary' : 'gray'" inset class="cursor-default">
-      <UAvatar class="rounded p-2 relative" size="md">
+      <UAvatar class="rounded p-2 relative" :size="size">
         <img v-if="src" :src="src" :alt="title" />
       </UAvatar>
 
@@ -17,11 +17,20 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
-  src?: string
-  title?: string
-  count?: number
-}>()
+const props = withDefaults(
+  defineProps<{
+    src?: string
+    title?: string
+    count?: number
+    size?: "md" | "lg" | "xl"
+  }>(),
+  {
+    size: "md",
+    src: undefined,
+    title: undefined,
+    count: 0,
+  },
+)
 const { src, count, title } = toRefs(props)
 
 const formattedCount = computed(() => {
