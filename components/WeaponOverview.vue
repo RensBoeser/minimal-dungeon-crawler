@@ -11,12 +11,10 @@
         :cost="weapon.cost"
         :user-gold="user.gold"
         :is-bought="user.weaponsBought.includes(weapon.id)"
-        :equipped="weapon.id === user.weapon"
         :src="weapon.icon"
         :title="$t(`weapons.${weapon.id}.name`)"
         :disabled="loading"
         @buy="() => buyWeapon(weapon.id)"
-        @equip="() => equipWeapon(weapon.id)"
       >
         <template #info>
           <WeaponPopoverPanel :weapon="weapon" />
@@ -40,12 +38,5 @@ const buyWeapon = async (weaponToBuy: WeaponId) => {
   user.value.gold = newGoldBalance
   user.value.weapon = newWeaponId
   user.value.weaponsBought.push(weaponToBuy)
-}
-
-const equipWeapon = async (weaponToEquip: WeaponId) => {
-  loading.value = true
-  const { weapon: newWeaponId } = await $fetch("/api/weapon/equip", { method: "POST", body: { weapon: weaponToEquip } }).finally(() => (loading.value = false))
-
-  user.value.weapon = newWeaponId
 }
 </script>

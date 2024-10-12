@@ -127,6 +127,7 @@ export default defineI18nConfig(() => ({
       actions: {
         sell: "Sell",
         buy: "Buy",
+        owned: "Owned",
         runDungeon: "Run dungeon",
         runningDungeon: "Running dungeon",
         recovering: "Recovering",
@@ -258,6 +259,7 @@ export default defineI18nConfig(() => ({
       actions: {
         sell: "Verkoop",
         buy: "Koop",
+        owned: "Gekocht",
         runDungeon: "Dungeon rennen",
         runningDungeon: "Dungeon rennen",
         recovering: "Bijkomen",
