@@ -43,6 +43,10 @@
         </USelectMenu>
       </li>
     </ul>
+
+    <template #footer>
+      <user-inventory v-model:user="user" />
+    </template>
   </UCard>
 </template>
 

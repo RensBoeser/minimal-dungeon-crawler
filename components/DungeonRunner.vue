@@ -1,7 +1,7 @@
 <template>
   <UCard>
     <template #default>
-      <UButton icon="i-ph:sword" size="xl" block :loading="isRunning" class="relative" @click="startRun">
+      <UButton icon="i-ph:sword" block :loading="isRunning" class="relative" @click="startRun">
         <span v-if="isRunning">{{ $t("actions.runningDungeon") }}...</span>
         <span v-else>{{ $t("actions.runDungeon") }}</span>
       </UButton>
@@ -37,7 +37,6 @@ const user = defineModel<DatabaseUser>("user", { required: true })
 
 const lastRun = ref<DungeonRun | null>(null)
 const runProgress = ref(0)
-
 const loading = ref(false)
 
 const { isPending: isRunning, start: startRun } = useTimeoutFn(

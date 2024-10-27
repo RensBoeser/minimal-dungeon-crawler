@@ -1,9 +1,6 @@
 <template>
   <div v-if="user" class="flex flex-wrap gap-4 mb-12">
-    <div class="flex flex-col gap-4 w-80 flex-grow">
-      <UserDetails v-model:user="user" />
-      <UserInventory v-model:user="user" />
-    </div>
+    <UserDetails v-model:user="user" class="w-96 flex-grow" />
 
     <DungeonRunner v-model:user="user" class="w-96 flex-grow" />
 

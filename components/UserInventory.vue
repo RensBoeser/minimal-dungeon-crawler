@@ -1,39 +1,29 @@
 <template>
-  <UCard>
-    <template #header>
-      <div class="flex gap-2">
-        <h1 class="text-xl">{{ $t("ui.inventory.title") }}</h1>
+  <div>
+    <div class="flex flex-wrap gap-1">
+      <!-- prettier-ignore -->
+      <ui-item-avatar
+        v-for="[enemyDropId, amount] of (Object.entries(user.inventory).filter(([_, amount]) => !!amount) as Array<[EnemyDropId, number]>)"
+        :key="enemyDropId"
+        :src="drops.find((drop) => drop.id === enemyDropId)!.icon"
+        :count="amount"
+      >
+        <template #panel>
+          <DropPopoverPanel :enemy-drop-id="enemyDropId" />
+        </template>
+      </ui-item-avatar>
 
-        <div class="flex-1" />
+      <ui-item-avatar v-for="emptyItem of emptyInventorySlots" :key="emptyItem" />
+    </div>
 
-        <UButton :disabled="hasEmptyInventory" :loading="loading" @click="sellInventory">
-          <span>{{ $t("actions.sell") }}</span>
-          <div>
-            <span>{{ $n(inventoryValue) }}</span>
-            <img width="20px" class="object-contain inline" src="~/public/gameplay/gold.webp" alt="Gold" />
-          </div>
-        </UButton>
+    <UButton class="mt-2" :disabled="hasEmptyInventory" :loading="loading" @click="sellInventory">
+      <span>{{ $t("actions.sell") }}</span>
+      <div>
+        <span>{{ $n(inventoryValue) }}</span>
+        <img width="20px" class="object-contain inline" src="~/public/gameplay/gold.webp" alt="Gold" />
       </div>
-    </template>
-
-    <template #default>
-      <div class="flex flex-wrap gap-1">
-        <!-- prettier-ignore -->
-        <ui-item-avatar
-            v-for="[enemyDropId, amount] of (Object.entries(user.inventory).filter(([_, amount]) => !!amount) as Array<[EnemyDropId, number]>)"
-            :key="enemyDropId"
-            :src="drops.find((drop) => drop.id === enemyDropId)!.icon"
-            :count="amount"
-          >
-            <template #panel>
-              <DropPopoverPanel :enemy-drop-id="enemyDropId" />
-            </template>
-          </ui-item-avatar>
-
-        <ui-item-avatar v-for="emptyItem of emptyInventorySlots" :key="emptyItem" />
-      </div>
-    </template>
-  </UCard>
+    </UButton>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -52,7 +42,7 @@ const inventoryValue = computed(() => {
   return amount
 })
 
-const inventorySize = 24
+const inventorySize = 7
 const emptyInventorySlots = computed(() => inventorySize - Object.values(user.value.inventory).filter((amount) => !!amount).length)
 
 const sellInventory = async () => {
