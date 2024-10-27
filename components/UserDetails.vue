@@ -44,9 +44,8 @@
       </li>
     </ul>
 
-    <template #footer>
-      <user-inventory v-model:user="user" />
-    </template>
+    <u-divider>{{ $t("ui.inventory.title") }}</u-divider>
+    <user-inventory v-model:user="user" class="mt-2" />
   </UCard>
 </template>
 
