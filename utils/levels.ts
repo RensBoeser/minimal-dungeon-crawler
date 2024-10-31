@@ -37,13 +37,13 @@ export const levels: Array<UserLevel> = [
   { level: 21, requiredXp: Infinity, baseStamina: 90 },
 ]
 
-export const getLevel = (xp: number) => {
+export const getLevel = (xp: number): UserLevel => {
   const highestLevel = levels.reduce((accLevel, currentLevel) => (currentLevel.requiredXp <= xp ? currentLevel : accLevel), levels[0])
 
   return JSON.parse(JSON.stringify(highestLevel))
 }
 
-export const getNextLevel = (xp: number) => {
+export const getNextLevel = (xp: number): UserLevel => {
   const nextLevel = levels.find((level) => level.requiredXp > xp)
 
   return JSON.parse(JSON.stringify(nextLevel))

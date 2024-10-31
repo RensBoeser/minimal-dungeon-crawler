@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-32">
     <div class="flex flex-wrap gap-1">
       <!-- prettier-ignore -->
       <ui-item-avatar
@@ -42,7 +42,7 @@ const inventoryValue = computed(() => {
   return amount
 })
 
-const inventorySize = 7
+const inventorySize = 9
 const emptyInventorySlots = computed(() => inventorySize - Object.values(user.value.inventory).filter((amount) => !!amount).length)
 
 const sellInventory = async () => {

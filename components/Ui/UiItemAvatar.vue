@@ -1,14 +1,9 @@
 <template>
-  <UPopover :class="size === 'md' ? '-mb-1.5' : undefined" :disabled="$slots.panel === undefined" overlay>
-    <UChip :show="!!count && count > 1" position="bottom-right" size="lg" :color="addedToCount ? 'primary' : 'gray'" inset class="cursor-default">
-      <UAvatar class="rounded p-2 relative" :size="size">
-        <img v-if="src" :src="src" :alt="title" />
-      </UAvatar>
-
-      <template #content>
-        <span class="font-mono">{{ formattedCount }}</span>
-      </template>
-    </UChip>
+  <UPopover :class="$slots.panel === undefined ? '-mb-1.5' : undefined" :disabled="$slots.panel === undefined" overlay>
+    <UAvatar class="rounded p-2 relative cursor-default" :size="size">
+      <img v-if="src" :src="src" :alt="title" />
+      <div v-if="count" class="font-mono text-xs absolute bottom-0 right-1" style="text-shadow: 0 0 5px rgba(0, 0, 0, 1)">{{ formattedCount }}</div>
+    </UAvatar>
 
     <template #panel>
       <slot name="panel" />
@@ -22,7 +17,7 @@ const props = withDefaults(
     src?: string
     title?: string
     count?: number
-    size?: "md" | "lg" | "xl"
+    size?: "md" | "lg" | "xl" | "2xl"
   }>(),
   {
     size: "md",

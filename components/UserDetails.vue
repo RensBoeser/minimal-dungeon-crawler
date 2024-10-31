@@ -1,51 +1,54 @@
 <template>
   <UCard>
-    <ul class="flex-1">
-      <li class="flex gap-1">
+    <ul>
+      <li class="text-sm flex gap-1">
         <span>{{ $t("ui.user.gold") }}:</span>
-        <span class="font-bold">{{ $n(user.gold) }}</span>
-        <img width="20px" class="object-contain" src="~/public/gameplay/gold.webp" alt="Gold" />
+
+        <u-divider class="flex-1 mx-2" />
+
+        <span class="font-mono text-yellow-300">{{ $n(user.gold) }}</span>
+        <img width="20px" style="margin-left: 1px" src="/gameplay/gold.webp" alt="Gold" class="inline-block" />
       </li>
 
-      <li class="flex gap-1">
-        <span>{{ $t("ui.user.level") }}:</span>
-        <span class="font-bold">{{ userLevel.level }}</span>
-        <span v-if="nextLevel?.requiredXp && nextLevel.requiredXp !== Infinity" class="font-mono">
-          ({{ $n(user.experience) }}/{{ $n(nextLevel?.requiredXp ?? 0) }} {{ $t("ui.user.xp") }})
-        </span>
-        <span v-else class="font-mono">({{ $n(user.experience) }} {{ $t("ui.user.xp") }})</span>
-      </li>
+      <li>
+        <div class="flex gap-1 text-sm">
+          <span>{{ $t("ui.user.level") }}:</span>
+          <span class="font-bold">lvl {{ userLevel.level }}</span>
 
-      <li class="flex gap-1">
-        <span>{{ $t("ui.user.stamina") }}:</span>
-        <span class="font-bold">{{ $n(userLevel.baseStamina) }}</span>
-      </li>
+          <u-divider class="flex-1 mx-2" />
 
-      <li class="flex gap-1 items-center">
-        <span>{{ $t("ui.user.weapon") }}:</span>
-        <USelectMenu :model-value="user.weapon" :options="user.weaponsBought" @update:model-value="equipWeapon">
-          <UButton variant="ghost" color="gray" trailing-icon="i-material-symbols:expand-more">
-            <img width="20px" class="object-contain" :src="currentWeapon?.icon" :alt="$t(`weapons.${user.weapon}.name`)" />
-            <span class="font-bold">{{ $t(`weapons.${user.weapon}.name`) }}</span>
-          </UButton>
+          <span v-if="nextLevel?.requiredXp && nextLevel.requiredXp !== Infinity" class="font-mono text-lime-300">
+            {{ $n(user.experience - userLevel.requiredXp) }}/{{ $n(nextLevel.requiredXp - userLevel.requiredXp) }} {{ $t("ui.user.xp") }}
+          </span>
+          <span v-else class="font-mono">({{ $n(user.experience) }} {{ $t("ui.user.xp") }})</span>
+        </div>
 
-          <template #option="{ option: weaponId }">
-            <span>
-              <img
-                width="20px"
-                class="object-contain inline-block mr-2"
-                :src="weapons.find((w) => w.id === weaponId)?.icon"
-                :alt="$t(`weapons.${weaponId}.name`)"
-              />
-              <span class="font-bold">{{ $t(`weapons.${weaponId}.name`) }}</span>
-            </span>
-          </template>
-        </USelectMenu>
+        <UProgress size="sm" color="lime" :max="nextLevel.requiredXp - userLevel.requiredXp" :value="user.experience - userLevel.requiredXp" class="mb-2" />
       </li>
     </ul>
 
-    <u-divider>{{ $t("ui.inventory.title") }}</u-divider>
-    <user-inventory v-model:user="user" class="mt-2" />
+    <div class="flex gap-4">
+      <div class="flex flex-col items-center flex-1">
+        <u-divider class="mt-4 mb-2">{{ $t("ui.inventory.title") }}</u-divider>
+
+        <user-inventory v-model:user="user" />
+      </div>
+
+      <div class="flex flex-col items-center flex-1">
+        <u-divider class="mt-4 mb-2">{{ $t("ui.user.weapon") }}</u-divider>
+
+        <USelectMenu :model-value="user.weapon" :options="user.weaponsBought" @update:model-value="equipWeapon">
+          <ui-item-avatar size="2xl" :src="currentWeapon?.icon">
+            <img width="20px" class="object-contain" :src="currentWeapon?.icon" :alt="$t(`weapons.${user.weapon}.name`)" />
+            <span class="font-bold">{{ $t(`weapons.${user.weapon}.name`) }}</span>
+          </ui-item-avatar>
+
+          <template #option="{ option: weaponId }">
+            <img class="object-contain inline-block mr-2" :src="weapons.find((w) => w.id === weaponId)?.icon" :alt="$t(`weapons.${weaponId}.name`)" />
+          </template>
+        </USelectMenu>
+      </div>
+    </div>
   </UCard>
 </template>
 
