@@ -42,7 +42,7 @@ const inventoryValue = computed(() => {
   return amount
 })
 
-const inventorySize = 9
+const inventorySize = 6
 const emptyInventorySlots = computed(() => inventorySize - Object.values(user.value.inventory).filter((amount) => !!amount).length)
 
 const sellInventory = async () => {
