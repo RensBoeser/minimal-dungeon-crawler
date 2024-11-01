@@ -39,7 +39,9 @@
 
         <USelectMenu :model-value="user.weapon" :options="user.weaponsBought" @update:model-value="equipWeapon">
           <ui-item-avatar size="2xl" :src="currentWeapon?.icon">
-            <u-icon v-if="user.weaponsBought.length > 1" name="i-material-symbols:expand-more" size="20" class="text-white relative left-1 top-1" />
+            <template v-if="user.weaponsBought.length > 1" #default>
+              <u-icon name="i-material-symbols:expand-more" size="20" class="text-white relative left-1 top-1" />
+            </template>
           </ui-item-avatar>
 
           <template #option="{ option: weaponId }">
