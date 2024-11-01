@@ -2,7 +2,11 @@
   <UPopover :class="$slots.panel === undefined ? '-mb-1.5' : undefined" :disabled="$slots.panel === undefined" overlay>
     <UAvatar class="rounded p-2 relative cursor-default" :size="size">
       <img v-if="src" :src="src" :alt="title" />
-      <div v-if="count" class="font-mono text-xs absolute bottom-0 right-1" style="text-shadow: 0 0 5px rgba(0, 0, 0, 1)">{{ formattedCount }}</div>
+      <div v-if="count || $slots.default" class="font-mono text-xs absolute bottom-0 right-1" style="text-shadow: 0 0 5px rgba(0, 0, 0, 1)">
+        <slot :count="count" :added-to-count="addedToCount" :formatted-count="formattedCount">
+          {{ formattedCount }}
+        </slot>
+      </div>
     </UAvatar>
 
     <template #panel>

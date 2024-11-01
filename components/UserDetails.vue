@@ -39,14 +39,14 @@
 
         <USelectMenu :model-value="user.weapon" :options="user.weaponsBought" @update:model-value="equipWeapon">
           <ui-item-avatar size="2xl" :src="currentWeapon?.icon">
-            <img width="20px" class="object-contain" :src="currentWeapon?.icon" :alt="$t(`weapons.${user.weapon}.name`)" />
-            <span class="font-bold">{{ $t(`weapons.${user.weapon}.name`) }}</span>
+            <u-icon v-if="user.weaponsBought.length > 1" name="i-material-symbols:expand-more" size="20" class="text-white relative left-1 top-1" />
           </ui-item-avatar>
 
           <template #option="{ option: weaponId }">
             <img class="object-contain inline-block mr-2" :src="weapons.find((w) => w.id === weaponId)?.icon" :alt="$t(`weapons.${weaponId}.name`)" />
           </template>
         </USelectMenu>
+        <span class="mt-2 text-sm">{{ $t(`weapons.${user.weapon}.name`) }}</span>
       </div>
     </div>
   </UCard>
