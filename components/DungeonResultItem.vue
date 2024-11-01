@@ -20,7 +20,7 @@
             <span class="font-mono">{{ enemyRecord.count }}x</span>
           </li>
 
-          <li v-if="enemiesDefeated.length" class="text-center font-mono">+{{ run.xpGained }} {{ $t("ui.user.xp") }}</li>
+          <li v-if="enemiesDefeated.length" class="text-center font-mono text-sm text-lime-300">+{{ run.xpGained }} {{ $t("ui.user.xp") }}</li>
           <li v-else class="text-center italic text-gray-400 mt-1">{{ $t("ui.run.noEnemiesDefeated") }}</li>
         </ul>
       </section>
