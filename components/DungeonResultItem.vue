@@ -15,12 +15,12 @@
         </UDivider>
 
         <ul class="flex flex-col">
-          <li v-for="enemyRecord of enemiesDefeated" :key="enemyRecord.enemy.id" class="flex gap-2 justify-center">
+          <li v-for="enemyRecord of enemiesDefeated" :key="enemyRecord.enemy.id" class="flex gap-2 justify-center items-center">
             <EnemyIcon :dungeon-id="run.dungeonId" :enemy-id="enemyRecord.enemy.id" />
-            <span class="font-mono">{{ enemyRecord.count }}x</span>
+            <span class="font-mono text-sm">{{ enemyRecord.count }}x</span>
           </li>
 
-          <li v-if="enemiesDefeated.length" class="text-center font-mono text-sm dark:text-lime-300 text-lime-600">
+          <li v-if="enemiesDefeated.length" class="text-center font-mono text-sm dark:text-lime-300 text-lime-600 mt-1">
             +{{ run.xpGained }} {{ $t("ui.user.xp") }}
           </li>
           <li v-else class="text-center italic text-gray-400 mt-1">{{ $t("ui.run.noEnemiesDefeated") }}</li>
@@ -33,9 +33,9 @@
         </UDivider>
 
         <ul class="flex flex-col">
-          <li v-for="dropRecord of enemyDrops" :key="dropRecord.drop.id" class="flex gap-2 justify-center">
+          <li v-for="dropRecord of enemyDrops" :key="dropRecord.drop.id" class="flex gap-2 justify-center items-center">
             <DropIcon :enemy-drop-id="dropRecord.drop.id" />
-            <span class="font-mono">{{ dropRecord.count }}x</span>
+            <span class="font-mono text-sm">{{ dropRecord.count }}x</span>
             <UBadge v-if="statistics.totalDropsGathered[dropRecord.drop.id] === dropRecord.count" class="font-mono" variant="soft" color="primary">
               {{ $t("ui.general.new") }}!
             </UBadge>
