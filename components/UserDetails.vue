@@ -6,7 +6,7 @@
 
         <u-divider class="flex-1 mx-2" />
 
-        <span class="font-mono text-yellow-300">{{ $n(user.gold) }}</span>
+        <span class="font-mono dark:text-yellow-300 text-yellow-500">{{ $n(user.gold) }}</span>
         <img width="20px" style="margin-left: 1px" src="/gameplay/gold.webp" alt="Gold" class="inline-block" />
       </li>
 
@@ -17,7 +17,7 @@
 
           <u-divider class="flex-1 mx-2" />
 
-          <span v-if="nextLevel?.requiredXp && nextLevel.requiredXp !== Infinity" class="font-mono text-lime-300">
+          <span v-if="nextLevel?.requiredXp && nextLevel.requiredXp !== Infinity" class="font-mono dark:text-lime-300 text-lime-600">
             {{ $n(user.experience - userLevel.requiredXp) }}/{{ $n(nextLevel.requiredXp - userLevel.requiredXp) }} {{ $t("ui.user.xp") }}
           </span>
           <span v-else class="font-mono">({{ $n(user.experience) }} {{ $t("ui.user.xp") }})</span>

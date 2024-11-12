@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-slate-800 rounded p-2 flex gap-3">
+  <div class="border dark:border-slate-800 rounded p-2 flex gap-3">
     <ui-item-avatar size="xl" :src="src" :title="title">
       <template #panel>
         <slot name="info" />
@@ -14,12 +14,12 @@
           {{ $t("actions.owned") }}
         </u-badge>
 
-        <p v-else-if="canBuy" class="font-mono text-xs dark:text-gray-300">
+        <p v-else-if="canBuy" class="font-mono text-xs dark:text-yellow-300 text-yellow-600">
           {{ $n(cost) }}
           <img width="16" class="object-contain inline-block" src="~/public/gameplay/gold.webp" :alt="$t('ui.user.gold')" />
         </p>
 
-        <p v-else class="font-mono text-xs dark:text-gray-600">
+        <p v-else class="font-mono text-xs text-red-400">
           {{ $n(cost) }}
           <img width="16" class="object-contain inline-block" src="~/public/gameplay/gold.webp" :alt="$t('ui.user.gold')" />
         </p>

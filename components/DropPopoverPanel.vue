@@ -15,7 +15,7 @@
         <tr>
           <td>{{ $t("ui.drop.sellValue") }}:</td>
           <td class="text-right font-mono">
-            <span>{{ enemyDrop.goldValue }}</span>
+            <span class="dark:text-yellow-300 text-yellow-500">{{ enemyDrop.goldValue }}</span>
             <img width="20px" class="object-contain inline pl-1" src="~/public/gameplay/gold.webp" alt="Gold" />
           </td>
         </tr>
