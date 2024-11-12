@@ -13,44 +13,38 @@
     <table class="w-full">
       <tbody>
         <tr>
-          <td>{{ $t("ui.weapon.damage") }}:</td>
-          <td class="text-right font-mono">{{ weapon.damage }}</td>
-        </tr>
-
-        <tr>
           <td>{{ $t("ui.weapon.staminaCost") }}:</td>
           <td class="text-right font-mono">{{ weapon.staminaCost }}</td>
         </tr>
 
+        <tr>
+          <td>{{ $t("ui.weapon.damage") }}:</td>
+          <td class="text-right font-mono text-red-400">{{ weapon.damage }}</td>
+        </tr>
+
         <tr v-if="weapon.criticalChance">
           <td>{{ $t("ui.weapon.criticalChance") }}:</td>
-          <td class="text-right font-mono">{{ weapon.criticalChance * 100 }}%</td>
+          <td class="text-right font-mono text-orange-300">{{ weapon.criticalChance * 100 }}%</td>
         </tr>
 
         <tr v-if="weapon.criticalMultiplier">
           <td>{{ $t("ui.weapon.criticalMultiplier") }}:</td>
-          <td class="text-right font-mono">{{ weapon.criticalMultiplier.toFixed(1) }}x</td>
+          <td class="text-right font-mono text-orange-400">{{ weapon.criticalMultiplier.toFixed(1) }}x</td>
         </tr>
       </tbody>
     </table>
 
     <template v-if="weapon.classModifiers">
-      <UDivider class="mt-2">{{ $t("ui.weapon.classModifiers") }}</UDivider>
+      <UDivider class="mt-2 mb-1">{{ $t("ui.weapon.classModifiers") }}</UDivider>
 
       <table class="w-full">
-        <thead>
-          <tr class="text-gray-500">
-            <td class="text-left">{{ $t("ui.enemy.class") }}</td>
-            <td class="text-right">{{ $t("ui.weapon.damage") }}</td>
-          </tr>
-        </thead>
         <tbody>
           <tr v-for="[enemyClass, value] of Object.entries(weapon.classModifiers)" :key="enemyClass">
             <td>
               <!-- prettier-ignore -->
               <EnemyClassTag :enemy-class-id="(enemyClass as EnemyClassId)" />
             </td>
-            <td class="text-right font-mono">{{ value }}x</td>
+            <td class="text-right font-mono text-orange-400">{{ value }}x</td>
           </tr>
         </tbody>
       </table>

@@ -1,5 +1,5 @@
 <template>
-  <UBadge class="font-mono" :color="enemyClass.color">{{ enemyClass.id }}</UBadge>
+  <UBadge class="font-mono" variant="subtle" :color="enemyClass.color">{{ enemyClass.id }}</UBadge>
 </template>
 
 <script setup lang="ts">

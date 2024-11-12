@@ -1,5 +1,5 @@
 <template>
-  <UPopover v-if="enemy" mode="hover">
+  <UPopover mode="hover">
     <img v-bind="$attrs" width="24px" class="object-contain" :src="enemy.icon" :alt="$t(`enemies.${enemy.id}.name`)" />
 
     <template #panel>
@@ -24,19 +24,19 @@
         <table class="w-full">
           <tbody>
             <tr>
-              <td>{{ $t("ui.enemy.xp") }}</td>
-              <td class="text-right font-mono">{{ enemy.xp }} XP</td>
+              <td>{{ $t("ui.enemy.xp") }}:</td>
+              <td class="text-right font-mono dark:text-lime-300 text-lime-600">{{ enemy.xp }} XP</td>
             </tr>
             <tr>
-              <td>{{ $t("ui.enemy.health") }}</td>
-              <td class="text-right font-mono">{{ enemy.health }} HP</td>
+              <td>{{ $t("ui.enemy.health") }}:</td>
+              <td class="text-right font-mono dark:text-green-300 text-green-500">{{ enemy.health }} HP</td>
             </tr>
             <tr v-if="enemy.armor">
-              <td>{{ $t("ui.enemy.armor") }}</td>
-              <td class="text-right font-mono">{{ enemy.armor }}</td>
+              <td>{{ $t("ui.enemy.armor") }}:</td>
+              <td class="text-right font-mono text-blue-400">{{ enemy.armor }}</td>
             </tr>
             <tr v-if="enemy.blockChance">
-              <td>{{ $t("ui.enemy.blockChance") }}</td>
+              <td>{{ $t("ui.enemy.blockChance") }}:</td>
               <td class="text-right font-mono">{{ enemy.blockChance * 100 }}%</td>
             </tr>
           </tbody>
@@ -44,14 +44,12 @@
 
         <UDivider class="mt-2">{{ $t("ui.enemy.drops") }}</UDivider>
 
-        <div class="flex flex-wrap gap-1 mt-1">
+        <div class="flex flex-wrap gap-1 mt-2 justify-center">
           <DropIcon v-for="lootTableItem of enemy.lootTable" :key="lootTableItem.item" :enemy-drop-id="lootTableItem.item" disabled />
         </div>
       </div>
     </template>
   </UPopover>
-
-  <span v-else>ERROR LOADING DROP</span>
 </template>
 
 <script setup lang="ts">
@@ -59,10 +57,10 @@ const props = defineProps<{ dungeonId: DungeonId; enemyId: EnemyId }>()
 const { enemyId, dungeonId } = toRefs(props)
 
 const dungeon = computed(() => {
-  return dungeons.find((dungeon) => dungeon.id === dungeonId.value)
+  return dungeons.find((dungeon) => dungeon.id === dungeonId.value)!
 })
 
 const enemy = computed(() => {
-  return dungeon.value?.enemies.find((enemy) => enemy.id === enemyId.value)
+  return dungeon.value.enemies.find((enemy) => enemy.id === enemyId.value)!
 })
 </script>
