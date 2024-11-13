@@ -10,6 +10,14 @@
         <img width="20px" style="margin-left: 1px" src="/gameplay/gold.webp" alt="Gold" class="inline-block" />
       </li>
 
+      <li class="text-sm flex gap-1">
+        <span>{{ $t("ui.user.stamina") }}:</span>
+
+        <u-divider class="flex-1 mx-2" />
+
+        <span class="font-mono dark:text-blue-300 text-blue-500">{{ $n(userLevel.baseStamina) }} ST</span>
+      </li>
+
       <li>
         <div class="flex gap-1 text-sm">
           <span>{{ $t("ui.user.level") }}:</span>

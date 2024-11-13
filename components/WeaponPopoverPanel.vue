@@ -14,12 +14,12 @@
       <tbody>
         <tr>
           <td>{{ $t("ui.weapon.staminaCost") }}:</td>
-          <td class="text-right font-mono">{{ weapon.staminaCost }}</td>
+          <td class="text-right font-mono dark:text-blue-300 text-blue-500">{{ weapon.staminaCost }} ST</td>
         </tr>
 
         <tr>
           <td>{{ $t("ui.weapon.damage") }}:</td>
-          <td class="text-right font-mono text-red-400">{{ weapon.damage }}</td>
+          <td class="text-right font-mono text-red-400">{{ weapon.damage }} DMG</td>
         </tr>
 
         <tr v-if="weapon.criticalChance">
